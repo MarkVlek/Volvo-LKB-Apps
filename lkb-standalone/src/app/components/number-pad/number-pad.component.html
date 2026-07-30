@@ -1,0 +1,10 @@
+<div class="numpad-container">
+    <div class="numpad-inner-container">
+        <mat-grid-list class="grid-list" cols="3" [rowHeight]="rowHeight" gutterSize="10px">
+            <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows">
+                <app-test-key class="key" (sendClickEvent)="addAttendee($event)" [height]="rowHeight"
+                    [value]="tile.text" [iconSize]="iconSize"></app-test-key>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>

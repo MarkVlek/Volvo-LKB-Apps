@@ -1,0 +1,10 @@
+<div class="iframe-canvas">
+    <iframe id="launchIframe" #launchIframe (load)="onIframeLoaded(launchIframe)" 
+        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+        [src]="url$ | async | safe" loading="lazy" frameBorder="0"
+        allow="geolocation *">
+    </iframe>
+    <div *ngIf="this.keyboardService.showKeyboard && dealerId != 'AEWTP'" class="keyboard-container-inner" #keyboardContainer>
+        <app-iframe-keyboard (onClicked)="onKeyClick($event)"></app-iframe-keyboard>
+    </div>
+</div>

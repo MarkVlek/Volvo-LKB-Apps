@@ -1,0 +1,38 @@
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 36px;
+    font-family: var(--fontRegular);
+    font-weight: bold;
+    border-radius: 10px;
+
+    .button-container {
+        display: flex;
+        flex-direction: row;
+
+        button {
+            margin-top: 44px;
+            height: 92px;
+            width: 465px;
+            border: 2px solid #141414;
+            border-radius: 8px;
+            font-size: 33px;
+            line-height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            margin-right: 20px;
+            margin-left: 20px;
+            transition: all 0.3s ease;
+        }
+    }
+
+    button:focus { 
+        outline: none;
+     }
+}

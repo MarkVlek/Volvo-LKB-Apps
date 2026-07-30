@@ -1,0 +1,4 @@
+<div *ngIf="canCast" (click)="this.Cast()" class="cast-selector">
+    <img src="assets/images/cast.svg" *ngIf="!this.castingService.isCasting" class="cast-symbol">
+    <img src="assets/images/cast_connected.svg" *ngIf="this.castingService.isCasting" class="cast-symbol">
+</div>

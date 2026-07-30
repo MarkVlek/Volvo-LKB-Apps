@@ -1,0 +1,8 @@
+<div #pageCardMain class="page-card-main" (click)="gotoPage()">
+    <div #title class="title">
+        {{page | removeUnderscore | launchPageAlias | translate}}
+    </div>
+    <div class="selected-page-box">
+        <div *ngIf="selected" [@inOutAnimation] class="selected-page-marker"></div>
+    </div>
+</div>

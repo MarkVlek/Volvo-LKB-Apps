@@ -1,0 +1,142 @@
+// .dialog-container{
+//     width: 1000px;
+//     height: 500px;
+// }
+
+.dialog-container .mat-dialog-container{
+    border-radius: 15px !important;
+}
+
+.list-item{
+    list-style: none !important;
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+::ng-deep .language-picker-dialog {
+  border-radius: 15px !important;
+  overflow: hidden !important;
+  box-shadow: none !important;
+  --mat-elevation-shadow-color: transparent !important;
+  --mdc-dialog-container-elevation-shadow: transparent !important;
+  --mdc-dialog-container-shadow-color: transparent !important;
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    box-shadow: none !important;
+  }
+}
+
+.nav {
+    width: 1300px;
+    height: auto;
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    ::ng-deep {
+        .mat-expansion-panel {
+            margin: 0;
+            padding: 0;
+            box-shadow: unset;
+            border-radius: unset;
+            font-family: var(--fontRegular);
+            color: #141414 !important;
+            background-color: unset;
+        }
+        .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled=true]):hover {
+            background-color: unset;
+        }
+        .mat-accordion .mat-expansion-panel {
+            border-bottom: 1px solid rgba(80, 80, 80, 0.493);
+        }
+        .disable_ripple:hover {
+            background: black !important;
+        }
+        .mat-focus-indicator {
+            background-color: transparent!important;
+        }
+        .mat-content {
+            font-family: var(--fontRegular);
+            font-size: 20px;
+            height: 40px;
+        }
+        .mat-expansion-panel-header {
+            height: 40px;
+            padding: 0;
+            font-size: 17px;
+            line-height: 20.4px;
+            font-weight: 600;
+        }
+        .mat-expansion-panel-body {
+            padding: 0;
+            padding-right: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .mat-expansion-panel-content {
+            overflow: hidden;
+        }
+        .mat-expansion-indicator {
+            padding-left: 2px;
+            padding-right: 2px;
+            margin-right: 5px;
+        }
+        .mat-expansion-indicator::after {
+            border-width: 0 1px 1px 0;
+            padding: 4px;
+        }
+    }
+    .parent-header {
+        font-size: 20px;
+        margin-top: 30px;
+        line-height: 24px;
+    }
+    ul {
+        padding: unset;
+        margin-left: 20px;
+        margin-bottom: 0;
+        font-family: var(--fontRegular);
+        li {
+            font-size: 17px !important;
+            font-weight: 350 !important;
+            line-height: 26.35px !important;
+        }
+        ::ng-deep .mat-expansion-panel-body {
+            padding: 0;
+        }
+    }
+    .child-header {
+        font-weight: 350;
+    }
+    .accordion {
+        width: 90%;
+        height: 90%;
+        padding-top: 40px;
+    }
+    .child {
+        width: 25%;
+        height: 90%;
+        overflow: visible;
+        &:last-child {
+            border-bottom: unset !important;
+        }
+        display: flex;
+        flex-direction: column;
+        font-size: 15px;
+        margin-bottom: 20px;
+        color: rgba(0, 0, 0, 0.64);
+    }
+    .header{
+        width: 100%;
+        height: 40px;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .close{
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+}

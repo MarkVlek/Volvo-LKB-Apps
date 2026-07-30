@@ -1,0 +1,22 @@
+<div class="category-details-container">
+  <div class="category-details-container-inner">
+    
+
+    <nav class="menu-container">
+      <ul>
+        <li *ngFor="let category of categories" [class.active]="category.name === selectedCategory.name" (click)="categoryClicked(category.name)">
+          {{ category.name }}
+        </li>
+      </ul>
+    </nav>
+
+    <div #scrollContainer class="product-list-container" id="product-list-container">
+      <div *ngFor="let accessory of accessories" [attr.id]="accessory.name">
+        <app-accessories-product-box [selectedCategory]="selectedCategory" [selectedCarModel]="selectedCarModel" [accessory]="accessory"></app-accessories-product-box>
+      </div>
+    </div> 
+    
+    <div class="gradient-bottom"></div>
+
+  </div>
+</div>

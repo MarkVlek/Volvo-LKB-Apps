@@ -1,0 +1,434 @@
+// Insurance Section
+
+.insurance-container {
+    width: 365px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 20px;
+    padding-top: 20px;
+
+    .close {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 5%;
+        margin-bottom: 40px;
+        .volvia {
+            width: 120px;
+            height: 14px;
+            position: relative;
+            right: 60%;
+        }
+        .icon {
+            transform: scale(1.6);
+        }
+    }
+    .header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        height: 5%;
+        font-size: 24px;
+        font-family: var(--fontRegular);
+    }
+    .content {
+        margin-top: 40px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        height: 5%;
+        justify-content: space-between;
+        font-size: 16px;
+        font-family: var(--fontRegular);
+    }
+
+    .slider {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 40px;
+        height: 0px;
+        ::ng-deep {
+            mat-slider {
+                width: 100%;
+                margin: 0px;
+            }
+
+            mat-mdc-focus-indicator {
+                height: 0%;
+                width: 0%;
+            }
+
+            .mat-mdc-slider .mdc-slider__track--inactive_fill {
+                background-color: #858585 !important;
+            }
+            
+            .mat-mdc-slider .mdc-slider__track--active_fill {
+                border-color: rgb(20, 20, 20) !important;
+            }
+            
+            .mdc-slider__thumb-knob {
+                transform: scale(0.7) translate(-75%, -75%) !important;
+                border-color: rgb(20, 20, 20) !important;
+                background-color: rgb(20, 20, 20) !important;
+            }
+            
+            .mat-mdc-slider .mdc-slider__track--inactive {
+                height: 2px !important;
+            }
+            .mat-mdc-slider .mdc-slider__track--active {
+                height: 3px !important;
+            }
+
+            .mat-mdc-focus-indicator {
+                display: none !important;
+            }
+        }
+    }
+
+    .input-title {
+        margin-bottom: 5px;
+    }
+    .input-box-container {
+        pointer-events: none;
+        .input-box {
+            width: 100%;
+            font-size: 25px;
+        }
+
+        ::ng-deep {
+            .mat-mdc-text-field-wrapper {
+                height: 51px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid #141414;
+                border-radius: 7px;
+                background-color: transparent;
+            }
+
+            .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+                display: none !important;
+            }
+        }
+    }
+    .numpad {
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        .numpad-inner {
+            width: 90%;
+
+            app-number-pad {
+
+                ::ng-deep {
+                    .numpad-container {
+                        padding: 0 !important;
+
+                        .inner-key {
+                            border: 1px solid #141414;
+
+                            .inner-inner-key {
+                                font-weight: 350;
+                                font-size: 30px;
+                                line-height: 36px;
+                                background-color: unset !important;
+                            }
+                        }
+
+                        .inner-key:active {
+                            filter: invert(1);
+                        }
+
+                        .mat-grid-tile:nth-child(10) {
+                            .inner-key {
+                                border: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .search {
+        width: 100%;
+        height: 50px;
+        background-color: #2A609D;
+        color: white;
+        border-radius: 7px;
+        margin-top: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        p {
+           font-size: 20px;
+           font-family: var(--fontRegular);
+           margin: 0px;
+        }
+
+        ::ng-deep {
+            .mat-mdc-progress-spinner { 
+                --mdc-circular-progress-active-indicator-color: white; 
+            }
+        } 
+    }
+    
+    .compliance {
+        height: 210px;
+        display: flex;
+        align-items: flex-end;
+        font-size: 10px;
+        color: rgba(0, 0, 0, 0.64);
+    }
+}
+
+// Social Security input
+
+input {
+    text-align: center;
+    padding: 9px;
+    width: 100%;
+    border: 2px solid #1c6bba;
+    border-radius: 5px;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+//Social Security Numpad
+
+.social-security-numpad-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.social-security-numpad-wrapper {
+    width: 244px;
+    height: 309px;
+    background-color: #d5d5d5;
+    padding: 10px;
+}
+
+.social-security-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 3px solid #d5d5d5;
+}
+
+.social-security-button > div {
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.social-security-search {
+    background-color: #1c6bba;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    font-size: 40px;
+    margin-top: 5px;
+}
+
+.social-security-searh-icon {
+    font-size: 30px;
+    color: white;
+}
+
+// SLIDERS
+
+.custom-slider {
+    color: #1c6bba !important;
+}
+
+::ng-deep {
+    .custom-slider .ngx-slider .ngx-slider-bar {
+        color: #1c6bba;
+        height: 2px;
+        margin-top: -7px;
+    }
+
+    .custom-slider .ngx-slider .ngx-slider-selection {
+        color: #1c6bba;
+        margin-top: -7px;
+        background-color: #1c6bba;
+    }
+
+    .custom-slider .ngx-slider .ngx-slider-pointer {
+        width: 16px;
+        height: 16px;
+        color: #1c6bba;
+        border-radius: 10px;
+        z-index: 5;
+        background-color: #1c6bba;
+    }
+
+    .custom-slider .ngx-slider .ngx-slider-pointer:after {
+        display: none;
+    }
+
+    .custom-slider .ngx-slider .ngx-slider-limit {
+        font-weight: bold;
+        color: #1c6bba;
+    }
+
+    .custom-slider .ngx-slider .ngx-slider-tick {
+        width: 1px;
+        height: 10px;
+        margin-left: 4px;
+        border-radius: 0;
+        background: #ffe4d1;
+        top: -1px;
+    }
+
+    .custom-slider .ngx-slider .ngx-slider-tick.ngx-slider-selected {
+        color: #1c6bba;
+    }
+
+    .ngx-slider .ngx-slider-bubble.ngx-slider-limit {
+        color: #1c6bba !important;
+    }
+
+    .ngx-slider .ngx-slider-pointer.ngx-slider-active {
+        outline-color: #1c6bba !important;
+    }
+}
+
+.insurance-result {
+    font-family: var(--fontRegular);
+    display: flex;
+    justify-content: center;
+    mask-image: linear-gradient(180deg, rgb(0, 0, 0) 90%, transparent);
+    padding-bottom: 40px;
+
+    .row {
+        padding: 0px;
+        width: 100%;
+
+        .insurance-header {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            justify-content: space-between;
+            padding: 0px;
+            margin-bottom: 15px;
+
+            .insurance-title {
+                font-size: 24px;
+                margin: 0px;
+            }
+            .insurance-price {
+                font-size: 24px;
+                justify-self: flex-end;
+                margin: 0px;
+            }
+            .insurance-miles {
+                font-size: 16px;
+                color: rgba(0, 0, 0, 0.64);
+                margin: 0px;
+            }
+            .insurance-name {
+                font-size: 16px;
+                color: rgba(0, 0, 0, 0.64);
+                justify-self: flex-end;
+                margin: 0px;
+            }
+        }
+
+        .insurance-details-header {
+            color: #141414;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 0px;
+        }
+
+        .insurance-items:last-child {
+            border-bottom: none;
+        }
+
+        ::ng-deep {
+            .mat-expansion-panel-body {
+                padding: 0 0 0 !important;
+                margin-bottom: 10px;
+            }
+    
+            .mat-expansion-panel-spacing {
+                margin: 0 !important;
+            }
+    
+            mat-expansion-panel {
+                border-top: none;
+                border-bottom: 1px solid #141414;
+                border-left: none;
+                border-right: none;
+                border-radius: 0px !important;
+                box-shadow: none !important;
+                overflow: visible;
+                padding: 0px;
+
+            }
+            
+            mat-expansion-panel-header {
+                padding: 0px 0px;
+                width: 100%;
+                height: 40px;
+                padding-right: 5px;
+            }
+
+            .mat-content {
+                height: 20px !important;
+                align-items: center;
+
+                p {
+                    margin: 0px;
+                }
+            }
+
+            .mat-expansion-panel-content {
+                overflow: hidden;
+            }
+        }
+
+        .description {
+            width: 100%;
+
+            p {
+                font-size: 14px;
+                line-height: 18px;
+                margin: 0px;
+                
+            }
+        }
+
+        .checkbox {
+            width: 12px;
+            height: 12px;
+            border: 1px solid #141414;
+            border-radius: 77px;
+            margin-right: 5px;
+        }
+
+        .checkbox-clicked {
+            background-color: #141414;
+        }
+    }
+}
+
+.addon-price {
+    margin-right: 10px;
+    color: rgba(0, 0, 0, 0.64);
+    font-family: var(--fontRegular);
+    font-size: 14px;
+}

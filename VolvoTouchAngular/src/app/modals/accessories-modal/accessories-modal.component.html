@@ -1,0 +1,16 @@
+
+<div class="carmodelModal">
+
+    <div class="carImageModal">
+        <img src="{{data.carModel.img}}">
+    </div>
+
+    <div class="carTitleModal">
+        {{data.carModel.title}}
+    </div>
+
+    <div class="caryears">
+        <div class="flex-item"  *ngFor="let modelCode of data.carModel.modelCodes" (click)="yearChosen(modelCode.year)">{{modelCode.year}}</div>
+    </div>
+
+</div>

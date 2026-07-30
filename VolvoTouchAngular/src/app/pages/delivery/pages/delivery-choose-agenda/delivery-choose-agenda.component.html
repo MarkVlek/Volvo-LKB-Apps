@@ -1,0 +1,144 @@
+<div class="main-container" id="main-container">
+    <div #header class="header" id="header">
+        {{isTablet ? 'Customize Agenda' : 'Filtrera Agenda' }}
+    </div>
+
+    <div class="content" *ngIf="!loading">
+        <swiper [config]="mainConfig" #swiper class="agendaswip"
+            (beforeTransitionStart)="onBeforeTransitionImage($event)"
+            *ngIf="deliveryAgendaService.agenda.categoryGroups">
+
+            <ng-template class="agendaswip-item"  *ngIf="isTablet" swiperSlide>
+
+                <div class="saved-container">
+                    
+                    <!-- THESE ARE THE CAST INSTRUCTIONS ON TABLET, DISPLAY INITALLY AND TOGGLE OFF WHEN PRESSED CAST -->
+                    <div [ngStyle]="{'opacity': HasCasted ? '0' : '1'}"
+                        style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="saved-header">
+                            Choose screen to cast
+                        </div>
+                        <div class="cast-btn" (click)="Cast()" [ngClass]="{'disabled-cast-btn': castingService.currentlyCastedPlayer === ''}">
+                            Cast
+                        </div>
+
+                        <div class="casting-players-container">
+
+                            <div *ngFor="let castingPlayer of castingPlayers">
+    
+                                <div class="casting-player-btn" (click)="SetCastingPlayer(castingPlayer)" [ngClass]="{'disabled-casting-player-btn': castingPlayer !== castingService.currentlyCastedPlayer}">
+                                    <div class="not-connected" [ngClass]="{'connected': this.castingService.occupationStatus.get(castingPlayer)}"></div>
+                                    {{castingPlayer}}
+                                </div>
+
+                                <div class="casting-status" *ngIf="this.castingService.occupationStatus.get(castingPlayer)">{{'Currently casting from ' + this.castingService.occupationStatus.get(castingPlayer).split(',')[0]}}</div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </ng-template>
+            <!--  Choose player to cast to for Kista  -->
+            <ng-template class="agendaswip-item"  *ngIf="this.configService.config['VolvoEndlessAisle_Kista'] == 'true'" swiperSlide>
+                <div class="saved-container">
+                    <!-- THESE ARE THE CAST INSTRUCTIONS ON TABLET, DISPLAY INITALLY AND TOGGLE OFF WHEN PRESSED CAST -->
+                    <div [ngStyle]="{'opacity': HasCasted ? '0' : '1'}"
+                        style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="casting-players-container">
+                            <div *ngFor="let castingPlayer of castingPlayers">
+                                <div class="casting-player-btn" (click)="SetCastingPlayer(castingPlayer)" [ngClass]="{'disabled-casting-player-btn': castingPlayer !== castingService.currentlyCastedPlayer}">
+                                    Hall {{(castingPlayers.indexOf(castingPlayer) + 1)}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+
+            <!-- THESE ARE THE AGENDA GROUPS, DONT DISPLAY INITIALLY UNTILL PRESSED CAST IF TABLET-->
+            <ng-template *ngFor="let page of agendas" class="agendaswip-item" swiperSlide >
+                <div class="item-container">
+                    <div class="row" *ngFor="let row of page">
+
+                        <div class="parent" (click)="setActive(row, true, null)">
+                            <div [ngClass]="row.show ? 'selectedText' : 'unselectedText'">{{row.title}}</div>
+                            <div [ngClass]="row.show ? 'selected' : 'unselected'"></div>
+                        </div>
+
+                        <div *ngFor="let child of row.categories" class="child" (click)="setActive(child, false, row)">
+                            <div [ngClass]="child.show ? 'selectedText' : 'unselectedText'">{{child.name}}</div>
+                            <div [ngClass]="child.show ? 'selected' : 'unselected'"></div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template class="agendaswip-item" swiperSlide *ngIf="isTablet">
+
+                <div class="saved-container" >
+
+                    <div [ngStyle]="{'display': loadingQr ? 'block' : 'none'}">
+                        <svg class="spinner" viewBox="0 0 50 50">
+                            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                        </svg>
+                    </div>
+
+                </div>
+
+            </ng-template>
+
+            <ng-template class="agendaswip-item" swiperSlide *ngIf="!isTablet">
+
+                <div class="qr-container">
+                    <div class="qr-code-img">
+    
+                        <div class="loading" *ngIf="loadingQr">
+                            <div class="loading-gif"> </div>
+                        </div>
+    
+                        <qrcode *ngIf="!loadingQr && qrCodeLink" [qrdata]="qrCodeLink" [width]="150"
+                            [errorCorrectionLevel]="'H'"></qrcode>
+    
+                    </div>
+                    <div class="qr-code-text">Scanna för att få checklistan i din telefon eller surfplatta.</div>
+                    <button class="continue-btn" (click)="onContinue()">Fortsätt</button>
+                </div>
+
+            </ng-template>
+
+        </swiper>
+    </div>
+
+    <div class="footer" *ngIf="!isTablet">
+        <div class="arrow-container">
+            <div class="arrow" (click)="goPrev()"></div>
+            <div #next class="arrow" (click)="goNext()" id="next"></div>
+        </div>
+
+        <div #point class="point-container" *ngIf="agendas" id="point">
+            <div *ngFor="let i of agendaSteps; index as x">
+                <div class="circle enabled"
+                    [ngClass]="{'disabled': this.deliveryAgendaService.currentAgendaIndex != x }"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer" *ngIf="isTablet">
+        <div class="arrow" (click)="goPrev()"></div>
+        <div #point class="point-container" id="point">
+            <div *ngFor="let i of agendaSteps; index as x">
+                <div class="circle enabled"
+                    [ngClass]="{'disabled': this.deliveryAgendaService.currentAgendaIndex != x }"></div>
+            </div>
+        </div>
+        <div #next class="arrow rotate" (click)="goNext()" id="next"></div>
+    </div>
+    <div class="power-turned-off" *ngIf="powerOff == true" (mousedown)="turnOn()"></div>
+    <div class="power" (click)="turnOff()" *ngIf="this.isTablet">
+        <mat-icon>power_settings_new</mat-icon>
+    </div>
+</div>

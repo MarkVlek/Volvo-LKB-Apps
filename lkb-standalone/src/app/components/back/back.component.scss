@@ -1,0 +1,126 @@
+.back-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 63px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    font-family: var(--fontDisplayMedium);
+    font-size: 16px;
+    font-weight: 500;
+
+    .back-static {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-right: 35px;
+
+        svg {
+            margin-left: 30px;
+            margin-right: 10px;
+        }
+    }
+
+    .close-container-static {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .close-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .close-searchbar {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background-color: rgb(0, 123, 205);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .icon {
+                    color: white;
+                    transform: scale(1.2);
+                }
+            }
+        }
+    }
+}
+
+.back:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.refresh:active {
+    transform: translateY(4px);
+}
+
+.iframe-back-container {
+    min-width: 75px;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    font-family: var(--fontDisplayMedium);
+    font-size: 16px;
+    font-weight: 500;
+
+    .refreshIframe {
+        position: absolute;
+        transform: scale(1.5);
+        left: 40px;
+        top: -45px;
+        height: 25px;
+        width: 65px;
+        border: 1px solid rgb(0, 0, 0, 0.4);
+        border-radius: 5px;
+        background-color: white;
+        transition: 2s ease;
+        transition-property: opacity;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--fontDisplayMedium);
+
+        p {
+
+            font-size: 10px;
+            margin-top: 15px;
+        }
+    }
+
+    .refresh {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 5px;
+    }
+
+    .backIframe {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-right: 30px;
+
+        svg {
+            margin-left: 30px;
+            margin-right: 10px;
+        }
+    }
+}

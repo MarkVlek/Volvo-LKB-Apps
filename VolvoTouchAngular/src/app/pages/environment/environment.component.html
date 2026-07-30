@@ -1,0 +1,13 @@
+<div class="scroll-container">
+    <div class="scroll">
+        <div *ngIf="showGif" class="pinch-container">
+            <div class="pinch-gif">
+                <img src="assets\gifs\Hand_ikon_varannan_transparent.gif">
+            </div>
+        </div>
+        <pinch-zoom class="pz" *ngIf="imagePreloadService.getImage('Environment-0')" [minScale]="1" [disablePan]="false"
+            [limit-zoom]="4" [draggableImage]="true" [zoomControlPosition]="'right'" [limitPan]="false" #pinch>
+            <img [src]="imagePreloadService.getImage('Environment-0').src" />
+        </pinch-zoom>
+    </div>
+</div>

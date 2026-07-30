@@ -1,0 +1,107 @@
+.acc-container {
+    font-family: "Volvo Novum-Regular";
+    width: 100%;
+    height: var(--main-view-height);
+    background-color: white;
+
+    .title {
+        width: 100%;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        font-family: var(--fontDisplayMedium);
+        font-weight: 500;
+        line-height: 24px;
+    }
+
+    .rower {
+        width: 100%;
+        display: flex;
+        height: 800px;
+        flex-direction: row;
+        justify-content: space-around;
+        .keyboardContainer {
+            height: 100%;
+            width: 47%;
+            display: flex;
+            flex-direction: column;
+            margin-left: -52px;
+            .regnr {
+                width: 100%;
+                height: 100px;
+                padding-left: 72px;
+                font-size: 25px;
+                font-weight: 500;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: var(--fontDisplayMedium);
+            }
+            .search {
+                width: 91%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .inner-search {
+                    min-width: 90%;
+                    min-height: 90%;
+                }
+            }
+        }
+
+        .or {
+            height: 100px;
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--fontRegular);
+        }
+
+        .modelsContainer {
+            height: 100%;
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            .model {
+                width: 100%;
+                height: 100px;
+                padding-right: 48px;
+                display: flex;
+                font-size: 25px;
+                font-weight: 500;
+                justify-content: center;
+                align-items: center;
+                font-family: var(--fontDisplayMedium);
+            }
+            .models {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                margin-left: 55px;
+                // margin-top: 50px;
+            }
+        }
+    }
+}
+
+.container {
+    display: flex;           /* Lay out children horizontally */
+    align-items: flex-start; /* Optional: align items at the top */
+  }
+  
+  .left-section,
+  .right-section {
+    flex: 1;          /* Each section takes up available space */
+    padding: 1rem;    /* Spacing around content */
+  }
+  
+  .vertical-line {
+    width: 1px;           /* Thickness of the line */
+    background-color: #000;  /* Color of the line */
+    margin-bottom: 96px;
+    margin-top: 25px;
+  }

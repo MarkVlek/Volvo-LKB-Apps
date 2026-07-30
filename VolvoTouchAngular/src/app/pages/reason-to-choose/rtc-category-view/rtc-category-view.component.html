@@ -1,0 +1,7 @@
+<div [@fade]="boolFadeIn" class="reason-to-choose-main">
+    <mat-grid-list class="grid" [cols]="gridCols" rowHeight="fit" gutterSize="5px">
+        <mat-grid-tile *ngFor="let tile of matrix; index as i;" [colspan]="spanForCols(i, matrix.length)" [rowspan]="1">
+            <app-rtc-category class="tile" [Index]="i" [category]="tile.category"></app-rtc-category>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

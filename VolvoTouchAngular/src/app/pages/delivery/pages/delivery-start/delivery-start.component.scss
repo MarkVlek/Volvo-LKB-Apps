@@ -1,0 +1,114 @@
+.container {
+    height: 1080px;
+    width: 1920px;
+    min-width: 1920px;
+    display: flex;
+    animation: fade-in 1.5s;
+
+    .video {
+        height: 1080px !important;
+        width: 1920px !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        video{
+            width: 1920px;
+            height: 1080px;
+            object-fit: cover;
+        }
+    }
+
+    .fade{
+        opacity: 1 !important;
+    }
+
+    .text-container {
+        margin-top: 480px;
+        margin-left: 160px;
+
+        font-family: var(--fontRegular);
+        color: #FFFFFF;
+        z-index: 99;
+        opacity: 0;
+        transition: all 2s;       
+
+        .header {
+            font-family: var(--fontRegular);
+            font-size: 100px;
+            line-height: 79.7px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .text {
+            margin-top: 20px;
+            font-size: 40px;
+            line-height: 48px;
+            font-weight: 400;
+        }
+
+        .button {
+            margin-top: 40px;
+            width: 256px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #FFFFFF;
+            border-radius: 8px;
+
+            font-size: 25px;
+            font-weight: 350;
+            transition: all .3s ease;
+        }
+
+        .button:active{
+            background-color: white;
+            color: black;
+        }
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.finish-container {
+    position: fixed;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-top: -44px;
+    width: 100%;
+}
+
+.finish-box {
+    width: 84px;
+    margin-right: 25px;
+}
+
+.icon-finnish {
+    
+    background-image: url('../../../../../assets/images/Delivery/check_white.png');
+    width: 18px;
+    height: 13px;
+    scale: 1;
+}
+
+.finish {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.finish > p {
+    color: #FFFFFF;
+}

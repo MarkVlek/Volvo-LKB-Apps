@@ -1,0 +1,43 @@
+<div class="container" *ngIf="!loading">
+    <div class="video" *ngIf="videoUrl">
+        <video autoplay loop [muted]="true">
+            <source src="{{videoUrl}}" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="text-container" id="text-container">
+
+        <div class="header">
+            Grattis {{deliveryAgendaService.agenda.customerName}}
+        </div>
+
+        <div class="text" >
+            Till din nya {{deliveryAgendaService.agenda.carModel != 'Generic' ? deliveryAgendaService.agenda.carModel : 'Volvo'}}
+        </div>
+
+        <div *ngIf="!isVCS" class="button" (click)="onStart()">
+            Din resa börjar nu
+        </div>
+
+        <div *ngIf="isVCS && !defaultMode" class="button" (click)="onStart()">
+            Utforska funktioner
+        </div>
+
+    </div>
+</div>
+
+<!-- Position avsluta buttonm here if deault mode -->
+
+
+<div *ngIf="isVCS" class="finish-container">
+
+    <div class="finish-box">
+
+        <div (click)="finish()" class="finish">
+        <div class="icon-finnish"></div>
+        <p>Avsluta</p>
+        </div>
+
+    </div>
+
+</div>

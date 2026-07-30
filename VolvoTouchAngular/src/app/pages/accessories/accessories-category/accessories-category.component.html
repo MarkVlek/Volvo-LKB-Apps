@@ -1,0 +1,28 @@
+<div class="category-container">
+  <div class="title-container">
+    <span>Tillbehör till din Volvo {{carmodelService.selectedCarModel}}</span>
+  </div>
+
+  <div class="category-grid">
+    <div class="tiles-container" [style.--max-cols]="tilesRow1.length">
+      <div class="tile-row">
+        <div class="grid-tile"
+          *ngFor="let tile of tilesRow1"
+          (click)="categoryClick(tile.text)"
+          [style.background-image]="tile.background">
+          <div class="gradient"></div>
+          <span class="grid-text">{{ tile.text }}</span>
+        </div>
+      </div>
+      <div class="tile-row" *ngIf="tilesRow2.length > 0">
+        <div class="grid-tile"
+          *ngFor="let tile of tilesRow2"
+          (click)="categoryClick(tile.text)"
+          [style.background-image]="tile.background">
+          <div class="gradient"></div>
+          <span class="grid-text">{{ tile.text }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

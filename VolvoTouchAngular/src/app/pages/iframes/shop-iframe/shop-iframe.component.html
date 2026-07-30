@@ -1,0 +1,12 @@
+<div class="iframe-canvas">
+    <iframe #IFrame (load)="onIframeLoaded(IFrame)" sandbox="allow-same-origin allow-scripts allow-forms"
+        [src]="url$ | async | safe" loading="lazy" frameBorder="0" allow="clipboard-read; clipboard-write"></iframe>
+        <div class="qrCodeContainer" *ngIf="this.showQr">
+            <div class="qrCodeAlign">
+                <qrcode id="qrcode" [width]="150" [qrdata]="this.qrData" [allowEmptyString]="true"></qrcode>
+            </div>
+            <div class="qrCodeText">
+                <p>{{"Scanna QR-koden för att fortsätta i mobilen" | translate}}</p>
+            </div>
+        </div>
+</div>

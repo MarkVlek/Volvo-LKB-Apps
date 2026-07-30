@@ -1,0 +1,107 @@
+<div class="insurance-container">
+
+    <div class="close">
+        <img src="./assets/images/AppSpecific/LeveransKlaraBilar/volvia.png" class="volvia">
+        <mat-icon (click)="onClose()">close</mat-icon>
+    </div>
+
+    <div class="insurance" *ngIf="!this.lkbService.showInsurance">
+
+        <div class="header">
+            <h3>Bilförsäkring</h3>
+        </div>
+        <div class="content">
+            <p>Körsträcka per år</p>
+            <p>{{this.miles}} mil</p>
+        </div>
+
+        <div class="slider">
+            <mat-slider [min]="500" [step]="500" [max]="3000">
+                <input [value]="this.miles" (valueChange)="changeMiles($event)" matSliderThumb>
+            </mat-slider>
+        </div>
+
+        <div class="input-title">
+            Personnummer
+        </div>
+        <div class="input-box-container">
+            <mat-form-field ape class="input-box">
+                <input matInput placeholder="ÅÅMMDD-XXXX" #input>
+            </mat-form-field>
+        </div>
+
+        <div class="numpad">
+            <div class="numpad-inner">
+                <app-number-pad (onClicked)="onKeyClick($event)" iconSize="1" rowHeight="50px"></app-number-pad>
+            </div>
+        </div>
+        <div (click)="onSearch()" class="search">
+            <p *ngIf="!showSpinner">{{error ? 'Något gick fel' : 'Visa försäkring' }}</p>
+            <mat-progress-spinner mode="indeterminate" color="white" diameter="40"
+                *ngIf="showSpinner"></mat-progress-spinner>
+        </div>
+        <div class="compliance">Genom att du klickar på Visa försäkring så godkänner du att vi skickar dina uppgifter
+            vidare till Volvia för att de ska kunna ge dig ett pris på försäkring. Hur de hanterar dina personuppgifter
+            kan du läsa om på deras hemsida.</div>
+    </div>
+
+    <div *ngIf="this.lkbService.showInsurance" class="insurance-result">
+
+        <div *ngFor="let insurance of insurances" class="row">
+            <div class="insurance-header">
+                <p class="insurance-title">Bilförsäkring</p>
+                <p class="insurance-price">{{insurance.price}} kr/mån</p>
+                <p class="insurance-miles">{{miles}} mil/år</p>
+                <p class="insurance-name">{{insurance.name}}</p>
+            </div>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                    <p class="panel-header">Mer info</p>
+                </mat-expansion-panel-header>
+
+                <div class="description" style="border-bottom: 1px solid #141414;">
+                    <p style="margin-bottom: 5px;">{{insurance.description}}</p>
+                </div>
+
+                <mat-accordion [multi]="false">
+                    <mat-expansion-panel *ngFor="let addon of insurance.addOns" [expanded]="false">
+
+                        <mat-expansion-panel-header>
+                            <div (click)="$event.stopPropagation()">
+                                <div class="checkbox" (click)="chooseAddon(addon, insurance)"
+                                    [ngClass]="{'checkbox-clicked' : this.chosenAddons.includes(addon)}"></div>
+                            </div>
+                            <p class="panel-header">{{addon.name}}</p>
+                            <p class="addon-price" style="margin-left: auto; margin-right: 10px;">{{addon.monthlyPrice +
+                                ' kr/mån'}}</p>
+                        </mat-expansion-panel-header>
+
+                        <div class="description">
+                            <p>{{addon.description}}</p>
+                        </div>
+
+                    </mat-expansion-panel>
+
+                    <p class="insurance-details-header">Försäkringen innehåller</p>
+
+                    <mat-expansion-panel *ngFor="let item of insurance.insuranceItems" [expanded]="false"
+                        class="insurance-items">
+
+                        <mat-expansion-panel-header>
+                            <p class="panel-header">{{item.name}}</p>
+                        </mat-expansion-panel-header>
+
+                        <div class="description">
+                            <p>{{item.description}}</p>
+                        </div>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+            </mat-expansion-panel>
+
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,29 @@
+.carmodelModal {
+    height: 408px;
+    width: 600px;
+
+    .carImageModal {
+        width: 100%;
+
+        img {
+            width: 600px;
+            height: 230px;
+        }
+    }
+
+    .carTitleModal {
+        width: 100%;
+        text-align: center;
+    }
+
+    .caryears {
+        display: flex;
+        height: 120px;
+        text-align: center;
+    }
+
+    .flex-item {
+        padding: 50px 0;
+        flex-grow: 1;
+    }
+}

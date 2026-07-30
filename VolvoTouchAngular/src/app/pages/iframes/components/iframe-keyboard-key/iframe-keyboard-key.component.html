@@ -1,0 +1,19 @@
+<div id="inner-key" class="inner-key"
+(pointerdown)="onMouseDown(value)"
+(pointerup)="onMouseUp(value)"
+(pointercancel)="onMouseUp(value)"
+(pointerleave)="onMouseLeave(value)"
+[id]="value"
+>
+    <div class="inner-inner-key" [style]="setEmpty">
+        <div style="margin-top: 4px;" *ngIf="back" class="key">
+            <mat-icon [style]="style">backspace</mat-icon>
+        </div>
+        <div *ngIf="!back && value != 'Space' && value != 'Close'" class="key">
+            {{value}}
+        </div>
+        <div *ngIf="value == 'Close'" class="key">
+            <mat-icon>close</mat-icon>
+        </div>
+    </div>
+</div>

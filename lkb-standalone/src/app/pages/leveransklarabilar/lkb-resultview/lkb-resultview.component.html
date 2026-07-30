@@ -1,0 +1,14 @@
+<div class="volvo-lkb-container" 
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="150"
+    (scrolled)="onScroll()"
+    [scrollWindow]="false"
+    [infiniteScrollDisabled]="!shouldListenToScroll"
+    id="lkb-container">
+  <div class="car-container">
+    <div class="car-c" id="{{car.id}}" *ngFor='let car of displayedCars'>
+      <app-lkb-car-card (click)="onCarClick(car)" [car]=" car"></app-lkb-car-card>
+    </div>
+  </div>
+</div>

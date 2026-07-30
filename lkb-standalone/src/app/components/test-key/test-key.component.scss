@@ -1,0 +1,36 @@
+.inner-key {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+
+    .inner-inner-key {
+        width: 95%;
+        height: 81%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: x-large;
+        color: #696969;
+        font-family: var(--fontRegular);
+        font-size: 30px;
+        font-weight: bold;
+        background-color: none;
+
+        .back {
+            height: 100%;
+            width: 100%;
+            background-image: url('../../../assets/images/keyboard/backspace.png');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+}
+
+@media screen and (width: 2880px) {
+    .back {
+        scale: 1.6;
+    }
+}

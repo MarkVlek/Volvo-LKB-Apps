@@ -1,0 +1,142 @@
+<div class="container" >
+
+    <div class="header">
+        <span>Delivery Agenda - {{deliveryAgendaService.agenda.regNum}}</span>
+    </div>
+
+    <div class="agenda-container">
+
+        <div class="list-container">
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let parent of filteredAgendas; index as i" [expanded]="i == parentStep">
+
+                    <mat-expansion-panel-header class="parent-header" (click)="setParentStep(i)">
+                        {{parent.title}}
+                    </mat-expansion-panel-header>
+
+                    <mat-accordion>
+
+                        <mat-expansion-panel class="child" *ngFor="let child of parent.categories; index as j"
+                            [expanded]="j == childStep">
+                            <mat-expansion-panel-header class="child-header" (click)="selectChild(child, j)">
+                                <div class="video-icon" *ngIf="child.accessories | deliveryCheckForMedia"></div>
+                                {{child.name}}
+                            </mat-expansion-panel-header>
+
+                            <ul>
+                                <li *ngFor="let item of child.accessories" (click)="scrollTo(item)" [ngClass]="{'active-list-item': item.name == activeAccessory}">
+                                    {{item.name}}
+                                </li>
+                            </ul>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
+        </div>
+
+        <div class="details-container" *ngIf="selectedChild">
+
+            <div class="media" *ngIf="hasMedia">
+
+                <div *ngIf="isImage" class="image" style="background-image: url('{{selectedMedia}}');"></div>
+                <div *ngIf="!isImage" class="image">
+                    <video autoplay loop playsinline preload="auto" [muted]="true" id="video"></video>
+                </div>
+
+                <div class="thumb-container">
+                    <div *ngFor="let media of selectedChild.accessories" (click)="setHighLight($event)" id="{{'thumb-' + media.name}}">
+
+                        <div *ngFor="let thumb of media.medias; let i = index" (click)="setMedia(thumb.name, false, media.name)">
+
+                            <div id="thumbnail-{{i}}">
+
+                                <div *ngIf="checkIfVideoOrImage(thumb.name)" class="thumb-media"
+                                    >
+                                    <img src="{{getThumbUrl(thumb.name)}}">
+                                </div>
+
+
+                                <div *ngIf="!checkIfVideoOrImage(thumb.name)" class="thumb-media">
+                                    <video class="thumb-video">
+                                        <source src="{{getThumbUrl(thumb.name)}}#t=1">
+                                    </video>
+                                    
+                                    <div class="video-icon2" *ngIf="selectedMedia.split('/').pop() == thumb.name">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="24px">
+                                            <defs>
+                                                <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                                                <feDropShadow dx="1.5" dy="1.5" stdDeviation="1.5" flood-color="black" flood-opacity="0.2" />
+                                                </filter>
+                                            </defs>
+                                            <path
+                                                d="M360-320h80v-320h-80v320Zm160 0h80v-320h-80v320ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"
+                                                fill="#FFFFFF"
+                                                filter="url(#shadow)"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div class="video-icon2" *ngIf="selectedMedia.split('/').pop() != thumb.name">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                            <defs>
+                                                <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                                                <feDropShadow dx="1.5" dy="1.5" stdDeviation="1.5" flood-color="black" flood-opacity="1" />
+                                                </filter>
+                                            </defs>
+                                            <path
+                                                d="m380-300 280-180-280-180v360ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"
+                                                fill="#FFFFFF"
+                                                filter="url(#shadow)"
+                                            />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div class="thumb-name">
+                                    {{media.name}}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-container" [ngClass]="hasMedia ? 'small' : 'big'">
+                <div *ngFor="let accessory of selectedChild.accessories" id="{{'text-' + accessory.name}}">
+                    <div class="title" >{{accessory.name}}</div>
+                    <div class="subTitle" *ngIf="accessory.bodyText" [innerHTML]="accessory.bodyText"></div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="arrow" (click)="goBack()"></div>
+        <div class="exit" (click)="closeDelivery()">
+            <div class="icon"></div>
+            Finish
+        </div>
+    </div>
+    <div class="power-turned-off" *ngIf="powerOff == true" (mousedown)="turnOn()"></div>
+</div>
+
+
+<div class="casted-player">
+    <div class="casted-player-label">{{castingService.currentlyCastedPlayer}}</div>
+    <div class="connected"></div>
+</div>
+
+
+<div class="power" (click)="turnOff()">
+    <mat-icon>power_settings_new</mat-icon>
+</div>
+
+
+<!-- <div class="cast">
+    <mat-icon>cast</mat-icon>
+</div> -->

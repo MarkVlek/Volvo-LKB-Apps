@@ -1,0 +1,29 @@
+<div class="main">
+    <div class="above">
+        <div class="title">
+            {{title}}
+        </div>
+    </div>
+    <div class="below">
+        <div class="left">
+            <div class="list-box">
+                <div *ngFor="let item of items; let i = index"  [class.first-item]="i === 0" class="item-list" (click)="changeItem(item)">
+                    <div class="item" [class.selected]="isSelected(item)">
+                        <div class="item-text">
+                            {{ item.name | removeChars: 35 }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-box-below">
+
+            </div>
+        </div>
+        <div class="right">
+            <div class="outlet-box">
+                <app-e-item-view [item]="selectedItem"></app-e-item-view>
+                <!-- <app-rtc-item-view [item]="selectedItem"></app-rtc-item-view> -->
+            </div>
+        </div>
+    </div>
+</div>

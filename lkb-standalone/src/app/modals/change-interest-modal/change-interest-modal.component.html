@@ -1,0 +1,28 @@
+<div class="main-container">
+    <div class="main-inner">
+        <div class="explantation">
+        </div>
+        <div class="info-box">
+            <div class="box">
+                <div class="header">
+                    Nuvarande ränta
+                </div>
+                <div class="procent">{{ currentInterest }} %</div>
+            </div>
+            <div class="box">
+                <div class="header">
+                    Ny ränta
+                </div>
+                <div class="procent">{{ newInterest }} %</div>
+            </div>
+        </div>
+        <div class="slider-container">
+            <mat-slider class="slider" step="0.05" min="3" max="10">
+                <input [value]="currentInterest" (valueChange)="valueChange($event)" matSliderThumb>
+            </mat-slider>
+        </div>
+        <div class="button-container">
+            <button (click)="save()" mat-flat-button color="primary" class="save">Spara ny ränta</button>
+        </div>
+    </div>
+</div>

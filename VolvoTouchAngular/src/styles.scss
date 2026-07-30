@@ -1,0 +1,177 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$VolvoFrontend-primary: mat.define-palette(mat.$indigo-palette);
+$VolvoFrontend-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$VolvoFrontend-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$VolvoFrontend-theme: mat.define-light-theme((color: (primary: $VolvoFrontend-primary,
+        accent: $VolvoFrontend-accent,
+        warn: $VolvoFrontend-warn,
+      ),
+    ));
+
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($VolvoFrontend-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: "codropsicons";
+  src: url("../src/assets/fonts/codropsicons/codropsicons.ttf") format("truetype");
+}
+
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: "VolvoCentumLight";
+  src: url("../src/assets/fonts/VolvoCentum/VolvoCentum_DisplayLt.ttf") format("truetype");
+}
+
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: "VolvoCentumRegular";
+  src: url("../src/assets/fonts/VolvoCentum/VolvoCentum_DisplayRg.ttf") format("truetype");
+}
+
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: "VolvoCentumDisplayMedium";
+  src: url("../src/assets/fonts/VolvoCentum/VolvoCentum_DisplayMd.ttf") format("truetype");
+}
+
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: "VolvoCentumSemiBold";
+  src: url("../src/assets/fonts/VolvoCentum/VolvoCentum_DisplaySBd.ttf") format("truetype");
+}
+
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: "fontello";
+  src: url("../src/assets/fonts/fbi-icons.ttf") format("truetype");
+}
+body.ex60-leasing-page {
+    --header-height: 0px;
+    --main-view-height: 1080px;
+}
+
+:root {
+  --volvo-blue: #007bcd;
+  --primary-color: #fff;
+  --background-color: #e5e5e5;
+  --text-color: #2d2d2d;
+  --header-color: #FFFFFF;
+  --footer-color: #F5F3F0;
+  --footer-height: 64px;
+  --header-height: 63px;
+  --main-view-height: calc(1080px - 63px);
+  --main-iframe-height: 1080px;
+  --search-bar-height: 700px;
+  --card-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  --fontRegular: "VolvoCentumRegular";
+  --fontDisplayMedium: "VolvoCentumDisplayMedium";
+  --fontLight: "VolvoCentumLight";
+  --fontSemiBold: "VolvoCentumSemiBold";
+}
+
+html,
+body {
+  overscroll-behavior-x: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  /* Hide scrollbars */
+  font-family: var(--fontSemiLight), "Helvetica Neue", sans-serif;
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */
+}
+
+.fullscreen-dialog .mat-dialog-container {
+  padding: 0;
+  overflow-y: auto !important;
+}
+
+::-webkit-scrollbar-track {
+  --webkit-box-shadow: inset 0 0 0px rgba(233, 233, 233, 0.8) !important;
+  border-radius: 10px !important;
+  background-color: #c9c9c957 !important;
+}
+
+::-webkit-scrollbar {
+  width: 5px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px !important;
+  width: 4px !important;
+  --webkit-box-shadow: inset 0 0 0px rgba(255, 255, 255, 0.205) !important;
+  background-color: #b4b4b4 !important;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+@media screen and (width: 2880px) {
+   ::-webkit-scrollbar {
+    width: 9px !important;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    width: 9px !important;
+  }
+}

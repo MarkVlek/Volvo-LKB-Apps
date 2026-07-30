@@ -1,0 +1,13 @@
+<div *ngIf="onCars" class="leveransklara-bilar-container">
+    <div class="filter" [ngClass]="{'sidebar-active-filter': !this.lkbService.sideBar}">
+        <app-lkb-filter [cars]="cars"></app-lkb-filter>
+    </div>
+    <div class="cars" [ngClass]="{'sidebar-active-cars': !this.lkbService.sideBar}">
+        <app-lkb-resultview></app-lkb-resultview>
+    </div>
+</div>
+<div *ngIf="!onCars" class="no-car-container">
+    <div class="title">
+        Tyvärr kunde inga bilar hämtas
+    </div>
+</div>

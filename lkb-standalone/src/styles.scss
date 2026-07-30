@@ -1,0 +1,111 @@
+@use "@angular/material" as mat;
+@include mat.core();
+
+$lkb-primary: mat.define-palette(mat.$blue-grey-palette);
+$lkb-accent: mat.define-palette(mat.$blue-palette, A200, A100, A400);
+$lkb-warn: mat.define-palette(mat.$red-palette);
+
+$lkb-theme: mat.define-light-theme((color: (primary: $lkb-primary, accent: $lkb-accent, warn: $lkb-warn)));
+
+@include mat.all-component-themes($lkb-theme);
+
+// ── Volvo brand fonts ─────────────────────────────────────────────────────────
+@font-face {
+  font-family: "VolvoCentumLight";
+  font-weight: normal;
+  font-style: normal;
+  src: url("assets/fonts/VolvoCentum/VolvoCentum_DisplayLt.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "VolvoCentumRegular";
+  font-weight: normal;
+  font-style: normal;
+  src: url("assets/fonts/VolvoCentum/VolvoCentum_DisplayRg.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "VolvoCentumDisplayMedium";
+  font-weight: normal;
+  font-style: normal;
+  src: url("assets/fonts/VolvoCentum/VolvoCentum_DisplayMd.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "VolvoCentumSemiBold";
+  font-weight: normal;
+  font-style: normal;
+  src: url("assets/fonts/VolvoCentum/VolvoCentum_DisplaySBd.ttf") format("truetype");
+}
+
+// ── CSS variables ─────────────────────────────────────────────────────────────
+:root {
+  --volvo-blue: #007bcd;
+  --primary-color: #fff;
+  --background-color: #e5e5e5;
+  --text-color: #2d2d2d;
+  --header-color: #FFFFFF;
+  --header-height: 63px;
+  /* LKB runs full-screen with no header/footer shell */
+  --main-view-height: 1017px;
+  --card-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2), 0 3px 10px 0 rgba(0, 0, 0, .19);
+  --fontRegular: "VolvoCentumRegular";
+  --fontDisplayMedium: "VolvoCentumDisplayMedium";
+  --fontLight: "VolvoCentumLight";
+  --fontSemiBold: "VolvoCentumSemiBold";
+  --fontMedium: "VolvoCentumDisplayMedium";
+}
+
+// ── Base reset ────────────────────────────────────────────────────────────────
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  overscroll-behavior-x: none;
+  font-family: var(--fontRegular), "Helvetica Neue", sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+// ── Scrollbar styling ─────────────────────────────────────────────────────────
+::-webkit-scrollbar {
+  width: 5px !important;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px !important;
+  background-color: #c9c9c957 !important;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px !important;
+  width: 4px !important;
+  background-color: #b4b4b4 !important;
+}
+
+// ── Material dialog override ──────────────────────────────────────────────────
+.fullscreen-dialog .mat-dialog-container {
+  padding: 0;
+  overflow-y: auto !important;
+}
+
+// ── Console ───────────────────────────────────────────────────────────────────
+#console {
+  height: 30%;
+  width: 80%;
+  top: 10px;
+  left: 10px;
+  font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+  color: #00ff00;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: absolute;
+  z-index: 10001;
+  padding: 10px;
+  min-height: 250px;
+  overflow-y: scroll;
+  display: none;
+}

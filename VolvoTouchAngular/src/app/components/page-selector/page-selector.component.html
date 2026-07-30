@@ -1,0 +1,5 @@
+<div class="page-selector-main" [ngClass]="{ 'searchActive': this.configService.showSearch || this.isShow, 'showroom-active': isShow}">
+    <div class="cards" *ngFor="let item of pageList; index as i">
+        <app-page-card [page]="item" *ngIf="shouldShowInFooter(item)"></app-page-card>
+    </div>
+</div>

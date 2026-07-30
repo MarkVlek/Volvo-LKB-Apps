@@ -1,0 +1,757 @@
+[
+  {
+    "Organization Name": "AB Visby Motorcentral",
+    "Organization ID": "72da77b3-26b4-4602-b2ac-24fd25fc743c",
+    "City": "Visby"
+  },
+  {
+    "Organization Name": "Ahlberg Bil Karlshamn",
+    "Organization ID": "48917675-14d4-4ff2-8517-6da7fb8c7443",
+    "City": "Asarum"
+  },
+  {
+    "Organization Name": "Ahlberg Bil Karlskrona",
+    "Organization ID": "bce5c7c9-e19e-448b-8c59-fb7fb6b375db",
+    "City": "Karlskrona"
+  },
+  {
+    "Organization Name": "Ahlberg Bil Ljungby",
+    "Organization ID": "64b7cb27-e027-4745-a003-0ecbb82b0dfc",
+    "City": "Ljungby"
+  },
+  {
+    "Organization Name": "Ahlberg Bil Olofström",
+    "Organization ID": "c94a7511-6d4f-46c4-9ca8-d67e952d1d3c",
+    "City": "Olofström"
+  },
+  {
+    "Organization Name": "Bilbolaget Bollnäs",
+    "Organization ID": "269448f4-d9b4-4e03-9611-c7ff1a93984f",
+    "City": "Bollnäs"
+  },
+  {
+    "Organization Name": "Bilbolaget Gällivare",
+    "Organization ID": "9b34efdc-5794-48c1-b0fa-694d4fe602e4",
+    "City": "Gällivare"
+  },
+  {
+    "Organization Name": "Bilbolaget Gävle",
+    "Organization ID": "7bd571d5-21ff-443f-b9a3-db43f125102e",
+    "City": "Gävle"
+  },
+  {
+    "Organization Name": "Bilbolaget Härnösand",
+    "Organization ID": "a08023c7-7d94-424e-ae5f-3eab69885d04",
+    "City": "Härnösand"
+  },
+  {
+    "Organization Name": "Bilbolaget Hudiksvall",
+    "Organization ID": "923ae5a0-4030-4cb8-93f6-b69e120fa84d",
+    "City": "Hudiksvall"
+  },
+  {
+    "Organization Name": "Bilbolaget Kalix",
+    "Organization ID": "6a649c38-7048-412e-aba6-831aea34d9fe",
+    "City": "Kalix"
+  },
+  {
+    "Organization Name": "Bilbolaget Kiruna",
+    "Organization ID": "c1db49f8-66d1-42ec-a9a9-c40f300a0930",
+    "City": "Kiruna"
+  },
+  {
+    "Organization Name": "Bilbolaget Ljusdal",
+    "Organization ID": "5add9166-7f5a-46c8-9bf9-c16ac66cea17",
+    "City": "Ljusdal"
+  },
+  {
+    "Organization Name": "Bilbolaget Luleå",
+    "Organization ID": "83287120-3de0-4ce0-b4d9-261f3805f588",
+    "City": "Luleå"
+  },
+  {
+    "Organization Name": "Bilbolaget Luleå Transportbilar",
+    "Organization ID": "3997fd84-1507-409b-b8d1-78d823b5a998",
+    "City": "Luleå"
+  },
+  {
+    "Organization Name": "Bilbolaget Lycksele",
+    "Organization ID": "233fccf9-0e8f-4fcb-9c17-cce3c420c847",
+    "City": "Lycksele"
+  },
+  {
+    "Organization Name": "Bilbolaget Norrtälje",
+    "Organization ID": "ae9cfaac-05c3-4b4a-b829-2ed15584b760",
+    "City": "Norrtälje"
+  },
+  {
+    "Organization Name": "Bilbolaget Örnsköldsvik",
+    "Organization ID": "ca9075c6-7c90-41af-86b0-642aedf46711",
+    "City": "Örnsköldsvik"
+  },
+  {
+    "Organization Name": "Bilbolaget Östersund",
+    "Organization ID": "102eb860-7e4b-4541-95db-4d31e2f1f60a",
+    "City": "Östersund"
+  },
+  {
+    "Organization Name": "Bilbolaget Östhammar",
+    "Organization ID": "d5305c21-5318-402c-882e-54c663d648d0",
+    "City": "Östhammar"
+  },
+  {
+    "Organization Name": "Bilbolaget Piteå",
+    "Organization ID": "d1e7acb9-7e5f-4dd5-ad3f-c10f269e509b",
+    "City": "Piteå"
+  },
+  {
+    "Organization Name": "Bilbolaget Sandviken",
+    "Organization ID": "f97afd97-c0bb-4ae8-9e00-10eb228d98e5",
+    "City": "Sandviken"
+  },
+  {
+    "Organization Name": "Bilbolaget Skellefteå",
+    "Organization ID": "4f249a0b-9b09-4fc7-b21a-77234bc3dc45",
+    "City": "Skellefteå"
+  },
+  {
+    "Organization Name": "Bilbolaget Söderhamn",
+    "Organization ID": "dbfdc7f2-aea5-4b00-9b8a-19e77f7b4913",
+    "City": "Söderhamn"
+  },
+  {
+    "Organization Name": "Bilbolaget Sollefteå",
+    "Organization ID": "e8834f9c-7c24-4290-8d74-1235e6907807",
+    "City": "Sollefteå"
+  },
+  {
+    "Organization Name": "Bilbolaget Strömsund",
+    "Organization ID": "4393059e-2eac-4832-948f-07968035e6d5",
+    "City": "Strömsund"
+  },
+  {
+    "Organization Name": "Bilbolaget Sundsvall",
+    "Organization ID": "97e11ec6-cb37-48c7-8f7d-07115a6f2798",
+    "City": "Sundsvall"
+  },
+  {
+    "Organization Name": "Bilbolaget Timrå",
+    "Organization ID": "08c6bfa2-c854-4cc9-9c14-287a7af9558a",
+    "City": "Timrå"
+  },
+  {
+    "Organization Name": "Bilbolaget Umeå",
+    "Organization ID": "5e993dc5-f0f0-4ab2-8463-8b8b3dcc4527",
+    "City": "Umeå"
+  },
+  {
+    "Organization Name": "Bilbolaget Uppsala Kungsgatan",
+    "Organization ID": "5ba7dbad-b6c4-45ab-bf64-2f3fb7d9cbf2",
+    "City": "Uppsala"
+  },
+  {
+    "Organization Name": "Bildeve AB - Bergahuset",
+    "Organization ID": "70bdfb8c-78a5-43a0-8629-1dd9b10de5d0",
+    "City": "Helsingborg"
+  },
+  {
+    "Organization Name": "Bildeve AB - Garnisonshuset",
+    "Organization ID": "27067afd-0abd-4e8b-9d6b-a692dbd53f28",
+    "City": "Helsingborg"
+  },
+  {
+    "Organization Name": "Bildeve AB - Landskrona",
+    "Organization ID": "db69cf6b-0aa8-46a7-943f-08777d8525e2",
+    "City": "Landskrona"
+  },
+  {
+    "Organization Name": "Bildeve ORG",
+    "Organization ID": "fab817e9-3c81-4b50-ae67-43003b2e6274",
+    "City": "Helsingborg"
+  },
+  {
+    "Organization Name": "Bilia Centralt lager Uppland - inaktiv",
+    "Organization ID": "24c06f9d-bf71-42b5-a4be-e8c89fc189fc",
+    "City": ""
+  },
+  {
+    "Organization Name": "Bilia Eskilstuna Volvo",
+    "Organization ID": "bc51d4cb-b736-475d-8dbc-6c17b9190817",
+    "City": "Eskilstuna"
+  },
+  {
+    "Organization Name": "Bilia Haga Norra Volvo",
+    "Organization ID": "437731f6-acbf-4988-8f4d-062522cec045",
+    "City": "Solna"
+  },
+  {
+    "Organization Name": "Bilia Haninge Volvo",
+    "Organization ID": "245c7d18-48ca-414c-baea-8d1c48ac5044",
+    "City": "Handen"
+  },
+  {
+    "Organization Name": "Bilia Hisingen Transportbilscenter",
+    "Organization ID": "e38c23de-bb8a-4000-8612-5085067ec7c9",
+    "City": "Göteborg"
+  },
+  {
+    "Organization Name": "Bilia Jägersro Nissan",
+    "Organization ID": "3c96fe88-7eb0-4129-9b8c-57d1e94ff8fb",
+    "City": "Malmö"
+  },
+  {
+    "Organization Name": "Bilia Jägersro Volvo",
+    "Organization ID": "baeddac2-a263-41ac-8b6e-7e888e8777a3",
+    "City": "Malmö"
+  },
+  {
+    "Organization Name": "Bilia Köping Volvo",
+    "Organization ID": "aa0910f4-c3c7-4edc-900b-a92c76584149",
+    "City": "Köping"
+  },
+  {
+    "Organization Name": "Bilia Kungälv Volvo",
+    "Organization ID": "47ab6615-a8fa-477d-a919-d2d10faaef6f",
+    "City": "Kungälv"
+  },
+  {
+    "Organization Name": "Bilia Kungsbacka Volvo",
+    "Organization ID": "21b7519b-f56d-405f-9c3a-fb04bae526ae",
+    "City": "Kungsbacka"
+  },
+  {
+    "Organization Name": "Bilia Lund Volvo",
+    "Organization ID": "edf487e4-fed6-4c37-8efe-36880aa37705",
+    "City": "Lund"
+  },
+  {
+    "Organization Name": "Bilia Nacka Volvo",
+    "Organization ID": "b0b41626-3fe9-4b38-b91d-794cf0643afe",
+    "City": "Nacka"
+  },
+  {
+    "Organization Name": "Bilia Outlet Bilhall Kista",
+    "Organization ID": "080927f1-50fc-4a27-90d7-522a3e65a1a5",
+    "City": "Kista (Akalla)"
+  },
+  {
+    "Organization Name": "Bilia Sävedalen Volvo",
+    "Organization ID": "75217af8-de02-49a8-8d7b-98f1949f1fb4",
+    "City": "Sävedalen"
+  },
+  {
+    "Organization Name": "Bilia Segeltorp Volvo",
+    "Organization ID": "6355dcdd-9dc3-4289-b4c5-ab48e5aaf732",
+    "City": "Segeltorp"
+  },
+  {
+    "Organization Name": "Bilia Sisjön - Verkstad",
+    "Organization ID": "c4b31d76-4e4b-4a94-acc6-02c5693a1ab0",
+    "City": "Västra Frölunda"
+  },
+  {
+    "Organization Name": "Bilia Sisjön Begagnade bilar",
+    "Organization ID": "b3692e92-f67a-4112-812d-5faa5ba8ea18",
+    "City": "Sisjön"
+  },
+  {
+    "Organization Name": "Bilia Sisjön Volvo",
+    "Organization ID": "07e5682d-00da-486b-9220-1dcecfe478c3",
+    "City": "Västra Frölunda"
+  },
+  {
+    "Organization Name": "Bilia Södertälje Volvo",
+    "Organization ID": "c09b25a4-b458-49f3-b70d-fe3199b2e094",
+    "City": "Södertälje"
+  },
+  {
+    "Organization Name": "Bilia Strängnäs Volvo",
+    "Organization ID": "3ee2d538-9543-4a37-acec-02e7eb8483fd",
+    "City": "Strängnäs"
+  },
+  {
+    "Organization Name": "Bilia Täby Volvo",
+    "Organization ID": "48ed98f2-12e4-428d-9b15-522c1c0547ea",
+    "City": "Täby"
+  },
+  {
+    "Organization Name": "Bilia Trelleborg Volvo",
+    "Organization ID": "7b48758c-8f51-4298-9d4c-9586bc235ff6",
+    "City": "Trelleborg"
+  },
+  {
+    "Organization Name": "Bilia Västerås Volvo",
+    "Organization ID": "5d0ff611-6258-47cb-b766-9cb4ad8d2f82",
+    "City": "Västerås"
+  },
+  {
+    "Organization Name": "Bilkompaniet i Avesta",
+    "Organization ID": "bef0075f-d84e-4cea-94b0-0fc31d87ffdd",
+    "City": "Avesta"
+  },
+  {
+    "Organization Name": "Bilkompaniet i Fagersta",
+    "Organization ID": "42e1171a-bc8b-4733-b295-07b3c6631805",
+    "City": "Fagersta"
+  },
+  {
+    "Organization Name": "Bilkompaniet i Hedemora",
+    "Organization ID": "a234f67b-1e5d-4e04-9c51-03e5b4d8ad2c",
+    "City": "Hedemora"
+  },
+  {
+    "Organization Name": "Bilkompaniet i Leksand",
+    "Organization ID": "fc007ef1-722c-4014-a715-4ddc747a7691",
+    "City": "Leksand"
+  },
+  {
+    "Organization Name": "Bilkompaniet i Malung",
+    "Organization ID": "00cc255d-f519-4c4d-b31e-737e61455f19",
+    "City": "Malung"
+  },
+  {
+    "Organization Name": "Bilkompaniet i Mora",
+    "Organization ID": "5233a04f-9c05-472a-8956-2940e66fff78",
+    "City": "Mora"
+  },
+  {
+    "Organization Name": "Bilkompaniet i Sala",
+    "Organization ID": "7c61c3b4-090b-4d6a-a523-c1905001e5b0",
+    "City": "Sala"
+  },
+  {
+    "Organization Name": "Bilmånsson Ängelholm",
+    "Organization ID": "04abbc64-4bb8-463d-9d58-1c3fcd5f2e2e",
+    "City": "Ängelholm"
+  },
+  {
+    "Organization Name": "Bilmånsson Eslöv Volvo",
+    "Organization ID": "d87e7044-7476-4c0f-aedb-5fb9364373ef",
+    "City": "Eslöv"
+  },
+  {
+    "Organization Name": "Bilmånsson Hörby",
+    "Organization ID": "0902e537-e41b-454e-99d1-1357402b82b2",
+    "City": "Hörby"
+  },
+  {
+    "Organization Name": "Bilmånsson Kristianstad Volvo",
+    "Organization ID": "9d590a98-d40b-44e9-821c-d0f92a82aa4b",
+    "City": "Kristianstad"
+  },
+  {
+    "Organization Name": "Bilmånsson Ystad",
+    "Organization ID": "b224c296-0a7f-47f8-a94f-0acbc72eeb4f",
+    "City": "Ystad"
+  },
+  {
+    "Organization Name": "Bogesunds Bil Tranemo",
+    "Organization ID": "e7b1d410-234f-463f-9149-2a525213fe38",
+    "City": "Tranemo"
+  },
+  {
+    "Organization Name": "Bogesunds Bil Ulricehamn",
+    "Organization ID": "c2d1288f-1959-4cbe-afd2-9e60608c9a6b",
+    "City": "Ulricehamn"
+  },
+  {
+    "Organization Name": "Borås Bil",
+    "Organization ID": "56b1373f-95bd-4e74-9030-15708ada078d",
+    "City": "Borås"
+  },
+  {
+    "Organization Name": "Brandt Bil - Alingsås",
+    "Organization ID": "a1e41dae-1181-4d06-8567-9e1a5d55b846",
+    "City": "Alingsås"
+  },
+  {
+    "Organization Name": "Brandt Bil - Åmål",
+    "Organization ID": "6fb47c61-759a-4799-930a-db19ad220ebc",
+    "City": "Åmål"
+  },
+  {
+    "Organization Name": "Brandt Bil - Dingle",
+    "Organization ID": "79bc5dbd-6c16-4ae5-9ccf-b4e2d5780543",
+    "City": "Dingle"
+  },
+  {
+    "Organization Name": "Brandt Bil - Falköping (Lovenegatan 1)",
+    "Organization ID": "5b986e9b-854f-4157-8ef2-af8720811914",
+    "City": "Falköping"
+  },
+  {
+    "Organization Name": "Brandt Bil - Lidköping (Mellbygatan)",
+    "Organization ID": "cfdd9e3f-ce9d-466d-ad34-c94b728ffe7b",
+    "City": "Lidköping"
+  },
+  {
+    "Organization Name": "Brandt Bil - Lysekil",
+    "Organization ID": "31503e3c-cc83-4f80-ae51-c4d71f9fe1a9",
+    "City": "Lysekil"
+  },
+  {
+    "Organization Name": "Brandt Bil - Mariestad (Hammarsmedsgatan)",
+    "Organization ID": "12fa2545-d72d-441d-9ed8-3b7ef9febfaf",
+    "City": "Mariestad"
+  },
+  {
+    "Organization Name": "Brandt Bil - Mellerud",
+    "Organization ID": "f4c2f0c2-ac6e-4d2c-9a67-5fb029999a29",
+    "City": "Mellerud"
+  },
+  {
+    "Organization Name": "Brandt Bil - Skara (Hospitalsgatan 13)",
+    "Organization ID": "f59e9e07-0bf1-4476-a179-3afede6fb740",
+    "City": "Skara"
+  },
+  {
+    "Organization Name": "Brandt Bil - Skövde (Mellomkvarnsvägen)",
+    "Organization ID": "a4d1a9ca-a2ab-4768-97d9-5ffcc52ede82",
+    "City": "Skövde"
+  },
+  {
+    "Organization Name": "Brandt Bil - Strömstad",
+    "Organization ID": "f333a01b-5739-4bed-b2c2-0ea5f48c55af",
+    "City": "Strömstad"
+  },
+  {
+    "Organization Name": "Brandt Bil - Uddevalla (Kärranäsvägen)",
+    "Organization ID": "a301dd81-e5b1-48c2-b73e-c49700c39c1a",
+    "City": "Uddevalla"
+  },
+  {
+    "Organization Name": "Brandt Bil - Vänersborg (Onsjö)",
+    "Organization ID": "b6b69ad6-a4e1-4ac5-a34c-8cd1c88eff23",
+    "City": "Vänersborg"
+  },
+  {
+    "Organization Name": "Brandt Bil - Vara",
+    "Organization ID": "ea5628f0-ab55-4bd2-a9d5-fc59ffcbd976",
+    "City": "Vara"
+  },
+  {
+    "Organization Name": "Brandt Bil ORG",
+    "Organization ID": "4f3c7afb-9bc9-43cf-a0e0-f030e7a5ed31",
+    "City": "Uddevalla"
+  },
+  {
+    "Organization Name": "Finnvedens Bil Gislaved",
+    "Organization ID": "77978156-5022-40c0-a05b-7c143f6c363b",
+    "City": "Gislaved"
+  },
+  {
+    "Organization Name": "Finnvedens bil Kapellgatan Värnamo",
+    "Organization ID": "6301417c-3960-4910-ad3c-c845c4576682",
+    "City": "Värnamo"
+  },
+  {
+    "Organization Name": "Finnvedens Bil Kristinehamn",
+    "Organization ID": "5ef1f56a-dbc9-48f2-969f-74fa2b055af0",
+    "City": "Kristinehamn"
+  },
+  {
+    "Organization Name": "Finnvedens bil Tornfalksvägen Värnamo",
+    "Organization ID": "5010afb0-4484-4ac1-985c-5058ec62bfb0",
+    "City": "Värnamo"
+  },
+  {
+    "Organization Name": "Finnvedens Bil Varberg",
+    "Organization ID": "392b7760-f09b-4f16-a60d-4d344b7a03f8",
+    "City": "Varberg"
+  },
+  {
+    "Organization Name": "Göinge Bil Älmhult",
+    "Organization ID": "ada3b30b-9a80-45cd-8763-9afef21e582a",
+    "City": "Älmhult"
+  },
+  {
+    "Organization Name": "Göinge Bil Hässleholm",
+    "Organization ID": "d2b9350b-4949-4df8-b8d0-292cb1986347",
+    "City": "Hässleholm"
+  },
+  {
+    "Organization Name": "Göinge Bil Markaryd",
+    "Organization ID": "7ef7d7c9-4011-4af7-8b57-804bceef7cde",
+    "City": "Markaryd"
+  },
+  {
+    "Organization Name": "Helmia Bil AB Arvika",
+    "Organization ID": "35f4ea8d-4515-419c-b356-0b995b376c14",
+    "City": "Arvika"
+  },
+  {
+    "Organization Name": "Helmia Bil AB Filipstad",
+    "Organization ID": "f459abe0-7d8d-4aff-ab8a-3d9eb9d86520",
+    "City": "Filipstad"
+  },
+  {
+    "Organization Name": "Helmia Bil AB Karlskoga",
+    "Organization ID": "d9a645b3-2ada-42d4-bb49-5f18f1591533",
+    "City": "Karlskoga"
+  },
+  {
+    "Organization Name": "Helmia Bil AB Karlstad",
+    "Organization ID": "f1962a3d-27f5-40ae-a0fd-c97a6b9d0f1b",
+    "City": "Karlstad"
+  },
+  {
+    "Organization Name": "Helmia Bil AB Sunne",
+    "Organization ID": "623e7180-a6c4-4e9a-8de9-b9684a5e9bf9",
+    "City": "Sunne"
+  },
+  {
+    "Organization Name": "Helmia Bil AB Torsby",
+    "Organization ID": "b241573a-30df-46c0-83a2-1842f806a6b3",
+    "City": "Torsby"
+  },
+  {
+    "Organization Name": "Helmia Bil ORG",
+    "Organization ID": "d9e5dbdb-6017-4c5f-8351-7c90e2c89b90",
+    "City": ""
+  },
+  {
+    "Organization Name": "Kinna Bil",
+    "Organization ID": "0acea758-e5c9-412b-933a-8cd3c8e269f3",
+    "City": "Kinna"
+  },
+  {
+    "Organization Name": "Liljas Personbilar Kalmar",
+    "Organization ID": "52754b78-98c2-49da-8765-54fe464f72e4",
+    "City": "Kalmar"
+  },
+  {
+    "Organization Name": "Liljas Personbilar Nybro",
+    "Organization ID": "4d19f8d9-92bf-427a-a923-e5d23c01bf62",
+    "City": "Nybro"
+  },
+  {
+    "Organization Name": "Liljas Personbilar Tingsryd",
+    "Organization ID": "b221b2d4-7414-41b9-94a0-7be289025a0b",
+    "City": "Tingsryd"
+  },
+  {
+    "Organization Name": "Liljas Personbilar Växjö",
+    "Organization ID": "336cbf6d-6e1e-4316-8b98-1825c63ad960",
+    "City": "Växjö"
+  },
+  {
+    "Organization Name": "Nybergs Bil Jönköping",
+    "Organization ID": "3a32f388-b5fd-4731-b832-16c4f076950c",
+    "City": "Jönköping (Jönköping, Sweden)"
+  },
+  {
+    "Organization Name": "Nybergs Bil Nässjö",
+    "Organization ID": "5e1c6dad-2be8-4802-8c13-4f73fa2269f5",
+    "City": "Nässjö"
+  },
+  {
+    "Organization Name": "Polestar Stockholm",
+    "Organization ID": "dbbd91aa-73ad-4dee-bcd2-1852ed31c9cd",
+    "City": "Stockholm"
+  },
+  {
+    "Organization Name": "Rejmes Halland - Falkenberg",
+    "Organization ID": "a19b2c7e-0d5f-4834-bf2d-a285eff2d725",
+    "City": "Falkenberg"
+  },
+  {
+    "Organization Name": "Rejmes Halland - Halmstad",
+    "Organization ID": "81e8dd8a-5822-455c-aa41-e4a9420a2a5b",
+    "City": "Halmstad"
+  },
+  {
+    "Organization Name": "Rejmes Halland - Laholm",
+    "Organization ID": "cddd81a6-5031-42cd-a468-67eb1f2299c7",
+    "City": "Laholm"
+  },
+  {
+    "Organization Name": "Rolf Ericson Bil Borlänge",
+    "Organization ID": "504dab32-5ed8-49d2-99db-37cdf8f20ca0",
+    "City": "Borlänge"
+  },
+  {
+    "Organization Name": "Rolf Ericson Bil Falun",
+    "Organization ID": "1b893cbd-090a-47c9-b939-dd8370bf59bd",
+    "City": "Falun"
+  },
+  {
+    "Organization Name": "Rolf Ericson Bil Ludvika",
+    "Organization ID": "ee4be592-c563-4c89-9b05-df57484535fd",
+    "City": "Ludvika"
+  },
+  {
+    "Organization Name": "Skobes Bil Katrineholm",
+    "Organization ID": "41c69955-7b04-4b96-8e7d-96194b59e326",
+    "City": "Katrineholm"
+  },
+  {
+    "Organization Name": "Skobes Bil Kisa",
+    "Organization ID": "a0a5bc77-2c05-4a0e-a68a-a466a8c49ae0",
+    "City": "Kisa"
+  },
+  {
+    "Organization Name": "Skobes Bil Motala",
+    "Organization ID": "f83d46ac-e9c3-43c1-aa8c-13fc2825ccd3",
+    "City": "Motala"
+  },
+  {
+    "Organization Name": "Skobes Bil Nyköping",
+    "Organization ID": "869f23ea-1b1d-4fe9-ae89-43fb0d5ed655",
+    "City": "Nyköping"
+  },
+  {
+    "Organization Name": "Skobes Bil Oskarshamn",
+    "Organization ID": "0ad2af9d-4b65-462b-b9e3-dc5858ebf83b",
+    "City": "Oskarshamn"
+  },
+  {
+    "Organization Name": "Skobes Bil Tranås",
+    "Organization ID": "3f720d8c-e9a4-45d1-972e-12ee6389e8f9",
+    "City": "Tranås"
+  },
+  {
+    "Organization Name": "Skobes Bil Västervik",
+    "Organization ID": "5edecf72-06cb-457c-9415-83b697cab0f8",
+    "City": "Västervik"
+  },
+  {
+    "Organization Name": "Skobes Bil Vetlanda",
+    "Organization ID": "655b744e-06dd-434a-bfaf-61f58ef7be56",
+    "City": "Vetlanda"
+  },
+  {
+    "Organization Name": "Skobes Bil Vimmerby",
+    "Organization ID": "18ff3b7a-b60a-41d7-8aa5-63ce1723c1e2",
+    "City": "Vimmerby"
+  },
+  {
+    "Organization Name": "Stendahls Bil Lilla Edet",
+    "Organization ID": "dbbcab7a-3aa4-4179-b8db-9ac96a201c24",
+    "City": "Lilla Edet"
+  },
+  {
+    "Organization Name": "Stendahls Bil Stenungsund",
+    "Organization ID": "c69082f9-bb3e-435b-b4f8-72d59b7393f4",
+    "City": "Stenungsund"
+  },
+  {
+    "Organization Name": "Tage Rejmes Bil i Åtvidaberg",
+    "Organization ID": "497b66c8-f658-4b88-8115-8d3296174811",
+    "City": "Åtvidaberg"
+  },
+  {
+    "Organization Name": "Tage Rejmes Bil i Finspång",
+    "Organization ID": "0afb6170-f8a1-4497-8649-b2d303f5cea6",
+    "City": "Finspång"
+  },
+  {
+    "Organization Name": "Tage Rejmes Bil i Hallsberg",
+    "Organization ID": "cebe897b-4a06-4dc4-a3b7-50c1a1d9a7bd",
+    "City": "Hallsberg"
+  },
+  {
+    "Organization Name": "Tage Rejmes Bil i Lindesberg",
+    "Organization ID": "baf6d177-4ecd-48fe-9cf6-c65c8014a474",
+    "City": "Lindesberg"
+  },
+  {
+    "Organization Name": "Tage Rejmes Bil i Linköping",
+    "Organization ID": "b7839234-0a21-460b-9f8d-b58917d19ae7",
+    "City": "Linköping"
+  },
+  {
+    "Organization Name": "Tage Rejmes Bil i Mjölby",
+    "Organization ID": "6d39be6e-be19-4153-ad07-0da47920bea4",
+    "City": "Mjölby"
+  },
+  {
+    "Organization Name": "Tage Rejmes Bil i Norrköping",
+    "Organization ID": "86cd6c4d-23a0-46e4-ad54-796dfc80fba2",
+    "City": "Norrköping"
+  },
+  {
+    "Organization Name": "Tage Rejmes Bil i Örebro",
+    "Organization ID": "4c172fdb-ce5a-47a2-8874-52534e51aaf7",
+    "City": "Örebro"
+  },
+  {
+    "Organization Name": "Tage Rejmes Bil i Tornby",
+    "Organization ID": "8455f97c-12d7-4775-931f-a70fd1b0a19e",
+    "City": "Linköping"
+  },
+  {
+    "Organization Name": "Testdealer åäö",
+    "Organization ID": "0ea58770-f95c-496c-b382-51e1b6172c46",
+    "City": "Borås"
+  },
+  {
+    "Organization Name": "Volvo Car Classic Kungsängen",
+    "Organization ID": "62f92063-6c25-42fe-a11b-c823552f1c09",
+    "City": "Stockholm"
+  },
+  {
+    "Organization Name": "Volvo Car Enköping",
+    "Organization ID": "974be96e-c2da-4b29-8e02-3f4467012a26",
+    "City": "Enköping"
+  },
+  {
+    "Organization Name": "Volvo Car Hammarby Sjöstad",
+    "Organization ID": "df3d1275-782d-4436-9775-205ac58096fe",
+    "City": "Stockholm"
+  },
+  {
+    "Organization Name": "Volvo Car Hisings Backa",
+    "Organization ID": "b9744403-5c9a-4079-8902-772006f3f74d",
+    "City": "Göteborg (Hisings Backa)"
+  },
+  {
+    "Organization Name": "Volvo Car Kista",
+    "Organization ID": "6746f122-0e4a-4f3b-8b68-5f2c9a078e9b",
+    "City": "Kista"
+  },
+  {
+    "Organization Name": "Volvo Car Kungsängen",
+    "Organization ID": "599c6c4a-a9ec-4734-8fb8-7c7a1495745f",
+    "City": "Kungsängen"
+  },
+  {
+    "Organization Name": "Volvo Car Retail Webblager",
+    "Organization ID": "5a5e5d97-0f90-41a6-babd-6356fba42cfb",
+    "City": "Sollentuna"
+  },
+  {
+    "Organization Name": "Volvo Car Sörred",
+    "Organization ID": "74538b88-b4dd-49f8-9957-41ef476f8a49",
+    "City": "Göteborg"
+  },
+  {
+    "Organization Name": "Volvo Car Sverige",
+    "Organization ID": "a412a8a3-06a9-4987-9272-67ced33a6f68",
+    "City": "Göteborg"
+  },
+  {
+    "Organization Name": "Volvo Car Upplands Väsby",
+    "Organization ID": "e59847eb-da67-4e91-ad66-e3b8d62922ce",
+    "City": "Upplands Väsby"
+  },
+  {
+    "Organization Name": "Volvo Car Vallentuna",
+    "Organization ID": "37b1a5f3-6d8f-46d4-9e10-67b88433c577",
+    "City": "Vallentuna"
+  },
+  {
+    "Organization Name": "Volvo Studio Stockholm",
+    "Organization ID": "eee99e99-2eda-4c14-9328-8f5d64324674",
+    "City": "Stockholm"
+  },
+  {
+    "Organization Name": "Wayke Test-ORG",
+    "Organization ID": "e640fd91-6842-4dd9-9447-ddf8411f8c3b",
+    "City": "Stockholm"
+  },
+  {
+    "Organization Name": "Wayke Testanläggning",
+    "Organization ID": "a44d7b80-f556-4bba-b317-950d5dd777c6",
+    "City": "Spånga"
+  }
+]

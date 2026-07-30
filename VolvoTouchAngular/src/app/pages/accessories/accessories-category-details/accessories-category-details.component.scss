@@ -1,0 +1,88 @@
+.category-details-container {
+    width: 100%;
+    height: var(--main-view-height);
+    display: flex;
+    background-color: white;
+    align-items: center;
+    .category-details-container-inner {
+        width: 98%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        padding-top: 60px;
+        .category-main-container {
+            width:15%;
+            height: 100%;
+        }
+
+        .product-list-container {
+            position: relative;
+            width: 85%;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: grid;
+            padding-bottom: 30px;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-auto-rows: minmax(350px, 350px);
+            &::-webkit-scrollbar {
+                display: none;  /* Chrome, Safari, Edge */
+              }
+
+              
+            }
+        }
+    }
+
+    .gradient-bottom {
+        position: fixed;
+        left: 0;
+        bottom: 0px;
+        width: 100%;
+        height: 60px; /* the height of the fade */
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 1)
+        );
+        pointer-events: none;
+    }
+
+.overlay {
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.menu-container {
+    width: 231px;
+    margin-right: 35px;
+    margin-left: 35px;
+  }
+  
+  .menu-container ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .menu-container li {
+    height: 40px;
+    font-family: var(--fontDisplayMedium);
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #141414; /* Inactive color */
+    border-bottom: 1px solid #C7C7C7;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  
+  .menu-container li.active {
+    font-family: var(--fontSemiBold);
+    color: #141414; /* Active color */
+    font-size: 16px;
+    font-weight: 700;
+  }

@@ -1,0 +1,101 @@
+.lkb-main-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+
+    .swiper-main-container {
+        width: 100%;
+        height: 75%;
+        overflow: hidden;
+        position: relative;
+
+        .image-navigation-wrapper {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            z-index: 20000;
+            display: flex;
+            margin-top: 315px;
+            padding-left: 10px;
+            padding-right: 10px;
+            justify-content: space-between;
+            flex-direction: row;
+            pointer-events: none;
+
+            .icon-container {
+                width: 40px;
+                height: 40px;
+                border-radius: 75px;
+                background-color: #FFFFFF;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                pointer-events: all !important;
+            }
+        }
+
+        swiper {
+            height: 100%;
+            width: 100%;
+
+            .swiper-slide {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+
+    .swiper-list-container {
+        width: 100%;
+        height: 20%;
+
+        swiper {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column-reverse;
+
+            .swiper-slide-thumb {
+                width: 100%;
+                height: 80%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 140px;
+                    object-fit: cover;
+                    overflow: visible;
+                }
+            }
+        }
+    }
+}
+
+::ng-deep .swiper-pagination {
+    position: relative !important;
+    bottom: auto !important;
+    margin-top: 10px;
+
+    .swiper-pagination-bullet-active {
+        background: #141414
+    }
+}

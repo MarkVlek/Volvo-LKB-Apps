@@ -1,0 +1,12 @@
+<div [ngStyle]="{'pointer-events':disabled ? 'none':'auto'}" class="main-container" (click)=selectCategory()>
+    <div [@darkenOverTime]="disabled" class="img-container">
+        <img src={{category.src}} />
+    </div>
+    <div class=category-header>
+        <span>{{category.name}}</span>
+        <p>{{category.copy}}</p>
+    </div>
+    <div class="spinner" *ngIf="onWait">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>

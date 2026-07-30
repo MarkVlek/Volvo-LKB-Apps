@@ -1,0 +1,11 @@
+<div matRipple class="category-container">
+    <div class="img-container" (click)="onClick()">
+        <img [ngClass]="isServices(this.category.header) ? 'img-service' : 'img'" [src]="imgsrc"/>
+        <div class="title">
+            {{this.category.name}}
+        </div>
+        <div class="black">
+
+        </div>
+    </div>
+</div>

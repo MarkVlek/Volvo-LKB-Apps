@@ -1,0 +1,95 @@
+.slider-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .upper {
+        width: 100%;
+        height: 20%;
+        display: flex;
+        flex-direction: row;
+        .title{
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20%;
+            font-size: 12px;
+        }
+        .values{
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            color:  rgb(20, 20, 20);
+            font-size: 12px;
+            display: flex;
+            justify-content: flex-end;
+            .text{
+                margin-right: 20px;
+            }                
+        }
+    }
+    .slider {
+        width: 90%;
+        height: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        mat-slider {
+            width: inherit;
+        }
+    }
+    .lower {
+        width: 100%;
+        height: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        .start-value{
+            width: 20%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+        .middle{
+            width: 60%;
+            height: 100%;
+        }
+        .end-value{
+            width: 20%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+    }
+}
+
+::ng-deep .mat-mdc-slider .mdc-slider__track--inactive_fill {
+    background-color: #858585 !important;
+}
+
+::ng-deep .mat-mdc-slider .mdc-slider__track--active_fill {
+    border-color: rgb(20, 20, 20) !important;
+}
+
+::ng-deep .mdc-slider__thumb-knob {
+    transform: scale(0.7) translate(-75%, -75%) !important;
+    border-color: rgb(20, 20, 20) !important;
+    background-color: rgb(20, 20, 20) !important;
+}
+
+::ng-deep .mat-mdc-slider .mdc-slider__track--inactive {
+    height: 2px !important;
+}
+::ng-deep .mat-mdc-slider .mdc-slider__track--active {
+    height: 3px !important;
+}

@@ -1,0 +1,160 @@
+.filter-section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    .inner-div {
+        width: 90%;
+        height: 95%;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: none !important;
+        mask-image: linear-gradient(180deg, rgb(0, 0, 0) 90%, transparent);
+        padding-bottom: 40px;
+        position: relative;
+        top: -23px;
+
+        .filter-section-header {
+            margin-bottom: 5px;
+        }
+        .section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+
+            .button-container {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                // justify-content: space-evenly;
+                flex-direction: row;
+                .button {
+                    height: 35px;
+                    width: 135px;
+                    margin-bottom: 5px;
+                    margin-right: 5px;
+                }
+            }
+
+        }
+        .slider-container {
+            width: 95%;
+            display: flex;
+            flex-direction: column;
+
+
+            .slider-box {
+                width: 100%;
+                max-height: 50%;
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+
+                .slider-values {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                }
+            }
+
+            ::ng-deep {
+                .mat-mdc-slider .mdc-slider__track--inactive_fill {
+                    background-color: #858585 !important;
+                }
+                
+                .mat-mdc-slider .mdc-slider__track--active_fill {
+                    border-color: rgb(20, 20, 20) !important;
+                }
+                
+                .mdc-slider__thumb-knob {
+                    transform: scale(0.7) translate(-75%, -75%) !important;
+                    border-color: rgb(20, 20, 20) !important;
+                    background-color: rgb(20, 20, 20) !important;
+                }
+                
+                .mat-mdc-slider .mdc-slider__track--inactive {
+                    height: 2px !important;
+                }
+                .mat-mdc-slider .mdc-slider__track--active {
+                    height: 3px !important;
+                }
+            }
+        }
+    }
+}
+
+::ng-deep .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled=true]):hover {
+    background: transparent !important;
+}
+
+.manufacturer-button {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    background-color: #F5F3F0;
+    color: rgb(20, 20, 20);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--fontRegular);
+    font-size: 13px
+}
+
+.active-button {
+    background-color: rgb(20, 20, 20);
+    color: white;
+}
+
+.sidebar {
+    float: right;
+    background-color: white;
+    height: 20px;
+    width: 20px;
+}
+
+.arrow {
+    position: relative;
+    right: -13px;
+    transform: scale(1);
+}
+
+.inner-div {
+    ::ng-deep {
+        .mat-expansion-panel-body {
+            padding: 0 0 0 !important;
+        }
+
+        .mat-expansion-panel-spacing {
+            margin: 0 !important;
+        }
+
+        mat-expansion-panel {
+            border-top: none;
+            border-bottom: 1px solid #141414;
+            border-left: none;
+            border-right: none;
+            border-radius: 0px !important;
+            box-shadow: none !important;
+            overflow: visible;
+            margin-left: 10px;
+        }
+        
+        mat-expansion-panel-header {
+            padding: 0px 0px;
+            width: 97%;
+        }
+    }
+}
+
+.header-title {
+    font-family: var(--fontRegular);
+    font-size: 16px;
+    color: #141414;
+    margin-bottom: 0px;
+}

@@ -1,0 +1,26 @@
+.page-selector-main{
+    display: flex;
+    flex-direction: row;
+    // justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    text-wrap: nowrap;
+    background-color: var(--footer-color);
+}
+
+.cards:first-child {
+    margin-left: 30px;
+}
+
+.cards:last-child {
+    margin-right: 30px;
+}
+
+.searchActive {
+    .cards:first-child app-page-card {
+        background-color: #FD6408;
+    }
+    .cards:last-child {
+        margin-right: 15px;
+    }
+}

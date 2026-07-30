@@ -1,0 +1,39 @@
+<div [@fadeInOut]="carSelected">
+    <div class="models-outer-container">
+        <div class="models-container" *ngIf="carModels && !carSelected">
+            <div *ngFor="let carModel of carModels" (click)="carPicked(carModel)">
+                <div matRipple [matRippleRadius]="radius" class="carModel">
+                    <div class="image-container">
+                        <img name='{{carModel.title}}' src="{{carModel.cachedImg}}">
+                    </div>
+                    <div style="margin-top: 5px;">{{carModel.displayTitle}}</div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div *ngIf="carSelected" class="models-container">
+            <div class="choose-year-container">
+                <div class="selected-car-model-container">
+                    <div class="selected-car-model">
+                        <img [src]="car.img">
+                    </div>
+                    <div class="background">
+                        {{car.title}}
+                    </div>
+                </div>
+                <div class="car-years-container">
+                    <div class="car-years">
+                        <div *ngFor="let modelCode of car.modelCodes">
+                            <button (click)="navigate(modelCode.year)" mat-raised-button>{{modelCode.year}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="return-container">
+                    <button (click)="return()" mat-raised-button>Tillbaka</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

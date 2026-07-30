@@ -1,0 +1,93 @@
+.iframe-canvas {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+iframe {
+    width: 100%;
+    height: 100%;
+    border: 0px !important;
+}
+.loader {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.keyboard-container {
+    z-index: 2000;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(65, 65, 65, 0.11);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    .keyboard-container-inner {
+        z-index: 2000;
+        height: 300px;
+        width: 1200px;
+        margin-top: 600px;
+        background-color: rgba(27, 27, 27, 0.719);
+    }
+}
+.back{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+    z-index: 204;
+    left: 10px;
+    top: 930px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qrCodeContainer{
+    border-radius: 15px;
+    position: absolute;
+    z-index: 1;
+    top: 78%;
+    left: 88%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+qrcode {
+    z-index: 10000;
+    width: 150px;
+    height: 150px;
+}
+.qrCodeAlign{
+    width: 150px;
+    height: 150px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.qrCodeText {
+    width: 180px;
+    color: #000;
+    font-size: 14px;
+    text-align: center;
+}
+.reload {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    left: 80px;
+    top: 930px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon{
+    transform: scale(1.5);
+}

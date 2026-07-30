@@ -1,0 +1,39 @@
+<div class="back-container" *ngIf="this.navigationService.showBackButton">
+    <div class="back-static" (click)="OnBack()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" fill="none">
+            <path d="M8 1L1 8L8 15" stroke="#141414"/>
+        </svg>
+        {{ "Tillbaka" | translate }}
+    </div>
+</div>
+<div class="iframe-back-container" *ngIf="this.navigationService.iframeBackBtn || this.navigationService.iframeRefresh">
+    <!-- Back button for Erbjudanden and EX60 iframe (calls backIframe) -->
+    <div class="backIframe" id="backiFrame" (click)="backIframe()" *ngIf="this.navigationService.iframeBackBtn && (this.currentPath == 'Erbjudanden' || this.currentPath == 'EX60')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" fill="none">
+            <path d="M8 1L1 8L8 15" stroke="#141414"/>
+        </svg>
+        {{"Tillbaka" | translate}}
+    </div>
+    <!-- Back button for other iframes (calls reloadIframe) -->
+    <div class="backIframe" id="backiFrame" (click)="reloadIframe()" *ngIf="this.navigationService.iframeBackBtn && this.currentPath != 'Erbjudanden' && this.currentPath != 'EX60'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" fill="none">
+            <path d="M8 1L1 8L8 15" stroke="#141414"/>
+        </svg>
+        {{"Tillbaka" | translate}}
+    </div>
+    <!-- Refresh button -->
+    <div class="refresh" *ngIf="this.navigationService.iframeRefresh" (click)="reloadIframe()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="23" viewBox="0 0 21 23" fill="none">
+            <g clip-path="url(#clip0_39_66)">
+                <path d="M17.57 4.99006C15.76 3.18006 13.26 2.06006 10.5 2.06006C4.98 2.06006 0.5 6.54006 0.5 12.0601C0.5 17.5801 4.98 22.0601 10.5 22.0601C16.02 22.0601 20.5 17.5801 20.5 12.0601" fill="white"/>
+                <path d="M17.57 4.99006C15.76 3.18006 13.26 2.06006 10.5 2.06006C4.98 2.06006 0.5 6.54006 0.5 12.0601C0.5 17.5801 4.98 22.0601 10.5 22.0601C16.02 22.0601 20.5 17.5801 20.5 12.0601" stroke="black" stroke-miterlimit="10"/>
+                <path d="M16.7 0.0899658L17.57 5.00997L12.59 5.88997" stroke="black" stroke-miterlimit="10"/>
+            </g>
+            <defs>
+                <clipPath id="clip0_39_66">
+                    <rect width="21" height="22.56" fill="white"/>
+                </clipPath>
+            </defs>
+        </svg>
+    </div>
+</div>

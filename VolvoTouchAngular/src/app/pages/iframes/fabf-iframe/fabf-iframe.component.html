@@ -1,0 +1,20 @@
+<div class="iframe-canvas">
+    <div class="landing-page" *ngIf="showLanding">
+        <div class="header">{{'Utforska våra bilmodeller' | translate}}</div>
+        <div class="model-filter"><button *ngFor="let filter of carFilters" (click)="filterByDriveline(filter.driveLine)" [class.active]="filter.driveLine === selectedFilter">{{filter.name | translate}}</button></div>
+        <div class="carmodels">
+            <div class="carmodel" *ngFor="let car of carModels" (click)="setPdpUrl(car.title)" [ngClass]="car.displayTitle == 'EX60' ? 'ex60' : 'carmodel'">
+                <img [src]="car.img">
+                <div class="text-container">
+                    <p>{{car.displayTitle}}</p>
+                    <span>{{car.driveline | translate}} {{' ' + car.cartype | translate}}</span>
+                </div>
+                <div class="spinner-overlay" *ngIf="isLoading && selectedCar === car.title">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <iframe #IFrame (load)="onIframeLoaded(IFrame)" sandbox="allow-same-origin allow-scripts allow-forms"
+        [src]="url$ | safe" loading="lazy" frameborder="0"></iframe>
+</div>

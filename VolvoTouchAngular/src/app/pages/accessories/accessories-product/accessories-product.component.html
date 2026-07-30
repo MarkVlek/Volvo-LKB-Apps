@@ -1,0 +1,30 @@
+<div class="product-container" *ngIf="selectedAccessory">
+
+    <div class="product-image">
+        <img [hidden]="IsVideo" [ngStyle]="{'opacity': IsVideo ? '0' : '1', 'transition': 'opacity 0.3s'}" [src]="mainImage">
+        <video [hidden]="!IsVideo" [ngStyle]="{'opacity': IsVideo ? '1' : '0', 'transition': 'opacity 1s', }"  [src]="mainImage" autoplay preload="auto" loop></video>
+    </div>
+
+    <div class="product-info">
+
+        <div class="product-title">
+            {{selectedAccessory.name}}
+        </div>
+
+        <div class="product-data">
+            <div class="product-description" [innerHtml]="selectedAccessory.description"></div>
+        </div>
+
+        <div class="img-gallery">
+            <div class="gradient-bottom"></div>
+            <div *ngFor="let media of selectedAccessory.medias" class="image-container" (click)="imagePicked(media)" >
+                <img *ngIf="!media.filePath.includes('.mp4')" src="{{media.filePath}}"> 
+                <video *ngIf="media.filePath.includes('.mp4')" src="{{media.filePath}}"> </video>
+                <div class="grey-overlay" *ngIf="media.filePath == mainImage" ></div>
+                <div *ngIf="media.filePath.includes('.mp4') && !mainImage.includes('.mp4')" class="video-overlay"></div>
+                <div *ngIf="mainImage.includes('.mp4') && media.filePath.includes('.mp4')" class="video-overlay-spinner"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

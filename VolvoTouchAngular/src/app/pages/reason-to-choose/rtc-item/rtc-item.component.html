@@ -1,0 +1,31 @@
+<body matRipple class="item-container" [style]="size" (click)="onClick()">
+    <div class="img-container">
+        <div *ngIf=hasVideo(this.item) class="video-icon">
+            <mat-icon>play_circle_outline</mat-icon>
+        </div>
+        <img [src]="this.item.image">
+
+    </div>
+    <div class="header-row">
+
+        <div class="header-container">
+            <div class="header">
+                {{item.header1}}
+            </div>
+
+        </div>
+        <div class="filler">
+            <div class="hasload">
+                <img *ngIf="this.item.has_loan_calculator" src="./assets/images/sliders.png">
+            </div>
+            <div class="icon-container">
+                <mat-icon class="icon">keyboard_arrow_right</mat-icon>
+            </div>
+        </div>
+    </div>
+    <div class="text-container">
+        <div class="text">
+            {{item.intro}}
+        </div>
+    </div>
+</body>

@@ -1,0 +1,283 @@
+.container {
+    height: 1080px;
+    width: 1920px;
+    min-width: 1920px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+
+    animation: fade-in 1.5s;
+
+    .details-container {
+        width: 1920px;
+        height: 1048px;
+        display: flex;
+
+        .nav {
+            width: 529px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-y: scroll;
+            padding-bottom: 70px;
+            mask-image: linear-gradient(180deg, rgb(0, 0, 0) 90%, transparent);
+
+            ::ng-deep {
+                .mat-expansion-panel {
+                    margin: 0;
+                    padding: 0;
+                    box-shadow: unset;
+                    border-radius: unset;
+                    font-family: var(--fontRegular);
+                    color: #141414 !important;
+                    background-color: unset;
+                }
+
+                .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled=true]):hover {
+                    background-color: unset;
+                }
+
+                .disable_ripple:hover {
+                    background: black !important;
+                }
+
+                .mat-content {
+                    font-family: var(--fontRegular);
+                    font-size: 17px;
+                }
+
+                .mat-expansion-panel-header {
+                    height: 40px;
+                    padding: 0;
+                    font-size: 17px;
+                    line-height: 20.4px;
+                    font-weight: 600;
+
+                }
+
+                .mat-expansion-panel-body {
+                    padding: 0;
+                    padding-bottom: 40px;
+                    padding-left: 20px;
+                    padding-right: 20px;
+                    overflow: hidden;
+                    padding-top: 20px;
+
+                }
+
+                .mat-expansion-panel-content {
+                    overflow: hidden;
+                }
+
+                .mat-expansion-indicator {
+                    padding-left: 2px;
+                    padding-right: 2px;
+                    margin-right: 5px;
+                }
+
+                .mat-expansion-indicator::after {
+                    border-width: 0 1px 1px 0;
+                    padding: 4px;
+                    position: relative;
+                    top: -4px;
+                }
+            }
+
+            .parent-header {
+                border-bottom: 1px solid #141414 !important;
+            }
+
+            ul {
+                padding: unset;
+                margin-left: 20px;
+                margin-bottom: 0;
+                font-family: var(--fontRegular);
+
+                li {
+                    font-size: 17px !important;
+                    font-weight: 350 !important;
+                    line-height: 26.35px !important;
+                }
+
+                ::ng-deep .mat-expansion-panel-body {
+                    padding: 0;
+                }
+            }
+
+            .child-header {
+                font-weight: 350;
+            }
+
+            .child {
+                margin-left: auto;
+                margin-right: auto;
+                border-bottom: 1px solid #141414 !important;
+                overflow: visible;
+
+                &:last-child {
+                    border-bottom: unset !important;
+                }
+            }
+        }
+
+        .media {
+            height: 100%;
+            width: 1391px;
+            display: flex;
+            flex-direction: column;
+            gap: 19px;
+            justify-content: flex-end;
+            align-items: center;
+
+            .img-container {
+                width: 1351px;
+                height: 759px;
+                background-size: cover;
+                background-position: center;
+
+
+                transition: all .5s ease;
+            }
+
+            .video-container {
+                width: 1351px;
+                height: 759px;
+
+                video {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .thumbnail-container {
+                width: 1351px;
+                height: 206px;
+                display: flex;
+                gap: 20px;
+                overflow-x: scroll;
+                overflow-y: hidden;
+
+                .thumbnail {
+                    height: 100%;
+                    display: flex;
+                    gap: 20px;
+
+                    .video {
+                        width: 280px;
+                        height: 157px;
+                        object-fit: cover;
+                        background-size: contain;
+                        background-position: center;
+                        transition: all .5s ease;
+                        position: relative;
+                        top: -35px;
+                    }
+
+                    .video-icon {
+                        margin: 5px 0 0 5px;
+                        height: 30px;
+                        width: 30px;
+                        position: relative;
+                        z-index: 9999;
+                        background-image: url('../../../../../assets/images/Delivery/video_icon.png');
+                    }
+
+                    .img {
+                        width: 280px;
+                        height: 157px;
+                        object-fit: cover;
+                        background-size: contain;
+                        background-position: center;
+
+                        transition: all .5s ease;
+                    }
+
+                    .text {
+                        font-family: var(--fontRegular);
+                        width: 280px;
+                        font-size: 17px;
+                        line-height: 20.4px;
+                        font-weight: 600;
+                    }
+                    .video-text {
+                        font-family: var(--fontRegular);
+                        width: 280px;
+                        font-size: 17px;
+                        line-height: 20.4px;
+                        font-weight: 600;
+                        position: relative;
+                        top: -35px;
+                    }
+                }
+
+                .highLight {
+                    .img {
+                        filter: brightness(0.5);
+                    }
+
+                    .video {
+                        filter: brightness(0.5);
+                    }
+
+                    .text {
+                        color: rgba(20, 20, 20, 0.5);
+                    }
+                }
+            }
+        }
+    }
+
+    .footer-container {
+        height: 32px;
+        width: 1920px;
+        position: absolute;
+        top: 96%;
+
+        .arrow-container {
+            width: 51px;
+            height: 100%;
+
+            .arrow {
+                margin-left: auto;
+                height: 17px;
+                width: 10px;
+                background-image: url('../../../../../assets/images/Delivery/arrow_white.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+                filter: invert(1);
+            }
+        }
+    }
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+*:focus {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+.active-list-item {
+    font-weight: bolder !important;
+}
+
+mat-expansion-panel {
+    max-width: 490px;
+}

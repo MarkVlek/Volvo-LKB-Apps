@@ -1,0 +1,23 @@
+<div class="categories-container">
+
+    <div class="categories-header">
+        <div class="main">
+            <div class="title">Leveransklara bilar</div>
+            <div class="category-link" *ngIf="configService.allBrandsAvailable">
+                <div>
+                    <!-- TODO ADD NAVIGATION HERE -->
+                    <a>
+                        Övriga märken
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="categories-list-box">
+        <div class="categories-box" *ngFor="let category of categories;let i = index">
+            <app-lkb-category-image [category]="category"></app-lkb-category-image>
+        </div>
+    </div>
+</div>

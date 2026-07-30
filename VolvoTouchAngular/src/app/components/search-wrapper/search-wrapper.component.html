@@ -1,0 +1,20 @@
+<div class="search-wrapper">
+    <div class="container-left">
+        <div class="input-container">
+            <div class="input">
+                <input matInput type="text" placeholder="Sök" #input>
+            </div>
+        </div>
+        <div class="keyboardContainer">
+            <app-test-keyboard (onClicked)="onKeyClick($event)" iconSize="1" rowHeight="51px">
+            </app-test-keyboard>
+        </div>
+    </div>
+    <div class="verticalLine">
+    </div>
+    <div class="container-right" (scroll)="onScroll($event)" #scrollable>
+        <div class="fade-top" [hidden]="atTop"></div>
+        <app-filter-search [request]="searchValue"></app-filter-search>
+        <div class="fade-bottom" [hidden]="atBottom"></div>
+    </div>
+</div>

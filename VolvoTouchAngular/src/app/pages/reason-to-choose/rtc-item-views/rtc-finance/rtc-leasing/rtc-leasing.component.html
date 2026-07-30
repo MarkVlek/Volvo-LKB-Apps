@@ -1,0 +1,71 @@
+<div class="finance-loan-wrapper">
+    <div class="finance-info">
+        <div class="header">
+            Vad kostar det att låna bil?
+        </div>
+        <div class="price-box">
+            <div class="money">
+                <span style="font-size: 30px;">
+                    {{output | thousandSeparator }}
+                </span>
+                <span style="margin-bottom: -10px; font-size: 15px; color: rgb(156, 156, 156);">
+                    &nbsp; kr/mån
+                </span>
+            </div>
+            <div class="interest">
+                <span style="margin-bottom: -10px; color: rgb(156, 156, 156);">
+                    Ränta: 7.95%
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="finance-sliders">
+        <!-- BIL PRIS -->
+        <div class="slider-container">
+            <div class="slider-above">
+                <div class="slider-name">
+                    Bilens Pris
+                </div>
+                <div class="slider-output">
+                    {{carPrice  | thousandSeparator}} kr
+                </div>
+            </div>
+            <div class="the-slider">
+                <app-slider [min]="100000" [max]="900000" [step]="10000" [start]="200000"
+                    (newSliderChange)="listenToPriceChange($event)" style="width: 100%;"></app-slider>
+            </div>
+
+        </div>
+        <!-- ANTAL MÅNADER -->
+        <div class="slider-container">
+            <div class="slider-above">
+                <div class="slider-name">
+                    Lånetid
+                </div>
+                <div class="slider-output">
+                    {{months}} mån
+                </div>
+            </div>
+            <div class="the-slider">
+                <app-slider [min]="0" [max]="84" [step]="1" [start]="months"
+                    (newSliderChange)="listenToNumOfMonthChange($event)" style="width: 100%;"></app-slider>
+            </div>
+        </div>
+        <!-- KONTANTINSATS -->
+        <div class="slider-container">
+            <div class="slider-above">
+                <div class="slider-name">
+                    Kontantinsats
+                </div>
+                <div class="slider-output">
+                    {{startCash  | thousandSeparator}} kr
+                </div>
+            </div>
+            <div class="the-slider">
+                <app-slider [min]="0" [max]="carPrice" [step]="10000" [start]="startCash"
+                    (newSliderChange)="listenToStartCashChange($event)" style="width: 100%;"></app-slider>
+
+            </div>
+        </div>
+    </div>
+</div>

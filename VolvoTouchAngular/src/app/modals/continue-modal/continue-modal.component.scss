@@ -1,0 +1,57 @@
+.continue-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 210px;
+    width: 440px;
+    .progress-bar-container{
+        width: 80%;
+    }
+    // font-family: $;
+
+    .progress-bar-container{
+        height: 20px;
+        width: 80%;
+        .progress-bar {
+            margin-top: 50px;
+        }
+    }
+    .title {
+        font-size: 32px;
+        margin-top: 50px;
+        font-family: var(--fontRegular);    
+        line-height: 24px;
+        font-weight: 600;
+    }
+
+    .select-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+    }
+    button {
+        width: 155px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-family: var(--fontRegular);
+        border-radius: 8px;
+    }
+}
+
+::ng-deep .continue-modal {
+    border-radius: 15px !important;
+    overflow: hidden !important;
+}
+
+@media screen and (width: 2880px) {
+    button{
+        font-size: 35px;
+        width: 400px !important;
+        height: 100px !important;
+    }
+}

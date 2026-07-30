@@ -1,0 +1,310 @@
+<div class="container" id="container" [@fade]="boolFadeIn">
+
+   <div class="start-container" *ngIf="!isGlobal" [ngClass]="(!showDetails && !enterName && !showFds && !isGlobal) ? 'show' : 'hidden'">
+      <div class="input-container">
+
+         <div class="input">
+            <input readonly  type="text" placeholder="{{isGlobal ? 'Order nr (FYON or CON)' : 'REGISTRERINGSNUMMER' }}" #search>
+         </div>
+         
+         <div class="btn" (click)="onSearch()">
+            <div *ngIf="!searchWait">{{isGlobal ? 'Search' : 'Sök' }}</div>
+            <div *ngIf="searchWait">
+               <svg class="spinner" viewBox="0 0 50 50">
+                  <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+               </svg>
+            </div>
+
+         </div>
+         
+      </div>
+
+      <div class="keyboard-container">
+         <app-test-keyboard (onClicked)="onKeyClick($event, true)" iconSize="2" rowHeight="{{rowHeight}}"></app-test-keyboard>
+      </div>
+      
+      <div class="btn-container">
+         <div class="standard-btn" *ngIf="Kista" (click)="goToStandardScen()">Standard Scenario</div>
+      </div>
+
+   </div>
+
+   <div class="start-container" *ngIf="isGlobal" [ngClass]="(!showDetails && !enterName && !showFds && isGlobal) ? 'show' : 'hidden'">
+      <swiper #swiper direction="vertical" style="height: 100vh;">
+         <ng-template swiperSlide>
+            <div style="display: flex; flex-direction: column; height: 100vh;">
+               <div class="swiper-header" [ngStyle]="fdsTimeSlots > 3 ? {'margin-bottom': '50px'} : {'margin-bottom': '100px'}">
+                  <h2 (click)="getStatus()">Today's deliveries - {{todaysDate | date:'dd/MM'}}</h2>
+                  <h3 (click)="fetchFdsOrders()" *ngIf="ordersLoaded">Deliveries: {{todaysDeliveries}}</h3>
+               </div>
+
+               <div *ngIf="ordersLoaded">
+                  <div class="fdsTimeSlots" *ngFor="let timeSlot of fdsOrders | keyvalue" [ngStyle]="fdsTimeSlots > 3 ? {'height': '365px'} : {'height': '445px'}">
+                     <p style="margin-right: 110px; position: relative; top: -85px;">{{timeSlot.key}}</p>
+
+                     <div class="fdsOrders" *ngFor="let order of timeSlot.value" (click)="searchByOrder(order.orderDetails.vistaOrderId)">
+                        <div class="fdsOrderDetails" *ngIf="searchOrderId !== order.orderDetails.vistaOrderId">
+                           <p style="font-weight: 600;">{{order.customerDetails.firstName + ' ' + order.customerDetails.surname}}</p>
+                           <p>{{order.orderDetails.vistaOrderId}}</p>
+                           <p>{{order.orderDetails.license}}</p>
+                           <p>{{order.orderDetails.carType}}</p>
+                        </div>
+                        <div *ngIf="searchOrderId === order.orderDetails.vistaOrderId" class="fdsSpinner">
+                           <svg class="spinner" viewBox="0 0 50 50">
+                              <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                           </svg>
+                        </div>
+                        <div class="casting-status" *ngIf="castingService.castingStatus | castingStatus:order.orderDetails.vistaOrderId as prefix">
+                           <div class="casting-player">Currently casting on {{prefix}}</div>
+                           <div class="connected"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="orders-spinner" *ngIf="!ordersLoaded">
+                  <svg class="spinner" viewBox="0 0 50 50">
+                     <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                  </svg>
+               </div>
+               <div class="searchByOrder" (click)="swipeDown()">
+                  <p>Search by order no</p>
+                  <mat-icon>arrow_forward_ios</mat-icon>
+               </div>
+            </div>
+         </ng-template>
+         <ng-template swiperSlide>
+            <div class="deliveries" (click)="swipeUp()">
+                  <mat-icon>arrow_forward_ios</mat-icon>
+                  <p>Today's deliveries - {{todaysDate | date:'dd/MM'}}</p>
+               </div>
+            <div class="input-container">
+               <div class="input">
+                  <input type="text" placeholder="{{isGlobal ? 'Order nr (FYON or CON)' : 'REGNUMMER eller VIN' }}" #search>
+               </div>
+               <div class="btn" (click)="onSearch()">
+                  <div *ngIf="!searchWait">{{isGlobal ? 'Search' : 'Sök' }}</div>
+                  <div *ngIf="searchWait">
+                     <svg class="spinner" viewBox="0 0 50 50">
+                        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                     </svg>
+                  </div>
+
+               </div>
+               
+            </div>
+
+            <div class="keyboard-container">
+               <app-test-keyboard (onClicked)="onKeyClick($event, true)" iconSize="2" rowHeight="{{rowHeight}}"></app-test-keyboard>
+            </div>
+            
+            <div class="btn-container">
+               <div class="standard-btn" *ngIf="Kista" (click)="goToStandardScen()">Standard Scenario</div>
+            </div>
+         </ng-template>
+      </swiper>
+   </div>
+
+   <div class="search-result" 
+      [ngClass]="(showDetails && !enterName) ? 'show' : 'hidden'">
+
+      <div class="header" [ngStyle]="{'width': !isGlobal ? '500px' : '1079px'}">
+         {{isGlobal ? 'Overview' : 'Översikt' }}
+      </div>
+
+      <div class="overview-container" *ngIf="deliveryAgendaService.agenda" [ngStyle]="{'justify-content': isGlobal ? 'space-between' : 'center'}">
+
+         <div class="details-container">
+            <div class="text">
+               {{deliveryAgendaService.agenda.carModel}}
+            </div>
+            <div class="text">
+               {{deliveryAgendaService.agenda.regNum}}
+            </div>
+            <div class="text">
+               {{deliveryAgendaService.agenda.color}}
+            </div>
+
+            <div *ngIf="isGlobal == true || Kista == true" class="btn-container">
+               <div class="btn-text">
+                  {{isGlobal ? 'Is this correct?' : 'Stämmer detta?' }}
+               </div>
+
+               <div class="btns">
+                  <div class="btn" (click)="detailsConfirm()">{{isGlobal ? 'Confirm' : 'Bekräfta' }}</div>
+                  <div class="btn" (click)="back()">{{isGlobal ? 'Back' : 'Tillbaka' }}</div>
+               </div>
+            </div>
+
+            <div *ngIf="!isGlobal && !Kista" class="btn-container" style="margin-top: 50px">
+
+               <div class="btns" style="justify-content: flex-start;">
+                  <div class="btn" (click)="detailsConfirm()">Bekräfta</div>
+               </div>
+            </div>
+         </div>
+
+         <!-- DÖLJ FÖR VCS -->
+         <div *ngIf="isGlobal == true"  class="accessories">
+            <div class="text">
+               {{'Accessories' }}
+            </div>
+
+            <div class="accessories-list">
+
+               <div *ngFor="let item of deliveryAgendaService.agenda.carSpecs">
+                  <p>{{item}}</p>
+               </div>
+
+               <div class="gradient-bottom"></div>
+
+            </div>
+         </div>
+
+      </div>
+   </div>
+
+   <div class="search-result-surface" [ngClass]="(showFds && !enterName) ? 'show' : 'hidden'" *ngIf="isGlobal == true">
+
+      <div class="header">
+         {{isGlobal ? 'Overview' : 'Översikt' }}
+      </div>
+
+      <div class="overview-container" *ngIf="deliveryAgendaService.agenda">
+         <div class="left-container">
+            <mat-expansion-panel [expanded]="true">
+               <mat-expansion-panel-header class="customer-global">
+                  {{deliveryAgendaService.agenda.customerName}}
+               </mat-expansion-panel-header>
+
+               <div class="customer-details-global">
+                  <h5>Address</h5>
+                  <p style="margin-bottom: 60px;">{{deliveryAgendaService.agenda.fdsData.customerDetails.address + ', ' + deliveryAgendaService.agenda.fdsData.customerDetails.city}}</p>
+
+                  <h5>More information</h5>
+                  <p style="margin-bottom: 60px;">{{'"' + fdsOrderNotes + '"'}}</p>
+                  
+                  <h5>Delivery specialist</h5>
+                  <p style="margin-bottom: 60px;">{{deliveryAgendaService.agenda.fdsData.bookingDetails.deliverySpecialist}}</p>
+               </div>
+           </mat-expansion-panel>
+
+            <mat-expansion-panel [expanded]="true">
+               <mat-expansion-panel-header class="customer-global">
+                  Order info
+               </mat-expansion-panel-header>
+
+               <div class="customer-details-global">
+                  <h5>Home Shipment Date</h5>
+                  <p>{{deliveryAgendaService.agenda.fdsData.bookingDetails.homeShipmentDate}}</p>
+                  <mat-expansion-panel class="workshop-orders" style="max-height: 420px; border-bottom: 0px; overflow-y: scroll; scrollbar-width: none !important;">
+                     <mat-expansion-panel-header style="border-bottom: 0px;">
+                        <h5>WS Orders ({{deliveryAgendaService.agenda.fdsData.workOrderDetails.length}})</h5>
+                     </mat-expansion-panel-header>
+
+                     <div class="work-order" *ngFor="let order of deliveryAgendaService.agenda.fdsData.workOrderDetails">
+                        <p>{{order.workOrderAccessories[0].workOrderDescription.split(' ').slice(1).join(' ')}}</p>
+                        <p>{{order.status}}</p>
+                        <p *ngIf="order.completedDate">{{order.completedDate | date:'yyyy-MM-dd'}}</p>
+                     </div>
+                  </mat-expansion-panel>
+               </div>
+           </mat-expansion-panel>
+         </div>
+         <div class="right-container">
+            <mat-expansion-panel [expanded]="true">
+               <mat-expansion-panel-header class="customer-global">
+                  Vehicle information
+               </mat-expansion-panel-header>
+
+               <div class="customer-details-global">
+                  <div class="vehicle-info">
+                     <h5>Order number</h5>
+                     <p>{{deliveryAgendaService.agenda.fdsData.orderDetails.vistaOrderId}}</p>
+                  </div>
+                  <div class="vehicle-info">
+                     <h5>Model name</h5>
+                     <p>{{deliveryAgendaService.agenda.carModel}}</p>
+                  </div>
+                  <div class="vehicle-info">
+                     <h5>Model year</h5>
+                     <p>{{deliveryAgendaService.agenda.fdsData.orderDetails.commercialModelYear.split('.')[0]}}</p>
+                  </div>
+                  <div class="vehicle-info">
+                     <h5>Color</h5>
+                     <p>{{deliveryAgendaService.agenda.color}}</p>
+                  </div>
+                  <div class="vehicle-info">
+                     <h5>VIN</h5>
+                     <p>{{deliveryAgendaService.agenda.vin}}</p>
+                  </div>
+                  <div class="vehicle-info">
+                     <h5>Transmission</h5>
+                     <p>{{deliveryAgendaService.agenda.gearbox}}</p>
+                  </div>
+                  <div class="vehicle-info">
+                     <h5>Engine</h5>
+                     <p>{{deliveryAgendaService.agenda.engine}}</p>
+                  </div>
+               </div>
+           </mat-expansion-panel>
+
+           <mat-expansion-panel [expanded]="true" class="car-specs-surface">
+               <mat-expansion-panel-header>
+                  Added accessories
+               </mat-expansion-panel-header>
+
+               <p *ngFor="let item of deliveryAgendaService.agenda.carSpecs" class="car-specs">{{item}}</p>
+
+            </mat-expansion-panel>
+         </div>
+      </div>
+      <div class="btn-container">
+         <div class="btns">
+            <div class="btn" (click)="detailsConfirm()">{{isGlobal ? 'Confirm' : 'Bekräfta' }}</div>
+         </div>
+      </div>
+      <div class="back-button">
+         <mat-icon (click)="back()">keyboard_arrow_left</mat-icon>
+      </div>
+   </div>
+
+   <div class="start-container" [ngClass]="enterName ? 'show' : 'hidden'">
+      <div class="input-container">
+         <div class="input">
+            <input type="text" placeholder="{{isGlobal ? 'Name of Customer' : 'Namn på kund' }}" #firstName>
+         </div>
+         <div class="btn" (click)="continue(true)">
+            {{isGlobal ? 'Confirm' : 'Bekräfta' }}
+         </div>
+      </div>
+
+      <div class="keyboard-container">
+         <app-test-keyboard (onClicked)="onKeyClick($event, false)" iconSize="2" rowHeight="{{rowHeight}}"></app-test-keyboard>
+      </div>
+
+      <div class="continue" (click)="continue(false)">
+         {{isGlobal ? 'Continue' : 'Fortsätt utan namn' }}
+      </div>
+   </div>
+
+   <app-battery-status *ngIf="this.isGlobal"></app-battery-status>
+   <div class="power-turned-off" *ngIf="powerOff == true" (mousedown)="turnOn()"></div>
+   <div class="power" (click)="turnOff()" *ngIf="this.isGlobal">
+      <mat-icon>power_settings_new</mat-icon>
+   </div>
+   <div class="refresh" (click)="refresh()" *ngIf="this.isGlobal">
+      <mat-icon>refresh</mat-icon>
+   </div>
+</div>
+
+<div *ngIf="(enterName || showDetails) && !this.isGlobal" class="finish-container">
+
+    <div class="finish-box">
+
+        <div (click)="finish()" class="finish">
+        <div class="icon-finnish"></div>
+        <p class="back-text">Tillbaka</p>
+        </div>
+
+    </div>
+</div>

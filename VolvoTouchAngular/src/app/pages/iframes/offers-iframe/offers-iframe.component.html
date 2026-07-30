@@ -1,0 +1,4 @@
+<div class="iframe-canvas">
+    <iframe #IFrame (load)="onIframeLoaded(IFrame)" sandbox="allow-same-origin allow-scripts allow-forms"
+        [src]="url$ | safe" loading="lazy" frameBorder="0" allow="clipboard-read; clipboard-write"></iframe>
+</div>

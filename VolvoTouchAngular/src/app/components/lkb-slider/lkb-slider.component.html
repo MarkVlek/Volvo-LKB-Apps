@@ -1,0 +1,38 @@
+<div class="slider-container">
+    <div class="upper">
+        <div class="title">
+            {{title}}
+        </div>
+
+        <div *ngIf="!showOnlyOneValue" class="values">
+            <div class="text">
+                {{currentMin}} - {{currentMax}}
+            </div>
+        </div>
+        <div *ngIf="showOnlyOneValue" class="values">
+            <div class="text">
+                {{currentMax}}
+            </div>
+
+        </div>
+    </div>
+    <div class="slider">
+        <mat-slider [style]="style" [min]="startValue" [max]="endValue">
+            <input [value]="startValue" (valueChange)="minValueChange($event)" matSliderStartThumb>
+            <input [value]="endValue" (valueChange)="maxValueChange($event)" matSliderEndThumb>
+        </mat-slider>
+
+    </div>
+    <!-- <div class="lower">
+        <div class="start-value">
+            {{startValue}}
+        </div>
+        <div class="middle">
+
+        </div>
+
+        <div class="end-value">
+            {{endValue}}
+        </div>
+    </div> -->
+</div>

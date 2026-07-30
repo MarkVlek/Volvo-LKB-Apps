@@ -1,0 +1,12 @@
+<div class="iframe-canvas">
+    <iframe #IFrame (load)="onIframeLoaded(IFrame)" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+        [src]="url$ | safe" loading="lazy" frameborder="0"></iframe>
+    <div class="qrCodeContainer">
+        <div class="qrCodeAlign">
+            <qrcode id="qrcode" [width]="100" [qrdata]="this.url$"></qrcode>
+        </div>
+        <div class="qrCodeText">
+            <p>{{"Hitta din närmaste station" | translate}}</p>
+        </div>
+    </div>
+</div>

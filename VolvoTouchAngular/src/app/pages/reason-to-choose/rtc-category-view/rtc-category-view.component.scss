@@ -1,0 +1,14 @@
+.reason-to-choose-main {
+    height: var(--main-view-height);
+    width: 1920px;
+    background-color: white;
+    .grid {
+        width: 100%;
+        min-height: var(--main-view-height);
+        max-height: var(--main-view-height);
+    }
+    .tile {
+        width: 100%;
+        height: 100%;
+    }
+}

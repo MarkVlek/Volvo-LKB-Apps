@@ -1,0 +1,55 @@
+.page-card-main {
+    margin-left: 15px;
+    margin-right: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .title {
+        font-family: var(--fontDisplayMedium);
+        color: #141414;
+        font-size: 16px;
+        font-weight: 500;
+        display: inline-block;
+        position: relative;
+        top: 0;
+    }
+    .selected-page-box {
+        height: 2px;
+        width: 100%;
+        position: relative;
+        top: 5px;
+        .selected-page-marker {
+            width: 100%;
+            border-radius: 10px;
+            height: 100%;
+            background-color: #141414;
+        }
+    }
+}
+
+.launch-title-wov {
+  background: linear-gradient(
+    270deg,
+    #cf844a,
+    #f9c47e,
+    #f9c47e,
+    #cf844a
+  );
+  background-size: 150% 150%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 4s linear infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

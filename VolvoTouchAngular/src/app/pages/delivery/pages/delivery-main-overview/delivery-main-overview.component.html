@@ -1,0 +1,55 @@
+<div class="main-container" >
+
+    <div class="video" *ngIf="videoUrl" (click)="cancelExit()">
+        <video autoplay loop [muted]="true" id="video">
+            <source src="{{videoUrl}}" type="video/mp4">
+        </video>
+    </div>
+
+    
+    <div class="agenda-list" id="agenda-list" *ngIf="deliveryAgendaService.agenda">
+
+        <div *ngFor="let row of deliveryAgendaService.agenda.categoryGroups" [ngClass]="{'row-width': row.show}">
+
+            <div class="row" *ngIf="row.show">
+                <div class="parent">{{row.title}}</div>
+
+                <div *ngFor="let child of row.categories" style="margin: 0; padding: 0;">
+                    <div class="child" *ngIf="child.show" (click)="moveForward(row, child)">
+                        {{child.name}}
+                        <div class="arrow" *ngIf="(child.accessories | delivery)"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer" id="footer">
+        <div class="arrow-container">
+            <div class="arrow" (click)="moveBack()"></div>
+            <div class="arrow" (click)="moveForward(null, null)" id="next"></div>
+        </div>
+        <div class="background" (click)="toggleDarkMode()">
+            <div class="container">
+                <label class="switch">
+                    <input type="checkbox" id="checkbox" (click)="toggleDarkMode()">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            Bakgrund
+        </div>
+        <div class="checklist" (click)="goToQr()">
+            <div class="qr-white"></div>
+            Checklista
+        </div>
+
+        <div class="open" id="rotate" (click)="slide()"></div>
+
+        <div class="exit" (click)="closeDelivery()">
+            <div class="check-white"></div>
+            Avsluta
+        </div>
+    </div>
+</div>
+

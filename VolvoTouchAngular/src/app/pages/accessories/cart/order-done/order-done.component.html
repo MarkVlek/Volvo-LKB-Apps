@@ -1,0 +1,29 @@
+<div class="cart-container">
+    <div class="info-container">
+        <div class="image-container">
+            <div class="main-text">
+                Tack för din order
+                <div class="main-text-sub">
+                    Kontakta närmsta säljare för att betala och
+                    <br />slutföra din beställning.
+                </div>
+            </div>
+            <img class="image" src="./assets/images/orderCompleteBackground.png">
+        </div>
+
+
+    </div>
+    <div class="products-container">
+        <div class="cart-text">
+            Beställda Varor
+        </div>
+        <div class="cart">
+            <div class="cart-item" *ngFor="let item of this.cartService.orderDoneProducts;  let i = index">
+                <app-order-done-item [cartItem]="item"></app-order-done-item>
+            </div>
+        </div>
+        <div class="cart-sum">
+            Totalt att betala: {{this.cartService.getFinalPriceAllItems(this.cartService.orderDoneProducts)}} kr
+        </div>
+    </div>
+</div>

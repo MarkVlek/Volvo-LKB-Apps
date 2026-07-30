@@ -1,0 +1,137 @@
+.iframe-canvas {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+iframe {
+    width: 100%;
+    height: 100%;
+    border: 0px !important;
+}
+.loader {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.keyboard-container {
+    z-index: 2000;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(65, 65, 65, 0.11);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    .keyboard-container-inner {
+        z-index: 2000;
+        height: 300px;
+        width: 1200px;
+        margin-top: 625px;
+        background-color: rgba(27, 27, 27, 0.719);
+    }
+}
+.back{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: var(--volvo-blue);
+    border-radius: 50%;
+    z-index: 204;
+    left: 20px;
+    top: 845px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button-text{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: var(--volvo-blue);
+    border-radius: 50%;
+    z-index: 204;
+    left: 20px;
+    top: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.qrCodeContainer{
+    border-radius: 15px;
+    position: absolute;
+    z-index: 1;
+    top: 45%;
+    left: 39.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 400px;
+    width: 400px;
+}
+qrcode {
+    z-index: 10000;
+    width: 300px;
+    height: 300px;
+}
+.qrCodeAlign{
+    width: 200px;
+    height: 100px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.qrCodeText {
+    width: 180px;
+    color: #000;
+    font-size: 15px;
+    text-align: center;
+    padding-top: 15px;
+    
+    p {
+        font-family: var(--fontRegular);
+    }
+}
+
+.disclaimer {
+    font-family: --fontRegular;
+    width: 180px;
+    color: #000;
+    font-size: 14px;
+    text-align: center;
+    top: 75%;
+    right: 46%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-size: 17px;
+}
+
+.spinner-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.spinner {
+    width: 80px;
+    height: 80px;
+    border: 8px solid #ccc;
+    border-top: 8px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

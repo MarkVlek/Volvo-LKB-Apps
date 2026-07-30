@@ -1,0 +1,121 @@
+{
+  "components": [
+    {
+      "name": "Inventory Settings",
+      "label": {
+        "en-US": {
+          "value": "Inventory Settings",
+          "tooltip": "Configuration for the Wayke vehicle inventory data feed."
+        }
+      },
+      "params": [
+        {
+          "name": "InventoryApiUrl",
+          "label": {
+            "en-US": {
+              "value": "Inventory API URL",
+              "tooltip": "The Wayke/cloud endpoint URL that returns the dealer's vehicle inventory as a JSON array."
+            }
+          },
+          "type": "string",
+          "value": "https://api.wayke.se/search"
+        },
+        {
+          "name": "WaykeApiToken",
+          "label": {
+            "en-US": {
+              "value": "Wayke API Token",
+              "tooltip": "Authentication token for the Wayke API. Provided by Volvo."
+            }
+          },
+          "type": "string",
+          "value": "68OaLKCeo4M6ZnHs8NPxZuvFuDdyA9EM"
+        },
+        {
+          "name": "LkbBranchName",
+          "label": {
+            "en-US": {
+              "value": "Branch Name",
+              "tooltip": "The dealer branch name. When set, the branch location label is suppressed on car cards (single-location dealers)."
+            }
+          },
+          "type": "string",
+          "value": "Bildeve AB - Bergahuset"
+        },
+        {
+          "name": "AllBrandsAvailable",
+          "label": {
+            "en-US": {
+              "value": "Show All Brands",
+              "tooltip": "Enable the multi-brand filter and 'Alla märken' button. Set to true for multi-brand dealerships."
+            }
+          },
+          "type": "bool",
+          "value": false
+        },
+        {
+          "name": "Dealership Name Filters",
+          "label": {
+            "en-US": {
+              "value": "Dealership Name Filters",
+              "tooltip": "Dealership names to be filtered in the way they are displayed. Format: Keyword|Pattern|Replace With \nSpaces are included in formatting, keywords should be capitalized"
+            }
+          },
+          "type": "array",
+          "value": [
+            "AHLBERG BIL|Ahlberg Bil | ",
+            "BILBOLAGET|Bilbolaget | ",
+            "BILDEVE|Bildeve AB - | ",
+            "BILIA|Bilia| ",
+            "BILKOMPANIET|Bilkompaniet i | ",
+            "BILMÅNSSON|Bilmånsson | ",
+            "BOGESUNDS|Bogesunds Bil | ",
+            "BRANDT BIL|Brandt Bil - | ",
+            "FINNVEDENS|Finnvedens Bil | ",
+            "HELMIA|Helmia Bil AB | ",
+            "LILJAS|Liljas Personbilar | ",
+            "NYBERGS|Nybergs Bil | ",
+            "REJMES|Rejmes Halland - | ",
+            "ROLF|Rolf Ericson Bil | ",
+            "SKOBES|Skobes Bil | ",
+            "STENDAHLS|Stendahls Bil | ",
+            "VOLVO CAR|Volvo Car | "
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Fallback Settings",
+      "label": {
+        "en-US": {
+          "value": "Fallback Settings",
+          "tooltip": "Settings to be used as fallbacks when no settings can be found."
+        }
+      },
+      "params": [
+        {
+          "name": "DealerId",
+          "label": {
+            "en-US": {
+              "value": "Dealer ID",
+              "tooltip": "The dealer branch ID to be used as a fallback for insurance API calls (Wayke branch ID)."
+            }
+          },
+          "type": "string",
+          "value": "fab817e9-3c81-4b50-ae67-43003b2e6274"
+        },
+        {
+          "name": "InterestRate",
+          "label": {
+            "en-US": {
+              "value": "Interest Rate (%)",
+              "tooltip": "Annual interest rate used as a fallback for the finance calculator if the vehicle record does not include one. Example: 7.95"
+            }
+          },
+          "type": "string",
+          "value": "7.95"
+        }
+      ]
+    }
+  ]
+}

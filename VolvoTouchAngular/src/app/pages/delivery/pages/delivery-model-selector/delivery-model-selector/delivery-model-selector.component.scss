@@ -1,0 +1,117 @@
+.carselector-container {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 300px auto 300px;
+    row-gap: 40px;
+    height: 1080px;
+    width: 1920px;
+    overflow-y: auto;
+    padding-bottom: 250px;
+}
+
+.carselector-header-container {
+    grid-column: 2;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 146px;
+    width: 1315px;
+}
+
+.carselector-title-container {
+    grid-column: 1 / 4;
+    grid-row: 1;
+    text-align: center;
+}
+
+.carselector-header-filtering-container {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    justify-content: space-around;
+}
+
+.carselector-list-container {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.carselector-group-list {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.carselector-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 33px;
+}
+
+.carselector-list-item {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: 1fr 0.5fr;
+}
+
+.carselector-list-item > img {
+    width: 300px;
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+}
+
+.carselector-list-item > p {
+    height: 25px;
+    padding-top: 10px;
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 16px;
+    font-family: var(--fontRegular);
+    font-weight: 600;
+}
+
+.carselector-list-item > p{
+    font-size: 16px;
+    font-family: var(--fontRegular);
+}
+
+.carselector-filtered {
+    color: white !important;
+    background-color: black !important;
+}
+
+
+.finish-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    bottom: 13px;
+    position: fixed;
+    left: 46px;
+}
+
+.finish-box {
+    width: 90px;
+    margin-right: 25px;
+    margin-bottom: 14px;
+}
+
+.icon-finnish {
+    background-image: url('../../../../../../assets/images/Delivery/back.svg');
+    width: 20px;
+    height: 22px;
+    scale: 1;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.finish {
+    display: flex;
+    align-items: center;
+}
+
+.back-text {
+    margin-bottom: 2px !important;
+    margin-left: 5px;
+}
+

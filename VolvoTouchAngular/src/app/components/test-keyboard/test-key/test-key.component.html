@@ -1,0 +1,10 @@
+<div id="inner-key" class="inner-key" (click)="sendClick(value)" [style]="setHeight">
+    <div class="inner-inner-key" [style]="setEmpty">
+        <div style=" height: 100%; width: 100%;" *ngIf="back">
+            <div class="back"></div>
+        </div>
+        <div *ngIf="!back && value != 'Space'">
+            {{value}}
+        </div>
+    </div>
+</div>

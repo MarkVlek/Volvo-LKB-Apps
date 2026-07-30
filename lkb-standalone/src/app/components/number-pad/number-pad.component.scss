@@ -1,0 +1,18 @@
+.numpad-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.numpad-inner-container {
+    height: 100%;
+    width: 100%;
+    .key {
+        height: 100%;
+        width: 100%;
+    }
+    .tile {
+        margin: 20px;
+    }
+}

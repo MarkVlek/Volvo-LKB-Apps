@@ -1,0 +1,667 @@
+/* body{
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+} */
+/* test */
+
+/* Cookie popup */
+a[href="//www.volvocars.com/se"]{
+    display: none !important;
+}
+
+dialog[id="dialog_cookie_consent"] {
+    display: none !important;
+}
+div[id="cookie-banner-host"] {
+    display: none !important;
+}
+
+.optanon-alert-box-wrapper {
+    display: none !important;
+}
+
+a[data-testid="contact-fab__button"]{
+    display: none !important;
+}
+
+div[id="contact-fab"] {
+    display: none !important;
+}
+
+div[class="onetrust-pc-dark-filter ot-fade-in"] {
+    display: none !important;
+}
+
+
+
+div[id="onetrust-banner-sdk"] {
+    display: none !important;
+}
+
+
+a[href='/uk/shop/xc40/?availability=inStock'] {
+    display: none !important;
+}
+
+div[data-testid="info-banner"] {
+    display: none !important;
+}
+
+div[data-testid="information-banner"] {
+    display: none !important;
+}
+
+/* Cookie popup */
+.optanon-alert-box-bottom-top {
+    display: none !important;
+}
+
+/* Cookie popup */
+.optanon-alert-box-bg {
+    display: none !important;
+}
+
+img[src*="volvo-wordmark-black"] {
+    display: none !important
+}
+
+
+/* footer{
+    display: none !important;
+} */
+
+
+/* SCROLL BAR START*/
+::-webkit-scrollbar-track {
+    --webkit-box-shadow: inset 0 0 0px rgba(0, 0, 0, 0.8) !important;
+    border-radius: 10px !important;
+    background-color: #ebebeb !important;
+}
+
+::-webkit-scrollbar {
+    width: 5px !important;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px !important;
+    width: 4px !important;
+    --webkit-box-shadow: inset 0 0 0px rgba(0, 0, 0, 0.8) !important;
+    background-color: #141414 !important;
+}
+
+/* SCROLLBAR END */
+
+
+/* REQUEST CALLBACK END */
+
+
+/* CHIP SHORTAGE LINK START */
+p[data-testid='pdp__trim-level-description']+div {
+    display: none !important;
+}
+
+h3[data-testid='pdp__delivery-time']+div {
+    display: none !important;
+}
+
+/* CHIP SHORTAGE LINK END */
+
+
+/* TYRE LINK START*/
+a[aria-label='Tyre energy labels, Opens in new window'] {
+    display: none !important;
+}
+
+/* TYRE LINK END */
+
+/* SAVE AND SHARE START */
+h2[data-sources='dict:modules.share.saveShare']+div {
+    display: none !important;
+}
+
+h2[data-sources='dict:modules.share.saveShare'] {
+    display: none !important;
+
+}
+
+/* SAVE AND SHARE END*/
+
+/* NOT READY TO BUY ONLINE START*/
+div[data-id='detailsColumnCSS'] div:nth-of-type(5) {
+    display: none !important;
+}
+
+/* NOT READY TO BUY ONLINE END*/
+
+
+/* AGREEMENT LINK PDF START */
+button[id='agreement_pdf_link'] {
+    display: none !important;
+}
+
+/* AGREEMENT LINK END */
+
+/* AGREEMENT NAVIGATION START */
+div[id='site-nav-topbar-wrapper'] {
+    display: none !important;
+}
+
+
+/* ANCHOR ALERT START */
+div[id='rc-anchor-alert'] {
+    display: none !important;
+}
+
+div[class='grecaptcha-badge'] {
+    display: none !important;
+}
+
+/* In order to make book test drive work */
+html {
+    overflow: scroll !important;
+    overflow-x: hidden !important;
+}
+
+/*ON DEMAND*/
+
+/* Header */
+div[class='relative z-10 flex items-center justify-between border-b-ornament-divider lg:border-b']{
+    display: none !important;
+}
+
+/* In order to make links non-clickable */
+a[href='https://apps.apple.com/se/app/m-volvo-car-mobility/id1449988777']{
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+}
+
+a[href='https://play.google.com/store/apps/details?id=co.m.app&gl=SE']{
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+}
+
+a[href='https://www.bankid.com/']{
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+}
+a[href="https://www.bankid.com/en/"]{
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+}
+
+a[href="https://www.apple.com/ios/carplay/"]{
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+}
+
+a[href='/se/on-demand/hyrbil']{
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+}
+
+a[href='/en-se/on-demand/sustainability']{
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+}
+
+ /* Hide clickable "cards" */
+div[data-cid='cards-large']{
+    display: none !important;
+}
+
+div[class='-mt-2 md:-mt-4']{
+    display: none !important;
+}
+
+div[id='site-footer-embed']{
+    display: none !important;
+}
+
+a[href='/se/on-demand/hallbarhet']{
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+}
+
+section[class='relative z-10 flow-root rounded-t-9 xl:rounded-t-24 -mb-9 pb-9 lg:-mb-21 lg:pb-21 text-base-800']{
+    display: none !important;
+}
+
+/* For a better future */
+site-navigation[id='site-navigation']{
+    display: none !important;
+}
+
+span[id='MDigitalAnimationWrapper']{
+    display: none !important;
+}
+
+a[data-autoid="promotionBackgroundImage:learnMore"]{
+    display: none !important;
+}
+
+a[data-autoid='imageWithText:primaryCta']{
+    display: none !important;
+}
+
+div[data-autoid="callouts:grid"] a[href="/se/v/sustainability"]{
+    display: none !important;
+}
+
+div[data-autoid="callouts:grid"] a[href="/se/v/car-safety"]{
+    display: none !important;
+}
+
+a[data-autoid="callouts:learnMore"]{
+    display: none !important;
+}
+
+div[data-autoid="localSubMenu:linksContainer"] :nth-child(3){
+    display: none;
+}
+
+/* In order to make Car carousel non-clickable */
+div[data-autoid="springCarouselPane:carouselItem"]{
+    pointer-events: none;
+}
+
+div[class="product-list-carousel-item-links"]{
+    display: none !important;
+}
+
+a[data-autoid="productListCarouselItem:link1"]{
+    display: none !important;
+}
+
+a[data-autoid="productListCarouselItem:link2"]{
+    display: none !important;
+}
+
+div[data-component="CTALink"]{
+    display: none !important;
+}
+
+a[data-autoid="imageWithText:secondaryCta"]{
+    display: none !important;
+}
+div[class="a"] div[data-component="PromotionBackgroundImage"]{
+    display: none !important;
+}
+
+div[data-component="ProductListCarousel"]{
+    display: none !important;
+}
+
+div[data-component="Disclaimer"]{
+    display: none !important;
+}
+
+div[class="a"] div[data-component="ImageWithText"]{
+    display: none !important;
+}
+/* Hide links to other sites in "Our history" */
+div[class="a az ba bb"]{
+    display: none !important;
+}
+
+/* Shop */
+/* Hide option for Delivery Ready Cars and Changeable cars */
+small[data-testid="filters__filtered-cars-result"]{
+    display: none !important
+}
+
+/*Hide Blocks that does not contain cars*/
+div[class="block animation_grid__MrG8p grid_cellLayout__RBa4C grid_cellLayoutNarrow__2WvuM"]:has(dialog[class="dialog dialog p-0"]){
+    display: none !important;
+}
+div[class="block animation_grid__MrG8p grid_cellLayout__RBa4C grid_cellLayoutNarrow__2WvuM"]:has(h3){
+    display: none !important;
+}
+p[data-testid="loaded-cars"]{
+    display: none !important;
+}
+
+/* Hide Info About Different Payements */
+main[class="a"] :nth-child(5):has(h4){
+    display: none !important;
+}
+main[class="a"] :nth-child(4):has(h3){
+    display: none !important;
+}
+div[data-testid="emissions-and-safety"]{
+    display: none !important;
+}
+div[class="my-8 w-full"]{
+    display: none !important;
+}
+div[data-testid="share"]{
+    display: none !important;
+}
+div[class="container-lg mx-auto self-center gap-y-48 grid justify-center order_order-grid__elOk9 order_order-grid-areas__QyLeu"] :nth-child(5) h2{
+    display: none !important;
+}
+div[class="container-lg mx-auto self-center gap-y-48 grid justify-center order_order-grid__elOk9 order_order-grid-areas__QyLeu"] :nth-child(5) div:nth-child(2) div:nth-child(1){
+    display: none !important;
+}
+div[class="container-lg mx-auto self-center gap-y-48 grid justify-center order_order-grid__elOk9 order_order-grid-areas__QyLeu"] :nth-child(5) div:nth-child(2) div:nth-child(2){
+    display: none !important;
+}
+div[data-testid="model-unavailable"] :nth-child(2)::after{
+    content: "";
+}
+/* Hide "Order" button */
+button[data-testid="primary-cta-button-begin-order"]{
+    display: none !important;
+}
+/*Get A Quote & Visit Retailer*/
+section[data-testid="pdp__hero"] :nth-child(1) :nth-child(2){
+    display: none !important;
+}
+button[data-testid="pdp__subscribe-button"]{
+    display: none !important;
+}
+button[data-testid="pdp__custom-button"]{
+    display: none !important;
+}
+div[data-sources="market:marketCtas.wholesale2.Wholesale test drive.title"]{
+    display: none !important;
+}
+div[data-sources="market:marketCtas.wholesale1.Wholesale quote.title"]{
+    display: none !important;
+}
+/* Hide Contact Me button */
+main[class="a"] :nth-child(3) :nth-child(3) :nth-child(5) button{
+    display: none !important;
+}
+main[class="a"] :nth-child(4):has(div):has(div):has(div[class="react-css-collapse-transition"]){
+    display: none !important;
+}
+button[data-autoid="financialSummary:primaryCTA"]{
+    display: none !important;
+}
+a[class="button-outlined container-max"]{
+    display: none !important;
+}
+div[class="flex flex-col justify-start w-full py-4 products_selected-card_interact__1_pJO"] :nth-child(2){
+    display: none !important;
+}
+div[class="container-lg mx-auto self-center gap-y-48 grid justify-center order_order-grid__elOk9 order_order-grid-areas__QyLeu"] :nth-child(5){
+    display: none !important;
+}
+div[data-testid="ActionBar"]{
+    display: none !important;
+}
+div[class="action-bar_v2_content-container__ytrti"]{
+    display: none !important;
+}
+/* Hide "Order from your dealer option" */
+div[data-testid="choiceCard-omni-channel"]{
+    display: none !important;
+}
+/* Hide Test Drive link in Shop */
+a[data-testid="secondary-ctas-link"]{
+    display: none !important;
+}
+img[class="icon-mask text-accent-blue"]{
+    display: none !important;
+}
+/* Hide Download and Print button (BDV) */
+button[data-sources="dict:modules.share.printAndDownload"]{
+    display: none !important;
+}
+/* Edit Payment */
+a[data-sources="dict:global.ctas.editYourOffer"]{
+    display: none !important;
+}
+/*Hide Enviroment Info*/
+div[class="ag b bd bw bx c dx dy dz e ea eb ec ed ee ef eg s t"] :nth-child(6){
+    display: none !important;
+}
+div[class="ag b bd bw bx c dx dy dz e ea eb ec ed ee ef eg s t"] :nth-child(7){
+    display: none !important;
+}
+div[class="ab ac by do fk fm jq nk nl x y z"]{
+    display: none !important;
+}
+div[class="ab ac by do fk fm jq nh ni x y z"]{
+    display: none !important;
+}
+div[class="ab ac by do fk fm jp nj nk x y z"]{
+    display: none !important;
+}
+/* View All Features */
+a[data-testid="pdp__all-features-cta"]{
+    display: none !important;
+}
+
+/* Hide Browse Cars Button when car is selected */
+button[data-testid="pdp__back"]{
+    display: none !important;
+}
+/* Hide Disclaimer for US cars */
+
+button[data-testid="pdp__collapsible-disclaimers-cta"]{
+    display: none !important;
+}
+/* Shop UK */
+/* Hide "Offers" front-page for Uk shop */
+div[class="a cd"]{
+    display: none !important;
+}
+div[class="offer-drawer_campaign-offer_view_root__vGgJe"]{
+    display: none !important;
+}
+div[class="container-md flex-col md:text-center mb-64 md:mb-0"]{
+    display: none !important;
+}
+/* Car part exchange */
+div[class="mt-m trade-in_tradeInContainer__J01lw"]{
+    display: none !important;
+}
+/* Disclaimer */
+div[class="gap-8 self-start"]{
+    display: none !important;
+}
+div[data-testid="disclaimers"]{
+    display: none !important;
+}
+/* US Inventory */
+div[class="block animation_grid__MrG8p grid_cellLayout__RBa4C grid_cellLayoutNarrow__2WvuM"]:has(aside):has(img[src="https://www.volvocars.com/static/shared/icons/v2/map-mappin-40.svg#light-primary"]){
+    display: none !important;
+}
+button:has(img[src="https://www.volvocars.com/static/shared/icons/v2/map-mappin-24.svg#light-action"]){
+    display: none !important;
+}
+div[class="a hj jd je jf jg jh"]{
+    display: none !important;
+}
+div[class="bd be d dq f h j"]{
+    padding-bottom: 10px;
+}
+div[class="quiq-togglechatbutton-wrapper"]{
+    display: none !important;
+}
+div[class="journey-selector"] :nth-child(3){
+    display: none !important;
+}
+div[class="dealer-map__search-container"]{
+    display: none !important;
+}
+div[class="dealer-list"]{
+    height: 100% !important;
+}
+div[class="dealer-map map-mode"]{
+    height: 805px !important;
+}
+a[rel="noopener noreferrer"]{
+    display: none !important;
+}
+/* Book A Test Drive*/
+
+div[class="route-container request__form"]{
+    min-height: 88vh !important;
+}
+div[class="route-container dealer__form"]{
+    min-height: 88vh !important;
+}
+/* div[dir="ltr"] :nth-child(1) :nth-child(1) p{
+    display: none !important;
+} */
+/* Hide the request form to put QR-code instead */
+div[class="route-container request__form"] :nth-child(2){
+    display: none !important
+}
+/* div[class="route-container dealer__form"] :nth-child(2){
+    display: none !important;
+} */
+div[class="a ai aj ak al am an ao ap"]{
+    display: none !important
+}
+div[class="a ge hf iv iw ix iy iz ja"]{
+    display: none !important;
+}
+/* Hide Calendar to put QR-code instead */
+div[class="preferences"]{
+    display: none !important;
+}
+div[class="preferences-choice"]{
+    display: none !important;
+}
+div[class="preferences__availability-header"]{
+    display: none !important;
+}
+div[class="calendar__legend"]{
+    display: none !important;
+}
+div[class="calendar"]{
+    display: none !important;
+}
+/* div[class="preferences__timepicker-header"]{
+    display: none !important;
+} */
+/* div[class="time-picker"]{
+    display: none !important;
+} */
+div[class="route-container dealer__calendar"]{
+    min-height: 88vh !important;
+}
+/* Hide retailer list button for Shop */
+button[class="button-outlined container-max"]{
+    display: none !important;
+}
+div[data-autoid="summary:secondaryCTA"]{
+    display: none !important;
+}
+/* Hide Promo Div for Shop */
+div[data-testid="campaign-hero-promo__text-overlay"]{
+    display: none !important;
+}
+/* Hide "Info" div for Build */
+div[data-autoid="info-message"] {
+    display: none !important;
+}
+/* Remove continue with dealer button */
+div[data-testid="primary-cta"] {
+    display: none !important;
+}
+/* Remove link to shop-page */
+a[data-testid="inventory_link"] {
+    display: none !important;
+}
+/* Remove tyre-label link */
+span[data-autoid="tyre-label:link"] {
+    display: none !important;
+}
+img[src="https://www.volvocars.com/static/shared/icons/v4/external-link-16.svg"] {
+    display: none !important;
+}
+/* Remove test-drive link */
+div[class="conclusion-stage_breakdown-container-desktop-content__2qN1i"] {
+    display: none !important;
+}
+/* Remove Delivery ready cars link */
+/* div[class="until-lg:hidden"] {
+    display: none !important;
+} */
+/* Hide "Any questions?" container for UK build */
+div[class="flex-col gap-48"] {
+    display: none !important;
+}
+/* Hide Google maps links */
+div:has(> img[alt="Google"]){
+    display: none !important;
+}
+div[class="gmnoprint"]{
+    pointer-events: none !important;
+}
+div[class="gmnoprint gm-style-cc"]{
+    pointer-events: none !important;
+}
+
+div[class='bg-always-black text-always-white px-24 sticky styles_wrapper__OuoP9']{
+    display: none !important;
+}
+
+a[class='button-text']{
+    display: none !important;
+}
+
+button[data-testid="optional-equipment-learn-more-cta"] {
+    margin-bottom: 50px !important;
+}
+
+div[data-testid="disclaimer"] {
+    margin-bottom: 50px !important;
+}
+
+nav[aria-label="Breadcrumb"] {
+    display: none !important;
+}
+
+div[data-component="introHeader"] {
+    display: none !important;
+}
+
+/* [data-autoid="spotlight hero"] {
+    display: none !important;
+} */
+
+div[data-autoid="spotlight hero 2"] {
+    display: none !important;
+}
+/* nav[class="flex lg:grid relative h-full justify-between items-center SubNavigation_innerContainer__CVvJ0 container-xl"]{
+    display: none !important;
+} */
+ div[data-autoid="promotionalBanner"] {
+    display: none !important;
+}
+div[id="promotions-2"]{
+    display: none !important;
+}
+div[class="stack-text markdown_markdown__8pB_Q inline"]
+{
+    a {
+        display: none !important;
+    }
+    
+}
+div[class="flex-row gap-8 until-lg:hidden SubNavigation_ctas__9oygC"] {
+    display: none !important;
+}

@@ -1,0 +1,420 @@
+.shaded {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.185) (104, 104, 104);
+    z-index: 2000;
+    width: 100%;
+    height: var(--main-view-height);
+    backdrop-filter: grayscale(1);
+}
+.spinner {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.185) (104, 104, 104);
+    z-index: 2000;
+    width: 100%;
+    height: var(--main-view-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.view-container {
+    width: 100%;
+    height: var(--main-view-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .details-container {
+        width: 95%;
+        height: 90%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        .image-container {
+            width: 60%;
+            height: 100%;
+        }
+        .spec-container {
+            width: 37%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            .car-title {
+                width: 100%;
+                height: 70px;
+                display: flex;
+                font-size: 20px;
+                font-family: var(--fontDisplayMedium);
+                border-bottom: 1px solid #141414;
+                flex-direction: column;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+
+                p {
+                    font-weight: lighter;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    margin-bottom: 0px;
+                    height: 35px;
+                }
+            }
+            .car-stats {
+                width: 100%;
+                height: 100px;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                border-bottom: 1px solid #141414;
+                .car-stats-item {
+                    width: 10%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    .car-stats-item-title {
+                        font-size: 15px;
+                        font-family: "Volvo Novum-Light";
+                        margin: 0px;
+                        height: 24px;
+                        width: 24px;
+                        overflow: hidden;
+
+                        img {
+                            width: 100%;
+                        }
+                    }
+                    .car-stats-item-content {
+                        font-size: 12px;
+                        margin-top: 2px;
+                        font-family: var(--fontRegular);
+                    }
+
+                    .car-stats-item-content-regNum {
+                        border: 1px solid #b5b5b5;
+                        font-size: 12px;
+                        margin-top: 2px;
+                        font-family: var(--fontRegular);
+                        height: 19px;
+                        width: 62px;
+                        display: flex;
+                        justify-content: center;
+                        position: relative;
+                        left: 10px;
+                    }
+                }
+                .car-stats-price {
+                    font-size: 24px;
+                    color: #141414;
+                    font-family: var(--fontRegular);
+                    margin-left: 205px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    position: absolute;
+                    right: 50px;
+                }
+            }
+            .equipment-subscription-section {
+                width: 100%;
+                height: 430px;
+                border-bottom: 1px solid #141414;
+
+                .car-details-container {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 100px;
+                    border-bottom: 1px solid #141414;
+                    .car-specs {
+                        height: 75px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        .heading {
+                            font-family: var(--fontDisplayMedium);
+                            font-size: 16px;
+                            font-weight: 500;
+                            margin-bottom: 5px;
+                        }
+                        .value {
+                            font-family: var(--fontRegular);
+                            font-size: 14px;
+                            font-weight: 400;
+                            margin-bottom: 0px;
+                        }
+                    }
+                }
+                .equipment-section {
+                    width: 50%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    margin-top: 25px;
+                    font-family: var(--fontRegular);
+
+                    .warning-image {
+                        margin-bottom: 20px;
+                    }
+                    .equipment-section-header {
+                        height: 15%;
+                        width: 100%;
+                        font-family: var(--fontDisplayMedium);
+                        font-size: 24px;
+                        display: flex;
+                        align-items: center;
+                    }
+                    .equipment-section-list {
+                        height: 80%;
+                        width: 100%;
+                        overflow-y: scroll;
+                        overflow-x: hidden;
+                        scrollbar-width: none !important;
+                        .equipment-section-list-item {
+                            font-family: var(--fontRegular);
+                            font-size: 18px;
+                            margin: 10px 0px;
+                        }
+                    }
+                }
+                .subscription-section {
+                    width: 50%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: center;
+                    flex-direction: column;
+                    .rate {
+                        width: 90%;
+                        height: 60%;
+                        background-color: rgb(241, 241, 241);
+                        padding-bottom: 5px;
+                    }
+                    .insurance {
+                        width: 90%;
+                        height: 30%;
+                        overflow: hidden;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-evenly;
+                        background-color: rgb(241, 241, 241);
+
+                        .title {
+                            display: flex;
+                            margin-left: 15px;
+                            align-items: center;
+                            width: 100%;
+                            height: 33%;
+                        }
+                        .insurance-toggler-wrapper {
+                            width: 100%;
+                            height: 25%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+
+                            .insurance-toggler {
+                                width: 70%;
+                                height: 100%;
+                                border-radius: 3px;
+                                background-color: #1c6bba;
+                                color: white;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                font-size: 13px;
+                            }
+                        }
+
+                        .volvo-finans-logo-wrapper {
+                            width: 100%;
+                            height: 30%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            .volvia-logo {
+                                width: 50%;
+                                height: 100%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: contain;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .miscellaneous-section {
+                width: 100%;
+                height: 225px;
+                display: flex;
+                flex-direction: row;
+                .miscellaneous-title {
+                    margin-left: 12px;
+                    width: 100%;
+                    height: 30%;
+                    font-size: 20px;
+                    font-family: var(--fontRegular);
+                }
+                .miscellaneous-items-box {
+                    width: 100%;
+                    height: 90%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    margin-top: 20px;
+
+                    .location {
+                        width: 30%;
+                        height: 100%;
+                        border-right: 1px solid #141414;
+                    }
+
+                    .subscription {
+                        width: 70%;
+                        height: 100%;
+                    }
+
+
+                    .miscellaneous-item {
+                        width: 90px;
+                        margin-right: 10px;
+                        margin-left: 10px;
+                        margin-top: 5px;
+                        margin-bottom: 5px;
+                        height: 40px;
+                        display: flex;
+                        flex-direction: column;
+                        .m-title {
+                            font-size: 15px;
+                            font-weight: lighter;
+                            font-family: var(--fontLight);
+                        }
+                        .m-value {
+                            font-size: 18px;
+                            font-weight: Bold;
+                            font-family: var(--fontRegular);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.options {
+    
+    width: 100%;
+    font-family: var(--fontRegular);
+    
+    
+
+    .heading {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 5px;
+        width: 200px;
+        font-family: var(--fontDisplayMedium);
+    }
+
+    .opt-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 20px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 309px;
+        scrollbar-width: none !important;
+        padding-bottom: 30px;
+        align-content: flex-start;
+        mask-image: linear-gradient(180deg, rgb(0, 0, 0) 85%, transparent);
+
+        .opt {
+            font-size: 14px;
+            line-height: 22px;
+            margin-bottom: 0px;
+            font-family: var(--fontRegular);
+        }
+    }
+}
+.insurance-drawer {
+    .insurance-component {
+        height: var(--main-view-height);
+        width: 420px;
+        overflow-y: scroll;
+        scrollbar-width: none !important;
+    }
+}
+
+.location {
+    height: 100%;
+    padding-right: 30px;
+
+    .location-box {
+        height: 60%;
+        width: 200px;
+        .dealerLocation {
+            font-family: var(--fontDisplayMedium);
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+    
+        p {
+            font-size: 14px;
+            font-family: var(--fontRegular);
+            margin-bottom: 0px;
+        }
+    
+        span {
+            font-size: 14px;
+            font-family: var(--fontRegular);
+        }
+    }
+    
+
+    .insurance-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 40%;
+        border-top: 1px solid #141414;
+
+        .volvia {
+            width: 60px;
+            height: 7px;
+        }
+
+        .insurance-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 174px;
+            height: 40px;
+            border-radius: 30px;
+            margin-top: 15px;
+            background-color: #F5F3F0;
+    
+            p {
+                font-family: var(--fontRegular);
+                font-size: 13px;
+                font-style: normal;
+                margin-bottom: 0px;
+            }
+        }
+    }
+}
+
+.price {
+    font-size: 24px; 
+    font-family: var(--fontDisplayMedium); 
+    font-weight: 500;
+    margin-bottom: 0px;
+}

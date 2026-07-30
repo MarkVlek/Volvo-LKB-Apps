@@ -1,0 +1,17 @@
+<div class="main">
+    <div class="info-box">
+        <p style="font-size: x-large; font-weight: bolder; margin: 0;">Sales assistant</p>
+        <p *ngIf="salesPersonService.current" style="font-size: medium; margin-top:10px;">Sales assistant selected:
+            {{salesPersonService.current.Name}}</p>
+        <p *ngIf="!salesPersonService.current" style="font-size: medium; margin: 0;">Sales assistant not selected</p>
+    </div>
+    <div class="sales-list">
+        <div class="sales-person" *ngFor="let person of salesList"
+            [ngClass]="{'selected': person === this.salesPersonService.current}" (click)="onSalesPersonClick(person)">
+            {{person.Name}}
+        </div>
+    </div>
+    <div class="close">
+        <button (click)="salesPersonService.isShowing = false" mat-button>Close</button>
+    </div>
+</div>

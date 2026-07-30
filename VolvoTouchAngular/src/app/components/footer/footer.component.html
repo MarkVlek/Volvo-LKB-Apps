@@ -1,0 +1,79 @@
+<div class="main-footer">
+    <div class="footer-left">
+        <div class="back-selector" 
+            [@growLeft]="(this.navigationService.showBackButton 
+                        || this.navigationService.iframeBackBtn 
+                        || this.navigationService.iframeRefresh) 
+                        && currentPage !== 'EX60Landing' ? 'visible' : 'hidden'"
+            [hidden]="currentPage === 'EX60Landing' 
+                    && !this.navigationService.showBackButton 
+                    && !this.navigationService.iframeBackBtn 
+                    && !this.navigationService.iframeRefresh">
+            <app-back></app-back>
+        </div>
+        <div class="cast-container" 
+            [@growLeft]="this.castingPlayer != '' 
+                        && this.token != '' 
+                        && currentPage == 'Bygg din Volvo' ? 'visible' : 'hidden'" 
+            [hidden]="this.castingPlayer == '' && this.token == '' && currentPage !='Bygg din Volvo'">
+            <app-cast></app-cast>
+        </div>
+    </div>
+
+    <div class="footer-middle" [style.border-top-left-radius]="(this.navigationService.showBackButton 
+                        || this.navigationService.iframeBackBtn 
+                        || this.navigationService.iframeRefresh) 
+                        || (this.castingPlayer == '' && this.token == '')
+                        && showEX60Button == false ? '0px' : '15px'">
+        <div class="page-selector">
+            <div class="EX60" *ngIf="showEX60Button" (click)="gotoPage()" [style.border-top-left-radius]="(this.navigationService.showBackButton 
+                        || this.navigationService.iframeBackBtn 
+                        || this.navigationService.iframeRefresh) 
+                        && currentPage !== 'EX60Landing' || (this.castingPlayer != '' && this.token != '' && currentPage == 'Bygg din Volvo') ? '0px' : '15px'">
+                <div class="EX60-container">
+                    <p class="locale">EX60</p>
+                </div>
+                <div class="selected-page-box">
+                    <div *ngIf="ex60Selected" class="selected-page-marker"></div>
+                </div>
+            </div>
+            <app-page-selector></app-page-selector>
+            <div class="search-icon" *ngIf="this.configService.showSearch" (click)="toggleSearch()">
+                <div class="search-icon-container">
+                    <div class="search-inner">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none" *ngIf="!searchBarService.searchBarActive">
+                            <circle cx="8.33333" cy="8.33333" r="7.33333" stroke="black" stroke-width="2"/>
+                            <path d="M19.2922 20.7071C19.6828 21.0976 20.3159 21.0976 20.7065 20.7071C21.097 20.3165 21.097 19.6834 20.7065 19.2929L19.9993 20L19.2922 20.7071ZM19.9993 20L20.7065 19.2929L14.8731 13.4595L14.166 14.1666L13.4589 14.8737L19.2922 20.7071L19.9993 20Z" fill="black"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 22" fill="none" *ngIf="searchBarService.searchBarActive">
+                            <path d="M21.9355 20.9998L1.93555 0.999756" stroke="black" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M2.0625 21.0034L22.0625 1.00342" stroke="black" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="country" (click)="openDialog()" *ngIf="this.showroom == true">
+                <div class="language-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
+                        <path d="M2.1215 11.9286L7.91682 19L13.7122 11.9286C14.1414 11.1786 15 9.29286 15 7.75C15 5.82143 13.0682 1 7.91682 1C2.76541 1 1 5.5 1 7.75C1 9.55 1.74767 11.2857 2.1215 11.9286Z" stroke="#141414"/>
+                        <circle cx="8" cy="8" r="3.5" stroke="#141414"/>
+                    </svg>
+                    <p class="locale">{{this.languageService.getActiveCountryName()}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-right">
+
+        <div class="shopping-cart" (dblclick)="refresh()">
+            <button *ngIf="this.cartService.products.length > 0" class="shopping-button" mat-button color="primary"
+                (click)="goToCart()" [matBadge]="this.cartService.products.length" matBadgeHidden="false">
+                <mat-icon>shopping_cart</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="search-bar-footer">
+    <div class="hidden-search" *ngIf="this.searchBarService.searchBarActive" (click)="toggleSearch()"></div>
+    <app-search-wrapper></app-search-wrapper>
+</div>

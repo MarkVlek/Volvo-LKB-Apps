@@ -1,0 +1,45 @@
+<div class="cart-container">
+    <div class="info-container">
+        <div class="main-text">
+            Lägg din order
+        </div>
+        <div class="sub-text">
+            Fyll i dina uppgifter för att placera din order.<br>
+            När din order är lagd hjälper en av våra säljare dig med levernsadress och betalning.
+        </div>
+        <div class="input-container">
+            <div class="name" (click)="setName()">
+                <mat-form-field class="input-box">
+                    <input matInput placeholder="Namn" #name>
+                </mat-form-field>
+            </div>
+            <div class="phone" (click)="setPhone()">
+                <mat-form-field class="input-box">
+                    <input matInput placeholder="Telefon" #phone>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="keyboard-container">
+            <app-test-keyboard (onClicked)="onKeyClick($event)" iconSize="1" rowHeight="50px"></app-test-keyboard>
+        </div>
+        <div class="place-order" (click)="sendOrder()">
+            <button class="place-order-button" mat-button color="primary">Lägg order</button>
+        </div>
+    </div>
+    <div class="products-container">
+        <div class="cart-text">
+            Varukorg
+        </div>
+        <div class="cart">
+            <div class="cart-item" *ngFor="let item of this.cartService.products;  let i = index">
+                <app-cart-item [cartItem]="item" [index]="i"></app-cart-item>
+            </div>
+        </div>
+        <div class="cart-sum">
+            Totalt att betala: {{this.cartService.getFinalPriceAllItems(this.cartService.products)}} kr
+        </div>
+        <div class="empty-cart" (click)="emptyCart()">
+            <button class="empty-cart-button" mat-button color="warning">Töm varukorg</button>
+        </div>
+    </div>
+</div>

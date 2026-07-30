@@ -1,0 +1,170 @@
+<div class="filter-section">
+    <div class="sidebar" (click)="toggleSidebar()"><mat-icon class="arrow">{{this.lkbService.sideBar ? 'arrow_back_ios'
+            : 'arrow_forward_ios'}}</mat-icon></div>
+    <div class="inner-div" [hidden]="!this.lkbService.sideBar">
+        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)" [expanded]="true">
+            <mat-expansion-panel-header>
+                <p class="header-title">Typ av bil</p>
+            </mat-expansion-panel-header>
+
+            <div class="section">
+                <div class="button-container">
+                    <div class="button" *ngFor='let carCategoryType of carCategeries'>
+                        <div class="manufacturer-button" (click)="setCategory(carCategoryType)"
+                            [ngClass]="{'active-button' : this.selectedOptions.includes(carCategoryType)}">
+                            {{carCategoryType.name}}
+                        </div>
+                    </div>
+                </div>
+                <div class="button-container" *ngIf="this.allBrandsAvailable == 'true'">
+                    <div class="button">
+                        <div class="manufacturer-button" (click)="toggleShowAllBrands()"
+                            [ngClass]="{'active-button' : this.showAllBrands == true}">Alla märken</div>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)"
+            [expanded]="false">
+            <mat-expansion-panel-header>
+                <p class="header-title">Anläggningar</p>
+            </mat-expansion-panel-header>
+
+            <div class="section">
+                <div class="button-container">
+                    <div class="button" *ngFor='let carLocation of carLocations | filterMissingName'>
+                        <app-lkb-filter-button (click)="toggleSelected(carLocation)"
+                            [text]="carLocation.name | lkbDealerName"></app-lkb-filter-button>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel *ngIf="showAllBrands" (opened)="panelOpenState.set(true)"
+            (closed)="panelOpenState.set(false)" [expanded]="false">
+            <mat-expansion-panel-header>
+                <p class="header-title">Tillverkare</p>
+            </mat-expansion-panel-header>
+
+            <div #allBrands class="section">
+                <div class="button-container">
+                    <div class="button" *ngFor='let carManufacturer of carManufacturers | filterMissingName'>
+                        <div class="manufacturer-button" (click)="toggleSelected(carManufacturer)"
+                            [ngClass]="{'active-button' : this.selectedOptions.includes(carManufacturer)}">
+                            {{carManufacturer.name}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)"
+            [expanded]="false">
+            <mat-expansion-panel-header>
+                <p class="header-title">Drivmedel</p>
+            </mat-expansion-panel-header>
+
+            <div class="section">
+                <div class="button-container">
+                    <div class="button" *ngFor='let carFuel of carFuels | filterMissingName'>
+                        <app-lkb-filter-button (click)="toggleSelected(carFuel)"
+                            [text]="carFuel.name"></app-lkb-filter-button>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)"
+            [expanded]="false">
+            <mat-expansion-panel-header>
+                <p class="header-title">Växellåda</p>
+            </mat-expansion-panel-header>
+
+            <div class="section">
+                <div class="button-container">
+                    <div class="button" *ngFor='let carGearbox of carGearboxes | filterMissingName'>
+                        <app-lkb-filter-button (click)="toggleSelected(carGearbox)"
+                            [text]="carGearbox.name"></app-lkb-filter-button>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)"
+            [expanded]="false">
+            <mat-expansion-panel-header>
+                <p class="header-title">Modell</p>
+            </mat-expansion-panel-header>
+
+            <div class="section">
+                <div class="button-container">
+                    <div class="button" *ngFor='let carModel of carModels | filterMissingName'>
+                        <app-lkb-filter-button (click)="toggleSelected(carModel)"
+                            [text]="carModel.name"></app-lkb-filter-button>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <!-- <mat-expansion-panel 
+            (opened)="panelOpenState.set(true)"
+            (closed)="panelOpenState.set(false)"
+            [expanded]="false">
+            <mat-expansion-panel-header>
+                <p class="header-title">Färg</p>
+            </mat-expansion-panel-header>
+
+            <div class="section">
+                <div class="button-container">
+                    <div class="button" *ngFor='let carColor of carColors | filterMissingName'>
+                        <app-lkb-filter-button (click)="toggleSelected(carColor)"
+                            [text]="carColor.name"></app-lkb-filter-button>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel> -->
+
+        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)"
+            [expanded]="false">
+            <mat-expansion-panel-header>
+                <p class="header-title">Pris / Miltal / Modellår</p>
+            </mat-expansion-panel-header>
+
+            <div class="slider-container">
+                <div class="slider-box">
+                    <div class="slider-values">
+                        <p>Pris</p>
+                        <p>{{this.priceSlider.min == this.priceSlider.max ? this.priceSlider.min : this.priceSlider.min
+                            + ' - ' + this.priceSlider.max}}</p>
+                    </div>
+                    <mat-slider [min]="lowestPrice" [max]="highestPrice" step="10000">
+                        <input [value]="this.priceSlider.min" (input)="priceChangeLowest($event)" matSliderStartThumb>
+                        <input [value]="this.priceSlider.max" (input)="priceChangeHighest($event)" matSliderEndThumb>
+                    </mat-slider>
+                </div>
+                <div class="slider-box">
+                    <div class="slider-values">
+                        <p>Miltal</p>
+                        <p>{{this.milageSlider.min == this.milageSlider.max ? this.milageSlider.min :
+                            this.milageSlider.min + ' - ' + this.milageSlider.max}}</p>
+                    </div>
+                    <mat-slider [min]="lowestMiles" [max]="highestMiles" step="500">
+                        <input [value]="this.milageSlider.min" (input)="milageChangeLowest($event)" matSliderStartThumb>
+                        <input [value]="this.milageSlider.max" (input)="milageChangeHighest($event)" matSliderEndThumb>
+                    </mat-slider>
+                </div>
+                <div class="slider-box">
+                    <div class="slider-values">
+                        <p>Modellår</p>
+                        <p>{{this.yearSlider.min == this.yearSlider.max ? this.yearSlider.min : this.yearSlider.min + '
+                            - ' + this.yearSlider.max}}</p>
+                    </div>
+                    <mat-slider [min]="earliestModelYear" [max]="latestModelYear">
+                        <input [value]="this.yearSlider.min" (input)="yearChangeNewest($event)" matSliderStartThumb>
+                        <input [value]="this.yearSlider.max" (input)="yearChangeLatest($event)" matSliderEndThumb>
+                    </mat-slider>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </div>

@@ -1,0 +1,75 @@
+.main-content {
+    width: 100%;
+    height: var(--main-view-height);
+    background-color: white;
+    .grid {
+        width: 100%;
+        min-height: var(--main-view-height);
+        max-height: var(--main-view-height);
+    }
+    .site {
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1)),
+            url("../../../../assets/images/electrification/SKW143_DIM_charge_BEV.png");
+        background-size: cover;
+        object-fit: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        .title {
+            height: 100px;
+            width: 100%;
+            color: white;
+            color: white;
+            font-family: var(--fontSemiLight);
+            font-size: 28px;
+            position: absolute;
+            bottom: -10px;
+            left: 40px;
+        }
+    }
+    .recharge-school {
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1)),
+            url("../../../../assets/images/electrification/STE_526_doorupdate.png");
+        background-size: cover;
+        object-fit: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        .title {
+            height: 100px;
+            width: 100%;
+            color: white;
+            color: white;
+            font-family: var(--fontSemiLight);
+            font-size: 28px;
+            position: absolute;
+            bottom: -10px;
+            left: 40px;
+        }
+    }
+}
+::ng-deep .mat-grid-tile-content {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+::ng-deep .mat-grid-tile {
+    --bs-card-border-width: 0px;
+    --bs-card-border-radius: 0rem;
+}

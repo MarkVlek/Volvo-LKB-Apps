@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="details-container">
+        <div class="nav" id="details" [hidden]="!filteredAgendas">
+
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let parent of filteredAgendas; index as i" [expanded]="i == parentStep">
+
+                    <mat-expansion-panel-header class="parent-header" (click)="setParentStep(i)">
+                        {{parent.title}}
+                    </mat-expansion-panel-header>
+
+                    <mat-accordion>
+
+                        <mat-expansion-panel class="child" *ngFor="let child of parent.categories; index as j"
+                            [expanded]="j == childStep">
+                            <mat-expansion-panel-header class="child-header" (click)="selectChild(child, j)">
+                                {{child.name}}
+                            </mat-expansion-panel-header>
+
+                            <ul>
+                                <li *ngFor="let item of child.accessories" (click)="scrollTo(item)">
+                                    <p style="margin: 0px;" [ngClass]="{'active-list-item': item.name == activeAccessory}">{{item.name}}</p>
+                                </li>
+                            </ul>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
+        </div>
+
+        <div class="media" id="media">
+
+            <div [hidden]="isMediaVideo" class="img-container" id="img-container"></div>
+
+            <div [hidden]="!isMediaVideo" class="video-container" id="video-container">
+                <video id="video" controls loop [muted]="true">
+                    <source type="video/mp4">
+                </video>
+
+            </div>
+
+            <div class="thumbnail-container" [hidden]="!selectedChild" id="thumbnail-container">
+
+
+                <div *ngFor="let x of selectedChild.accessories; index as i">
+                    <div class="thumbnail" *ngIf="loadingDone">
+
+                        <div *ngFor="let c of x.medias; index as j" (click)="setMedia(c.name, $event)"
+                        id="thumbnail-{{c.name}}">
+
+                            <div *ngIf="!checkIfVideoOrImage(c.name)" class="img">
+                                <img class="img" src="{{getMediaPath(c.name)}}">
+                                <div class="text">
+                                    <div class="title">
+                                        {{x.name}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="checkIfVideoOrImage(c.name)">
+                                <div class="video-icon"></div>
+                                <video class="video">
+                                    <source src="{{getMediaPath(c.name)}}#t=1">
+                                </video>
+                                <div class="video-text">
+                                    <div class="title">
+                                        {{x.name}}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer-container" id="footer-container">
+        <div class="arrow-container" (click)="back()">
+            <div class="arrow"></div>
+        </div>
+    </div>
+</div>

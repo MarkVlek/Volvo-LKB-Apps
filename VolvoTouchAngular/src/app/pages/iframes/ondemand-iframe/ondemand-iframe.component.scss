@@ -1,0 +1,52 @@
+.iframe-canvas {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+iframe {
+    width: 100%;
+    height: 100%;
+    border: 0px !important;
+}
+.loader {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.qrCodeContainer{
+    border-radius: 15px;
+    position: absolute;
+    z-index: 1;
+    top: 78%;
+    left: 89%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+qrcode {
+    z-index: 10000;
+    width: 100px;
+    height: 100px;
+}
+.qrCodeAlign{
+    width: 110px;
+    height: 110px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+.qrCodeText {
+    width: 180px;
+    height: 23px;
+    color: #000;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 50px;
+    background-color: white;
+    margin-top: 5px;
+}

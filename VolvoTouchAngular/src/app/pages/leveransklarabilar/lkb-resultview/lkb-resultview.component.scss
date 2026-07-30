@@ -1,0 +1,23 @@
+.volvo-lkb-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .car-container {
+        width: 100%;
+        height: 100%;
+        margin-top: 20px;
+        display: flex;
+        // justify-content: space-;
+        align-content: flex-start;
+        flex-wrap: wrap;
+        flex-direction: row;
+        .car-c {
+            margin: 10px;
+        }
+    }
+}

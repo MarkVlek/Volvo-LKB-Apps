@@ -1,0 +1,237 @@
+.accessories-search-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .form-container {
+        width: 100%;
+        height: 20%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        .input-box {
+            height: 100%;
+            width: 80%;
+            font-size: 40px;
+            font-weight: bold;
+            font-family: var(--fontRegular);
+        }
+        .search-icon {
+            height: 80px;
+            width: 100px;
+            background-color: #1c6bba;
+            margin-left: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .icon {
+                color: white;
+                transform: scale(2);
+                margin-left: 5px;
+            }
+
+            .wait-spinner {
+                width: 10px;
+                height: 10px;
+            }
+        }
+    }
+
+    .keyboard-container {
+        width: 90%;
+        height: 80%;
+        margin-top: 50px;
+        margin-right: 267px !important;
+    }
+}
+:host ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #6d6d6d;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: transparent !important;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: transparent !important;
+}
+
+// Keyboard 
+
+::ng-deep .cdk-overlay-pane {
+
+    margin-bottom: -42px !important;
+
+}
+
+
+.keyboard-container {
+    margin-top: 45px;
+    margin-left: 470px;
+    margin-right: 469px;
+    height: 25% !important;
+
+    app-test-keyboard {
+
+        ::ng-deep {
+
+            mat-grid-list {
+                height: 100px !important;
+            }
+
+            .keyboard-inner-container {
+                height: 100px !important;
+            }
+
+            .keyboard-container {
+                padding: 0 !important;
+                height: 100px !important;
+
+                .inner-key {
+                    border: 1px solid #141414;
+
+                    .inner-inner-key {
+                        font-weight: 350;
+                        font-size: 20px;
+                        line-height: 36px;
+                        background-color: unset !important;
+                    }
+                }
+
+                .inner-key:active {
+                    filter: invert(1);
+                }
+
+                .mat-grid-tile:nth-child(23) {
+                    .inner-key {
+                        border: none;
+                    }
+                }
+
+                .mat-grid-tile:nth-child(24) {
+                    .inner-key {
+                        border: none;
+                    }
+                }
+
+                .mat-grid-tile:nth-child(36) {
+                    .inner-key {
+                        border: none;
+                    }
+                }
+
+                .mat-grid-tile:nth-child(45) {
+                    .inner-key {
+                        border: none;
+                    }
+                }
+
+                .mat-grid-tile:nth-child(47) {
+                    .inner-key {
+                        border: none;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+.input-container {
+    margin-top: 80px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    gap: 33px;
+    margin-left: 200px;
+
+    input {
+        height: 60px;
+        width: 406px;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        border: unset;
+        border-bottom: 1px solid #141414;
+        outline: none;
+        font-family: var(--fontRegular);
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 25px;
+        color: #141414;
+    }
+
+    .btn {
+        width: 181px;
+        height: 100%;
+        border-radius: 8px;
+        border: 1px solid #141414;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        font-family: var(--fontRegular);
+        font-size: 25px;
+        font-weight: lighter;
+        color: #141414;
+
+        .spinner {
+            animation: rotate 2s linear infinite;
+            z-index: 2;
+            width: 40px;
+            height: 40px;
+
+            & .path {
+                stroke: #141414;
+                stroke-linecap: round;
+                animation: dash 1.5s ease-in-out infinite;
+            }
+
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes dash {
+            0% {
+                stroke-dasharray: 1, 150;
+                stroke-dashoffset: 0;
+            }
+
+            50% {
+                stroke-dasharray: 90, 150;
+                stroke-dashoffset: -35;
+            }
+
+            100% {
+                stroke-dasharray: 90, 150;
+                stroke-dashoffset: -124;
+            }
+        }
+    }
+
+    .btn:active {
+        background-color: black;
+        color: white;
+    }
+}
+
+// Modal
+
+.modal-overlay {
+    position: fixed;
+    width: 1920px;
+    height: 1056px;
+    margin-top: -536px;
+    z-index: 1000;
+}

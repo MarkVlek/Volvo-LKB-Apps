@@ -1,0 +1,38 @@
+<div class="main-content">
+    <div *ngIf="this.configService.pages.includes(PageCard.Bygg_din_Volvo)"
+        [hidden]="!iframeVisibility[PageCard.Bygg_din_Volvo]" class="iframe">
+        <app-bdv-iframe></app-bdv-iframe>
+    </div>
+    <div *ngIf="this.configService.pages.includes(PageCard.Care_by_Volvo)"
+        [hidden]="!iframeVisibility[PageCard.Care_by_Volvo]" class="iframe">
+        <app-care-by-volvo-iframe></app-care-by-volvo-iframe>
+    </div>
+    <div *ngIf="this.configService.pages.includes(PageCard.Electrification)"
+        [class.inactive]="!iframeVisibility[PageCard.ElectrificationIframe]" class="iframe electrification">
+        <app-electrification-iframe></app-electrification-iframe>
+    </div>
+    <div *ngIf="this.configService.pages.includes(PageCard.OnDemand)"
+        [hidden]="!iframeVisibility[PageCard.OnDemand]" class="iframe">
+        <app-ondemand-iframe></app-ondemand-iframe>
+    </div>
+    <div *ngIf="this.configService.pages.includes(PageCard.Fabf)"
+        [hidden]="!iframeVisibility[PageCard.Fabf]" class="iframe">
+        <app-fabf-iframe></app-fabf-iframe>
+    </div>
+    <div *ngIf="this.configService.pages.includes(PageCard.Shop)"
+        [hidden]="!iframeVisibility[PageCard.Shop]" class="iframe">
+        <app-shop-iframe></app-shop-iframe>
+    </div>
+    <div *ngIf="this.configService.pages.includes(PageCard.TestDrive)"
+    [hidden]="!iframeVisibility[PageCard.TestDrive]" class="iframe">
+        <app-test-drive-iframe></app-test-drive-iframe>
+    </div>
+    <div *ngIf="this.configService.pages.includes(PageCard.Offers)"
+    [hidden]="!iframeVisibility[PageCard.Offers]" class="iframe">
+        <app-offers-iframe></app-offers-iframe>
+    </div>
+    <div 
+    [hidden]="!iframeVisibility[PageCard.LaunchIframe]" class="iframe">
+        <app-launch-iframe></app-launch-iframe>
+    </div>
+</div>

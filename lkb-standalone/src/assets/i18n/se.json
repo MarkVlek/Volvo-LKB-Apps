@@ -1,0 +1,21 @@
+{
+    "Bygg Din Volvo": "Bygg Din Volvo",
+    "ex60": {
+        "funktioner": {
+            "title": "Funktioner",
+            "description": "Se utvalda funktioner i nya Volvo EX60"
+        },
+        "elektrifiering": {
+            "title": "Elektrifiering",
+            "description": "Utforska livet med en helt elektrisk Volvo"
+        },
+        "leasing": {
+            "title": "Care by Volvo Leasing",
+            "description": "Utforska finansieringsalternativ för Volvo EX60"
+        },
+        "app": {
+            "title": "Ta med EX60 hem",
+            "description": "Upplev Volvo EX60 i vår AR app"
+        }
+    }
+}

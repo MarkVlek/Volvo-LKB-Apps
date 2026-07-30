@@ -1,0 +1,8 @@
+<div class="back-container" *ngIf="this.navigationService.showBackButton">
+    <div class="back-static" (click)="OnBack()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" fill="none">
+            <path d="M8 1L1 8L8 15" stroke="#141414" />
+        </svg>
+        {{ "Tillbaka" }}
+    </div>
+</div>

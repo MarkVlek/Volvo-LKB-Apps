@@ -1,0 +1,101 @@
+
+<div class="delivery-main-container">
+
+    <div class="reg-container">
+        
+        <div class="reg-number">
+
+            <p>{{carModel}}</p>
+
+        </div>
+    </div>
+
+    <div class="swiper-main-container" #containerRef>
+
+        <div class="image-navigation-wrapper no-click"  [ngClass]="{ 'image-navigation-wrapper-fullscreen': fullscreenClicked }">
+
+            <div [ngClass]="{ 'icon-hidden': selectedIndex == 0 }" (click)="prev()" class="icon-container">
+                <mat-icon class="icon-left">navigate_before</mat-icon>
+            </div>
+
+            <div [ngClass]="{ 'icon-hidden': selectedIndex == mainFeatures.length - 1 }" (click)="next()" class="icon-container">
+                <mat-icon class="icon-right">navigate_next</mat-icon>
+            </div>
+
+        </div>
+
+        <div class="full-screen-container" [ngClass]="{ 'full-screen-container-fullscreen': fullscreenClicked }">
+
+            <div class="full-screen" [ngClass]="{'full-screen-max': !this.fullscreenClicked, 'full-screen-min' : this.fullscreenClicked }"  (click)="onFullscreenClick()">
+
+            </div>
+
+        </div>
+
+        <swiper #main [config]="mainConfig" (slideChange)="onBeforeTransitionImage($event)" [ngClass]="{ 'swiper-fullscreen': fullscreenClicked }">
+
+            <ng-template swiperSlide *ngFor="let feature of mainFeatures">
+
+                <div *ngIf="currFeature != feature.name" class="gray-overlay"></div> <!-- Set animation -->
+
+                <div class="swiper-slide-child" [ngClass]="{ 'swiper-slide-child-full-screen': fullscreenClicked }">
+                    
+                    <video [attr.id]="feature.name" [autoplay]="currFeature == feature.name" [src]="pathToMedia + '/' + feature.medias[0].name" alt="" loop></video>
+
+                </div>
+                
+            </ng-template>
+
+        </swiper>
+        
+    </div>
+
+    <div class="feature-list-container">
+        
+        <div id="featurelistscroller" class="feature-list">
+
+            <div class="vertical-gradient-right" *ngIf="!lastPage"></div>
+            <div class="vertical-gradient-left" *ngIf="lastPage"></div>
+
+            <div [class.active]="feature.name == currFeature" *ngFor="let feature of footerFeatures; index as i" class="feature-tab" >
+                <div class="feature-item" (click)="toggleFeature(feature.name)">{{feature.name | deliveryFeaturePipe}}</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="info-container">
+        <div [@fadeState]="animationState" class="info-box">
+            <h5>{{title}}</h5>
+            <p>{{description | truncateAtFirstPeriod:400 }}</p>
+        </div>
+    </div>
+
+    <div class="finish-container">
+
+        <div class="finish-box">
+
+            <div (click)="finish()" class="finish">
+            <div class="icon-finnish"></div>
+            <p>Avsluta</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="back-container">
+
+        <div class="back-box">
+
+            <div (click)="back()" class="back">
+            <div class="icon-back"></div>
+            <p class="back-text">Tillbaka</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

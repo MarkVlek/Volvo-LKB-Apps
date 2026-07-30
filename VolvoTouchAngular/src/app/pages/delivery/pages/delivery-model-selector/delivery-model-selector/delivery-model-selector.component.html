@@ -1,0 +1,49 @@
+
+<div class="carselector-container">
+
+    <div class="carselector-header-container">
+        
+        <div class="carselector-title-container">
+            <h2>Tyvärr kunde vi inte hitta bilen på det valda registreringsnumret...</h2>
+            <p>Välj model manuellt för att skapa ett välkomstbudskap åt kunden. OBS! "Utforska Funktioner" finns inte som ett knappallternativ i detta läge</p>
+        </div>
+
+    </div>
+
+    <div class="carselector-list-container">
+
+        <div class="carselector-group-list">
+
+            <!-- Iterate over group here -->
+
+            <div class="carselector-list">
+
+                <!-- Iterate over each car in the group here -->
+                <div class="carselector-list-item" *ngFor="let carModel of carModels" (click)="navigate(carModel)">
+                    
+                    <img src="{{carModel.icon}}" style="background-color: #FAFAFA;">
+                    
+                    <p>{{carModel.title}}</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="finish-container">
+
+    <div class="finish-box">
+
+        <div (click)="finish()" class="finish">
+        <div class="icon-finnish"></div>
+        <p class="back-text">Tillbaka</p>
+        </div>
+
+    </div>
+
+</div>

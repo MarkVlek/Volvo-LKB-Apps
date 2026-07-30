@@ -1,0 +1,33 @@
+<div class="car-card">
+
+   
+
+    <div id="img-container" class="img-container">
+        <img src="{{thumbnail}}" (error)="errorImg($event)">
+        <div class="selekt">
+            <div *ngIf="car.isSelekt" class="selekt-inner">
+                <img src="./assets/images/AppSpecific/LeveransKlaraBilar/volvo-selekt.svg">
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="card-name-price-container">
+            <div class="card-name-details">
+                <p class="card-model" style="font-family: var(--fontMedium);">{{car.title}}</p>
+            </div>
+        </div>
+        <p class="card-description">{{car.shortDescription}}</p>
+        
+        {{ car.modelYear }} • {{ car.milage }} mil • {{ car.fuel }} • {{ car.gear }}
+
+        <div class="location">
+            <svg width="10" height="13" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9 6C9 7.65685 7.65685 9 6 9C4.34315 9 3 7.65685 3 6C3 4.34315 4.34315 3 6 3C7.65685 3 9 4.34315 9 6ZM8 6C8 7.10457 7.10457 8 6 8C4.89543 8 4 7.10457 4 6C4 4.89543 4.89543 4 6 4C7.10457 4 8 4.89543 8 6Z" fill="black" fill-opacity="0.96"></path>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.99996 15L10.5746 9.54695C11.4622 8.53377 11.9999 7.23229 11.9999 5.79901C12.017 2.59473 9.32853 0 6.00849 0C2.68846 0 0 2.59473 0 5.79901C0 7.23229 0.537692 8.54201 1.42531 9.54695L5.99996 15ZM2.18324 8.89449L2.17481 8.88495C1.44051 8.05359 1 6.9765 1 5.79901C1 3.18017 3.207 1 6.00849 1C8.81123 1 11.0139 3.18012 10.9999 5.79369L10.9999 5.79901C10.9999 6.97434 10.5608 8.04514 9.82243 8.88799L9.81538 8.89604L5.99996 13.4441L2.18324 8.89449Z" fill="black" fill-opacity="0.96"></path>
+            </svg>
+            <span *ngIf="carLocationsCount > 1 && car.location !== '' && branch !== 'VolvoBil'">{{car.waykeBranchName | lkbDealerName }}</span>
+            <div *ngIf="car.price > 0" style="font-family: var(--fontMedium); max-width: 78px; margin-left: auto;">{{this.price}}</div>
+        </div>
+    </div>
+</div>

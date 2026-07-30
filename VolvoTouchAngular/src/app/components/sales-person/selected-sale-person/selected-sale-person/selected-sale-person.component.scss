@@ -1,0 +1,57 @@
+.main {
+    z-index: 100;
+    background: white;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-box {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sales-list {
+    width: 100%;
+    height: 80%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--mainGray);
+}
+
+.sales-person {
+    width: 60%;
+    height: 50px;
+    border: 2px solid black;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.sales-person.selected {
+    border-color: blue;
+}
+.close {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    button {
+        width: 40%;
+        height: 40%;
+        border: 1px solid black;
+    }
+}

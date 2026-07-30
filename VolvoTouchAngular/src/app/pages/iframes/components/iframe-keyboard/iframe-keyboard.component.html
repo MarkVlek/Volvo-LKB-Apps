@@ -1,0 +1,22 @@
+<div class="keyboard-container">
+    <div class="keyboard-inner-container">
+        <mat-grid-list *ngIf="!this.capsActive && !this.shiftActive" cols="43" rowHeight="50" gutterSize="8px">
+            <mat-grid-tile [colspan]=" tile.cols" [rowspan]="tile.rows" *ngFor="let tile of tiles">
+                <app-iframe-keyboard-key class="key" 
+                (keyHoldStart)="startKeyHold($event)"
+                (keyHoldEnd)="stopKeyHold($event)"
+                [value]="tile.text"
+                iconSize="2"></app-iframe-keyboard-key>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list *ngIf="this.capsActive || this.shiftActive" cols="43" rowHeight="50" gutterSize="8px">
+            <mat-grid-tile [colspan]=" tile.cols" [rowspan]="tile.rows" *ngFor="let tile of capsTile">
+                <app-iframe-keyboard-key class="key" 
+                (keyHoldStart)="startKeyHold($event)"
+                (keyHoldEnd)="stopKeyHold($event)"
+                [value]="tile.text"
+                iconSize="2"></app-iframe-keyboard-key>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>

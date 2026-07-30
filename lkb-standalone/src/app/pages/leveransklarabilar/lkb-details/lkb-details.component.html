@@ -1,0 +1,135 @@
+<mat-drawer-container class="insurance-drawer" [hasBackdrop]="true">
+    <mat-drawer #drawer mode="over" position="end">
+        <div class="insurance-component">
+            <app-lkb-insurance [carBrand]="car?.manufacturer" [waykeCarId]="car?.waykeCarId"
+                [waykeBranchId]="car?.waykeBranchId" [dealerId]="dealerId"></app-lkb-insurance>
+        </div>
+    </mat-drawer>
+
+    <div *ngIf="shaded" class="shaded"></div>
+    <div *ngIf="shaded" class="spinner">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div class="view-container">
+        <div class="details-container">
+            <div class="image-container">
+                <app-lkb-swiper-view *ngIf="show" [car]="car"></app-lkb-swiper-view>
+            </div>
+
+            <div class="spec-container">
+                <div class="car-title">
+                    {{car?.title}}
+                    <p>{{car?.shortDescription}}</p>
+                </div>
+
+                <div class="car-stats">
+
+                    <div class="car-stats-item" *ngIf="car?.fuel">
+                        <div class="car-stats-item-title">
+                            <img [src]="fuelIcon">
+                        </div>
+                        <div class="car-stats-item-content">
+                            {{car?.fuel}}
+                        </div>
+                    </div>
+                    <!-- <div class="car-stats-item">
+                        <div class="car-stats-item-title">
+                            <img src="https://www.volvocars.com/static/shared/icons/v4/fwd-24.svg">
+                        </div>
+                        <div class="car-stats-item-content">
+                            {{drivingWheel}}
+                        </div>
+                    </div> -->
+                    <div class="car-stats-item">
+                        <div class="car-stats-item-title">
+                            <img src="https://www.volvocars.com/static/shared/icons/v2/car-transmission-40.svg">
+                        </div>
+                        <div class="car-stats-item-content">
+                            {{car?.gear}}
+                        </div>
+                    </div>
+                    <div class="car-stats-item">
+                        <div class="car-stats-item-title">
+                            <img src="https://www.volvocars.com/static/shared/icons/v2/car-performance-40.svg">
+                        </div>
+                        <div class="car-stats-item-content">
+                            <p style="margin-bottom: 0px;">{{car?.milage}} mil</p>
+                        </div>
+                    </div>
+                    <div class="car-stats-item">
+                        <div class="car-stats-item-title">
+                            <img src="https://www.volvocars.com/static/shared/icons/v2/other-calendaronedot-40.svg">
+                        </div>
+                        <div class="car-stats-item-content">
+                            {{car?.modelYear}}
+                        </div>
+                    </div>
+
+                    <div class="car-stats-item">
+                        <div class="car-stats-item-content-regNum">
+                            {{car?.regNr}}
+                        </div>
+                    </div>
+
+                    <div class="car-stats-price">
+                        <p class="price">{{price}}</p>
+                        <p style="font-size: 14px;">Inklusive moms</p>
+                    </div>
+
+                </div>
+
+                <div class="equipment-subscription-section">
+                    <div class="car-details-container">
+                        <div class="car-specs">
+                            <p class="heading">Färg</p>
+                            <p class="value">{{car?.color.includes('�') ? 'Okänd' : car?.color}}</p>
+                        </div>
+                        <div class="car-specs">
+                            <p class="heading">Effekt</p>
+                            <p class="value">{{car?.horsePower}} hk</p>
+                        </div>
+                        <div class="car-specs">
+                            <p class="heading">Fordonstyp</p>
+                            <p class="value">{{car?.vehicleType}}</p>
+                        </div>
+                        <div class="car-specs">
+                            <p class="heading">Modellår / Tillverkningsår</p>
+                            <p class="value">{{car?.modelYear + ' / ' + car?.manufactureYear}} </p>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <p class="heading" style="margin-top: 15px;">Utrustning</p>
+                        <div class="opt-list">
+                            <p class="opt" *ngFor="let option of options">{{option}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Car stats -->
+                <div class="miscellaneous-section">
+
+                    <div class="miscellaneous-items-box">
+                        <div class="location">
+                            <div class="location-box">
+                                <p class="dealerLocation">{{formatDealerName(this.car?.waykeBranchName)}}</p>
+                                <p>{{this.car?.street}}</p>
+                                <span>{{this.car?.zip | Postalcode}} {{this.car?.location | lkbDealerName}}</span>
+                            </div>
+                            <div class="insurance-container">
+                                <img src="./assets/images/AppSpecific/LeveransKlaraBilar/volvia.png" class="volvia">
+                                <div class="insurance-button" (click)="toggleInsurance()">
+                                    <p>Räkna på försäkring</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="subscription">
+                            <app-lkb-finace-box [car]="this.car"> </app-lkb-finace-box>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-drawer-container>

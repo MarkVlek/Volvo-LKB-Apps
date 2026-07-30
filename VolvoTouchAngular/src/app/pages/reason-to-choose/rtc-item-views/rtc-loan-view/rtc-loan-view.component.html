@@ -1,0 +1,24 @@
+<div class="main full-dim">
+
+    <div class="body">
+        <div class="left">
+            <div class="image">
+                <img *ngIf="!spotlightMedia.isVideo" [src]="spotlightMedia.media">
+            </div>
+        </div>
+        <div class="right">
+            <div class="info-box">
+                <div class="header">{{item.name}}</div>
+                <div class="info-text">
+                    <p [innerHtml]='infoText'></p>
+                </div>
+            </div>
+            <div class="calculator">
+                <app-rtc-leasing></app-rtc-leasing>
+            </div>
+        </div>
+    </div>
+    <div class="below">
+        <div class="arrow-box"></div>
+    </div>
+</div>

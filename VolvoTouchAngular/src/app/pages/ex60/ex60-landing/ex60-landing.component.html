@@ -1,0 +1,19 @@
+<div class="categories-container">
+
+    <div class="categories-header">
+        <div class="main">
+            <div class="title">{{headline}}</div>
+            <div class="category-link"
+                *ngIf="configService.config['VolvoEndlessAisle_LKB_AllBrandsAvailable'] === 'true'">
+                <div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="categories-list-box">
+        <div class="categories-box" [class.showroom-active]="configService.config['VolvoEndlessAisle_Showroom']?.toString().toLowerCase() === 'true'" *ngFor="let category of categories;let i = index">
+            <app-ex60-category-image [category]="category"></app-ex60-category-image>
+        </div>
+    </div>
+</div>

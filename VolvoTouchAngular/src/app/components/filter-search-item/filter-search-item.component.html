@@ -1,0 +1,9 @@
+<div class="item-main" (click)="navigateToItem()">
+    <div class="image-container">
+        <img [src]="item.image">
+    </div>
+    <div class="title-container">
+        <h4>{{item.name}} {{item.category == "Tjänster" ? '- ' + item.subCategory : ''}}</h4>
+        <p>{{item.item == '' ? item.subCategory : item.item}}</p>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="container" id="backdrop" (click)="onBackdropClick($event)">
+    <div class="container-content">
+        <div class="top">
+            <h1>Admin</h1>
+            <div class="close-container" (click)="closeModal()">
+                <div class="close">X</div>
+            </div>
+        </div>
+        <div class="login-container" *ngIf="!authorized">
+            <input type="password" [(ngModel)]="inputValue" (input)="onInputChange($event)" placeholder="****"
+                autofocus>
+            <div class="keypad-container">
+                <button (click)="onPinClick(1)">1</button>
+                <button (click)="onPinClick(2)">2</button>
+                <button (click)="onPinClick(3)">3</button>
+                <button (click)="onPinClick(4)">4</button>
+                <button (click)="onPinClick(5)">5</button>
+                <button (click)="onPinClick(6)">6</button>
+                <button (click)="onPinClick(7)">7</button>
+                <button (click)="onPinClick(8)">8</button>
+                <button (click)="onPinClick(9)">9</button>
+                <span></span>
+                <button (click)="onPinClick(0)">0</button>
+                <span></span>
+            </div>
+        </div>
+        <div class="admin-container" *ngIf="authorized">
+            <div class="player-config">
+                <div *ngFor="let config of playerConfig">
+                    <code>{{ config.key }}: {{ config.value }}</code>
+                </div>
+            </div>
+
+            <button (click)="updateChrome()">Update Chrome</button>
+            <button (click)="updatePlugins()">Update Plugins</button>
+            <button *ngIf="isUpdateVolvoReasons" (click)="updateVolvoReasons()">Update Volvo Reasons (Tillbehör,
+                Innovationer, Tjänster)</button>
+            <button *ngIf="isUpdateLKB" (click)="updateLKB()">Update LKB</button>
+            <button *ngIf="isUpdateAccessories" (click)="updateAccessories()">Update Accessories</button>
+            <button *ngIf="isUpdateFeatures" (click)="updateFeatures()">Update Features</button>
+            <div class="loading" *ngIf="loading">
+                <svg class="spinner" viewBox="0 0 50 50">
+                    <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                 </svg>
+            </div>
+            <p>{{ message }}</p>
+        </div>
+    </div>
+</div>

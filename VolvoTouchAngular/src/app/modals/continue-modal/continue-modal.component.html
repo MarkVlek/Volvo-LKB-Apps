@@ -1,0 +1,17 @@
+<div class="continue-main">
+    <!-- <div class="progress-bar-container">
+        <mat-progress-bar class="progress-bar"  mode="determinate" min="0" [value]="progressbarValue" max="30"></mat-progress-bar>
+    </div> -->
+    <div class="title">
+        {{"Vill du fortsätta?" | translate}}
+    </div>
+    <div class="select-buttons">
+        <button (click)="continue()" mat-button style="background-color: #284E80; color: #FFF; margin-right: 30px;">
+            {{"Ja, fortsätt" | translate}}
+        </button>
+        <button (click)="exit()" mat-button color="white" style="border: 1px solid black">
+            {{"Avsluta" | translate}}
+        </button>
+    </div>
+</div>
+<!-- [value]="progressbarValue" -->

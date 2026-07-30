@@ -1,0 +1,15 @@
+<div class="screensaver-container" (click)="exitScreenSaver()">
+    
+  <div *ngIf="screenSaver && screenSaver?.isVideo">
+    <!-- TODO ADD BACK (ended)="changeToNext()" -->
+      <video #video id="video" autoplay muted playsinline loop>
+        <source [src]="screenSaver?.fileName" type="video/mp4">
+      </video>
+    </div>
+</div>
+  
+<div *ngIf="screenSaver && screenSaver.width > 0" (click)="exitScreensaverSwitchChannel(screenSaver.app)"
+[ngStyle]="{'z-index': '10002', 'top': screenSaver.yPos+'px', 'left': screenSaver.xPos+'px', 'width': screenSaver.width+'px', 'height': screenSaver.height+'px', 'position': 'absolute'}">
+</div>
+
+<!-- (ended)="changeToNext()" -->

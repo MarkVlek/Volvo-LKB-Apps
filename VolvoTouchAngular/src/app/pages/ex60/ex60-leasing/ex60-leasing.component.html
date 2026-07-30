@@ -1,0 +1,26 @@
+<div class="custom-header">
+    <div class="logo-container">
+        <img class="logo" src="./assets/images/AppSpecific/EX60/Volvo_Spread_Word_Mark_2025_wh 1.png">
+    </div>
+</div>
+
+<div class="leasing-container">
+    <div class="leasing-header">
+        <h1>EX60 Care by Volvo leasing</h1> 
+        <div><p>{{'Skanna QR-koderna för att utforska Care by Volvo. Prata med oss för mer information om samtliga finansieringsalternativ.' | translate}}</p></div>
+        <div class="qr-boxes-container">
+            <div class="qr-box">
+                <div class="qr-header">Privatleasing</div>
+                <img class="qr-code" src="./assets/images/AppSpecific/EX60/Leasing-Privat.svg" alt="QR Code">
+            </div>
+            <div class="qr-box">
+                <div class="qr-header">Business Lease</div>
+                <img class="qr-code" src="./assets/images/AppSpecific/EX60/Leasing-Business.svg" alt="QR Code">
+            </div>
+             <div class="qr-box" *ngIf="configService.config['VolvoEndlessAisle_Showroom']?.toString().toLowerCase() === 'true'">
+                <div class="qr-header">Bli kontaktad</div>
+                <img class="qr-code" src="./assets/images/AppSpecific/EX60/Leasing-Kontakt.svg" alt="QR Code">
+            </div>
+        </div>
+    </div>
+</div>

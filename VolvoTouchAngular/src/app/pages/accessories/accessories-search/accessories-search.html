@@ -1,0 +1,24 @@
+<div class="accessories-search-container">
+
+    <div class="input-container">
+        <div class="input">
+           <input type="text" placeholder="REGNUMMER" #search style="touch-action: none; pointer-events: none;">
+        </div>
+        <div class="btn" (click)="onSearch()">
+           <div *ngIf="!searchWait">Sök</div>
+           <div *ngIf="searchWait">
+              <svg class="spinner" viewBox="0 0 50 50">
+                 <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+              </svg>
+           </div>
+
+        </div>
+        
+     </div>
+
+    <div class="keyboard-container">
+        <app-test-keyboard (onClicked)="onKeyClick($event, true)" iconSize="1" rowHeight="51px"></app-test-keyboard>
+     </div>
+
+</div>
+<div *ngIf="isError" class="modal-overlay" (onClicked)="onModalClick()"></div>

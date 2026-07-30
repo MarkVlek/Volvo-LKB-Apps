@@ -1,0 +1,43 @@
+<div class="outer-container">
+
+    <div class="model-info">
+        <div class="model">
+            <div style="font-weight: bold;">
+                Modell:
+            </div>
+            {{this.cartItem.carModel.title}}
+        </div>
+        <div class="year">
+            <div style="font-weight: bold;">
+                År:
+            </div>
+            {{this.cartItem.carModel.modelCodes[0].year}}
+        </div>
+    </div>
+    <div class="inner-container">
+        <div class="image">
+            <img [src]="this.cartItem.product.thumbnail">
+        </div>
+        <div class="text">
+            <div>
+                {{this.cartItem.product.title}}
+            </div>
+            <div>
+                {{this.cartItem.product.price}} kr
+            </div>
+        </div>
+        <div class="plus-minus">
+            <div class="plus-minus-amount">
+                {{this.cartItem.amount}}
+            </div>
+        </div>
+        <div class="amount">
+            <div>
+                Total:
+            </div>
+            <div>
+                {{this.cartItem.getFinalPrice()}} kr
+            </div>
+        </div>
+    </div>
+</div>

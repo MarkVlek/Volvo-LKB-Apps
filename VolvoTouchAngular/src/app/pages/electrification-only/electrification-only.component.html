@@ -1,0 +1,5 @@
+<div class="iframe-canvas" [ngStyle]="{'height': this.showroom}">
+    <iframe #IFrame (load)="onIframeLoaded(IFrame)" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+        [src]="url$ | safe" loading="lazy" frameBorder="0"></iframe>
+   
+</div>

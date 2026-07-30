@@ -1,0 +1,85 @@
+[
+    {
+        "worldRegion":"Europe",
+        "countries":
+        [
+            {
+                "countryName": "Sverige",
+                "lang": "se",
+                "code": "se"
+            },
+            {
+                "countryName": "Norway",
+                "lang": "en",
+                "code": "no"
+            }, 
+            {
+                "countryName": "United Kingdom",
+                "lang": "en",
+                "code": "uk"
+            }, 
+            {
+                "countryName": "Denmark",
+                "lang": "en",
+                "code": "dk"
+            },
+            {
+                "countryName": "Spain",
+                "lang": "en",
+                "code": "es"
+            },
+            {
+                "countryName": "Germany",
+                "lang": "en",
+                "code": "de"
+            },
+            {
+                "countryName": "Netherlands",
+                "lang": "en",
+                "code": "nl"
+            },
+            {
+                "countryName": "Belgium",
+                "lang": "en",
+                "code": "nl-be"
+            }
+        ]
+    },
+    {
+        "worldRegion":"America",
+        "countries":
+        [
+            {
+                "countryName": "United States",
+                "lang": "en",
+                "code": "us"
+            },
+            {
+                "countryName": "Argentina",
+                "lang": "en",
+                "code": "ar"
+            },
+            {
+                "countryName": "Chile",
+                "lang": "en",
+                "code": "cl"
+            },
+            {
+                "countryName": "Brazil",
+                "lang": "en",
+                "code": "br"
+            }
+        ]
+    },
+    {
+        "worldRegion":"Asia",
+        "countries":
+        [
+            {
+                "countryName": "China",
+                "lang": "en",
+                "code": "zh-cn"
+            }
+        ]
+    }
+]

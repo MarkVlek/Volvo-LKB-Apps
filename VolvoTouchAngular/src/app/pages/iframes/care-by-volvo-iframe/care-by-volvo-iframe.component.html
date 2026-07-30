@@ -1,0 +1,13 @@
+<div class="iframe-canvas">
+    <iframe #IFrame (load)="onIframeLoaded(IFrame)" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+        [src]="url$  | safe" loading="lazy" frameBorder="0"></iframe>
+    <div *ngIf="showKeyboard" class="keyboard-container" (click)="parentClick()">
+        <div (click)="childClick($event)" class="keyboard-container-inner">
+            <app-iframe-keyboard (onClicked)="onKeyClick($event)"></app-iframe-keyboard>
+        </div>
+    </div>
+
+    <div class="back" *ngIf="showBack" (click)="goBack()">
+        <mat-icon class="icon">keyboard_arrow_left</mat-icon>
+    </div>
+</div>

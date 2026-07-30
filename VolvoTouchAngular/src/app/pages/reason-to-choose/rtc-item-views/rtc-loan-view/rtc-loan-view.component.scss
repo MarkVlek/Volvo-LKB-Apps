@@ -1,0 +1,88 @@
+.full-dim {
+    width: 100%;
+    height: 100%;
+}
+
+.video {
+    background-size: cover;
+    object-fit: cover;
+    background-repeat: no-repeat;
+}
+
+.main {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.body {
+    width: 100%;
+    height: 80%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.left {
+    width: 75%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.right {
+    width: 25%;
+    padding-left: 30px;
+    height: 100%;
+
+}
+.info-box{
+    width: 100%;
+    height: 40%;
+    overflow: auto;
+    margin-bottom: 25px
+}
+.header {
+    font-family: var(--fontMedium);
+    width: 100%;
+    font-size: 23px;
+    margin-bottom: 15px;
+}
+
+.info-text {
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    font-size: 15px;
+    color: rgb(156, 156, 156);
+    padding-right: 10px;
+}
+
+.calculator {
+    width: 100%;
+    height: 60%;
+}
+
+.below {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.arrow-box {
+    width: 30%;
+    height: 100%;
+}

@@ -1,0 +1,56 @@
+.iframe-canvas {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+iframe {
+    width: 100%;
+    height: 100%;
+    border: 0px !important;
+}
+.loader {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: var(--volvo-blue);
+    border-radius: 50%;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .icon {
+        transform: scale(1.5);
+        color: white;
+    }
+}
+.back:active {
+    transform: scale(0.8);
+}
+.keyboard-container {
+    z-index: 2000;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(65, 65, 65, 0.11);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    .keyboard-container-inner {
+        z-index: 2000;
+        height: 300px;
+        width: 1200px;
+        margin-top: 600px;
+        background-color: rgba(27, 27, 27, 0.719);
+    }
+}

@@ -1,0 +1,19 @@
+.keyboard-container {
+    // background-color: rgb(247, 247, 247);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+    .keyboard-inner-container {
+        height: 100%;
+        width: 100%;
+        .key {
+            height: 100%;
+            width: 100%;
+        }
+        .tile {
+            margin: 20px;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+.carpay {
+    width: 770px;
+    .phone {
+        position: relative;
+        display: block;
+        width: 276px;
+        margin-left: auto;
+        margin-right: auto;
+        animation: fadeInItem 1s;
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        iframe {
+            background-color: #000;
+            width: 238px;
+            height: 420px;
+            position: absolute;
+            z-index: 2;
+            top: 61px;
+            left: 19px;
+        }
+    }
+}

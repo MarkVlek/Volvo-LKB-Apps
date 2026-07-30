@@ -1,0 +1,18 @@
+<div class="menu" (click)="close()">
+    <img src="./assets/images/fullscreen-close.png">
+</div>
+
+<swiper (click)="close()" #swiper [loop]="true" [initialSlide]="initialSlide" class="mySwiper">
+    <ng-template swiperSlide *ngFor="let slide of imgPathArr">
+        <div class="full-screen-canvas">
+            <div *ngIf="isRealVideo(slide)">
+                <video id="video" class="productVideo" loop autoplay [muted]="'muted'" onloadstart="this.volume = 0">
+                    <source [src]="slide" type="video/mp4">
+                </video>
+            </div>
+            <div *ngIf="!isRealVideo(slide)">
+                <img [src]="slide">
+            </div>
+        </div>
+    </ng-template>
+</swiper>

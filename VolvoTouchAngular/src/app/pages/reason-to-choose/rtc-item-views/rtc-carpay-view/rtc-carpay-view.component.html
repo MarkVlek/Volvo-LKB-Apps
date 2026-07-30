@@ -1,0 +1,27 @@
+<div class="main full-dim">
+    <div class="body">
+        <div class="carpay-iframe">
+            <app-carpay-iframe></app-carpay-iframe>
+        </div>
+        <div class="info">
+            <div class="img-container">
+                <img src="./assets/images/carpay-logo-black.png">
+            </div>
+            <div class="info-text">
+                <p style="padding-right: 15px;" [innerHtml]='infoText'></p>
+                <div class="bullet-points">
+                    <ul>
+                        <div *ngFor="let point of bulletPoints">
+                            <li>
+                                {{point}}
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" below">
+        <div class="arrow-box"></div>
+    </div>
+</div>

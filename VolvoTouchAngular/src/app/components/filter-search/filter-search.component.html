@@ -1,0 +1,7 @@
+<div class="search-box">
+    <div *ngFor="let filtered of this.rtcService.filtered | RTCFilterPipe:title">
+        <div>
+            <app-filter-search-item [item]="filtered"></app-filter-search-item>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="nav">
+  <mat-icon class="close" (click)="this.dialogRef.close()">close</mat-icon>
+  <div class="header">
+    <h6>Change Location</h6>
+  </div>
+  <mat-accordion class="accordion">
+      <mat-expansion-panel *ngFor="let parent of continents; index as i">
+          <mat-expansion-panel-header class="parent-header">
+              {{parent.worldRegion}}
+          </mat-expansion-panel-header>
+
+          <mat-accordion class="child" *ngFor="let child of parent.countries; index as j" (click)="changeLanguage(child.lang); changeLocale(child.code); changeCountryName(child.countryName)">
+              {{child.countryName}}
+          </mat-accordion>
+      </mat-expansion-panel>
+  </mat-accordion>
+</div>

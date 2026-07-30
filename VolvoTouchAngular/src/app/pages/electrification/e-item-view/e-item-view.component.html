@@ -1,0 +1,25 @@
+<div class="main full-dim">
+    <div class="body">
+        <!-- MEDIA CONTAINER -->
+        <div class="media">
+            <img *ngIf="!spotlightMedia.isVideo" [src]="spotlightMedia.media">
+            <div *ngIf="spotlightMedia.isVideo" class="full-dim">
+                <video class="full-dim video" [src]="spotlightMedia.media" autoplay muted></video>
+            </div>
+            <div class="fullscreen" (click)="OnFullscreen()">
+                <img src="./assets/images/fullscreen-open.png">
+            </div>
+        </div>
+
+        <!-- INFO CONTAINER -->
+        <div class="info" >
+            <div class="header">{{item.name}}</div>
+            <div  class="info-text">
+                <p [innerHtml]='infoText'></p>
+            </div>
+        </div>
+    </div>
+    <div class=" below">
+        <div class="arrow-box"></div>
+    </div>
+</div>

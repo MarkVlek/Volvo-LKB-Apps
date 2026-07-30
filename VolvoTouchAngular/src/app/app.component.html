@@ -1,0 +1,53 @@
+<div class="main-canvas">
+  <div class="fetching" *ngIf="!fetchedConfig">
+    <div class="error-msg " *ngIf="showErrorMsg">
+      Något gick fel, kontakta support eller ladda om sidan
+      <button mat-flat-button color="primary" class="reload-button" (click)="reload()">Ladda om</button>
+    </div>
+    <div *ngIf="!showErrorMsg">
+      <div style="margin-bottom: 50px;">
+        Hämtar data
+      </div>
+      <div>
+        <mat-spinner></mat-spinner>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="fetchedConfig">
+    <header *ngIf="!this.configService.onlyDelivery && this.showHeader == true">
+      <app-header></app-header>
+    </header>
+    <div *ngIf="!this.configService.onlyElectrification" class="page-viewer" [ngClass]="{'page-viewer-fullscreen': this.configService.onlyDelivery}">
+      <div [@routerTrigger]="prepareRoute(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </div>
+    </div>
+    <app-dynamic-iframe *ngIf="!this.configService.onlyElectrification && !this.configService.onlyDelivery"
+      [@fade]="this.iframeService.currentIFrame.active" class="iframe"
+      [hidden]="!this.iframeService.currentIFrame.active"></app-dynamic-iframe>
+
+    <footer *ngIf="!this.configService.onlyElectrification && !this.configService.onlyDelivery" [@searchBar]="searchBarServic.searchBarActive">
+      <app-footer></app-footer>
+    </footer>
+    <div>
+      <app-energy-saver></app-energy-saver>
+    </div>
+  </div>
+</div>
+<div class="visibleScreenSaver" *ngIf="screenSaverService.screenSaver && screenSaverService.showScreensaver">
+  <video
+  #screensaver
+  muted
+  loop
+  playsinline
+  autoplay
+  [src]="screenSaverService.screenSaver.fileName"
+  (click)="screenSaverService.exitScreensaver()"></video>
+  <!-- <app-screensaver></app-screensaver> -->
+</div>
+<div *ngIf="salesPersonService.isShowing" class="sale-person">
+  <app-selected-sale-person></app-selected-sale-person>
+</div>
+
+<div class="hidden-button" (mousedown)="mousedown()" (mouseup)="mouseup()" (mouseleave)="mouseup()" [ngStyle]="{'left': hiddenButton}"></div>
+<div class="sales-list" *ngIf="this.isExplorer == 'true'" (click)="click('saleslist')"></div>

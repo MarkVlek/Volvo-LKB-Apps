@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="box-container">
+        <div class="percentage">
+            <p>{{this.percentage + '%'}}</p>
+            <ng-template [ngIf]="this.charging == true">
+                <mat-icon  class="charging">bolt</mat-icon>
+            </ng-template>
+        </div>
+        <div class="percentage-box" [ngStyle]="{ 'background-color': 'rgb(171 171 171 / 59%)', width: this.percentage + 'px'}"></div>
+    </div>
+</div>

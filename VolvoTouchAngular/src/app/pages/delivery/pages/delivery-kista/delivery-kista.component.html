@@ -1,0 +1,33 @@
+<div class="container" *ngIf="showQr != true">
+    <div [ngStyle]="{'opacity': HasCasted ? '0' : '1'}"
+    style="display: flex; flex-direction: column; align-items: center;">
+        <div class="casting-players-container">
+            <div>
+                <div class="casting-player-btn" (click)="SetCastingPlayer('grassDelivery1')" [ngClass]="{'disabled-casting-player-btn': 'grassDelivery1' !== castingService.currentlyCastedPlayer}">
+                    Hall 1
+                </div>
+                <div class="casting-player-btn" (click)="SetCastingPlayer('grassDelivery2')" [ngClass]="{'disabled-casting-player-btn': 'grassDelivery2' !== castingService.currentlyCastedPlayer}">
+                    Hall 2
+                </div>
+            </div>
+        </div>
+        <div class="continue-btn-container">
+            <button class="continue-btn" (click)="onContinue()">Fortsätt</button>
+        </div>
+    </div>
+</div>
+
+<div class="qr-container" *ngIf="showQr == true">
+    <div class="qr-code-img">
+
+        <div class="loading" *ngIf="loadingQr">
+            <div class="loading-gif"> </div>
+        </div>
+
+        <qrcode *ngIf="!loadingQr && qrCodeLink" [qrdata]="qrCodeLink" [width]="150"
+            [errorCorrectionLevel]="'H'"></qrcode>
+
+    </div>
+    <div class="qr-code-text">Scanna för att få checklistan i din telefon eller surfplatta.</div>
+    <button class="continue-btn" (click)="onExit()">Avsluta</button>
+</div>
