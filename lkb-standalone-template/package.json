@@ -1,0 +1,15 @@
+{
+  "name": "lkb-standalone",
+  "version": "1.4.1",
+  "description": "",
+  "license": "ISC",
+  "author": "Mark Vlek",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "mtemplate-loader": "^2.0.40"
+  }
+}

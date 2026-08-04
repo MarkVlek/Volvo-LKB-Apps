@@ -1,0 +1,15 @@
+{
+    "/js": [
+        "node_modules/mtemplate-loader/release/js",
+        "js"
+    ],
+    "/css": [
+        "css"
+    ],
+    "/fonts": [
+        "fonts"
+    ],
+    "/images": [
+        "images"
+    ]
+}
