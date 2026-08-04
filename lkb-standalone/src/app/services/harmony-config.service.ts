@@ -48,7 +48,8 @@ export class HarmonyConfigService {
             SearchableBranchNames: p('Inventory Settings', 'LkbBranchName'),
             InterestRate: p('Fallback Settings', 'InterestRate'),
             AllBrandsAvailable: p('Inventory Settings', 'AllBrandsAvailable').toString(),
-            WaykeApiToken: p('Inventory Settings', 'WaykeApiToken')
+            WaykeApiToken: p('Inventory Settings', 'WaykeApiToken'),
+            NameFilters: p('Inventory Settings', 'DealershipNameFilters'),
           };
 
           loader.ready();
@@ -99,6 +100,13 @@ export class HarmonyConfigService {
     return (this.params['AllBrandsAvailable'] ?? 'false').toLowerCase() === 'true';
   }
 
+  /** Dealer name replacements */
+  get locationFilters(): string[] {
+    let filterParam = this.params['NameFilters'];
+    if (Array.isArray(filterParam)) return filterParam;
+    else return [];
+  }
+
   /**
    * Wayke API authentication token.
    */
@@ -108,7 +116,7 @@ export class HarmonyConfigService {
 
   // ── Dev defaults ──────────────────────────────────────────────────────────
 
-  private devDefaults(): Record<string, string> {
+  private devDefaults(): Record<string, any> {
     return {
       InventoryApiUrl: 'https://api.wayke.se/search',
       DealerId: 'fab817e9-3c81-4b50-ae67-43003b2e6274',
@@ -117,7 +125,25 @@ export class HarmonyConfigService {
       InterestRate: '7.95',
       AllBrandsAvailable: 'false',
       WaykeApiToken: '68OaLKCeo4M6ZnHs8NPxZuvFuDdyA9EM',
-      nameFilters: ""
+      NameFilters: [
+        "AHLBERG BIL|Ahlberg Bil | ",
+        "BILBOLAGET|Bilbolaget | ",
+        "BILDEVE|Bildeve AB - | ",
+        "BILIA|Bilia| ",
+        "BILKOMPANIET|Bilkompaniet i | ",
+        "BILMÅNSSON|Bilmånsson | ",
+        "BOGESUNDS|Bogesunds Bil | ",
+        "BRANDT BIL|Brandt Bil - | ",
+        "FINNVEDENS|Finnvedens Bil | ",
+        "HELMIA|Helmia Bil AB | ",
+        "LILJAS|Liljas Personbilar | ",
+        "NYBERGS|Nybergs Bil | ",
+        "REJMES|Rejmes Halland - | ",
+        "ROLF|Rolf Ericson Bil | ",
+        "SKOBES|Skobes Bil | ",
+        "STENDAHLS|Stendahls Bil | ",
+        "VOLVO CAR|Volvo Car | "
+      ]
     };
   }
 }

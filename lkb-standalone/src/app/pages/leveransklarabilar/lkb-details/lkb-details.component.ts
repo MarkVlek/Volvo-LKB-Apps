@@ -76,7 +76,6 @@ export class LkbDetailsComponent implements OnInit, AfterViewInit {
 
     // this.lkbService.getCar(this.lkbService.selectedCar.regNr).subscribe(res => {
     this.lkbService.getCar(this.lkbService.selectedCar.id).subscribe(res => {
-      console.log(res);
       //Only get options here. Or maybe get options with every car? Put this in resolver instead?
       this.car = res;
       this.show = true;

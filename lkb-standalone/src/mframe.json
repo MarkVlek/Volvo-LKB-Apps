@@ -54,11 +54,11 @@
           "value": false
         },
         {
-          "name": "Dealership Name Filters",
+          "name": "DealershipNameFilters",
           "label": {
             "en-US": {
               "value": "Dealership Name Filters",
-              "tooltip": "Dealership names to be filtered in the way they are displayed. Format: Keyword|Pattern|Replace With \nSpaces are included in formatting, keywords should be capitalized"
+              "tooltip": "Dealership names to be filtered in the way they are displayed. Format: Keyword|Pattern|Replace With \nSpaces are included in formatting"
             }
           },
           "type": "array",

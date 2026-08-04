@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { routeTransitionAnimations } from './animations/route-transition-animations';
 import { LkbService } from './services/lkb.service';
 
 @Component({
   selector: 'app-root',
-  template: `<router-outlet>
+  template: `<div class="main-canvas">
               <div class="header">
                 <div class="header-main">
                   <div class="logo-container">
@@ -12,8 +13,11 @@ import { LkbService } from './services/lkb.service';
                   </div>
                 </div>
               </div>
-            </router-outlet>
-            <app-back></app-back>`,
+              <div [@routerTrigger]="prepareRoute(outlet)">
+                <router-outlet #outlet="outlet"></router-outlet>
+              </div>
+              <app-back></app-back>
+            </div>`,
   styles: [`
     :host {
       display: block;
@@ -47,8 +51,13 @@ import { LkbService } from './services/lkb.service';
   `],
   animations: [routeTransitionAnimations]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
+  @ViewChild(RouterOutlet, { static: false }) outlet: RouterOutlet;
+  routerAnimation: string;
+
   constructor(
+    private router: Router,
+    private changeDetectorRef: ChangeDetectorRef,
     private lkbService: LkbService,
   ) { }
 
@@ -64,4 +73,27 @@ export class AppComponent implements OnInit {
       this.lkbService.initializeCars();
     }
   };
+
+  ngAfterViewInit(): void {
+    // This change will ensure that change detection runs after the view is initialized, preventing the ExpressionChangedAfterItHasBeenCheckedError from occurring.
+    this.changeDetectorRef.detectChanges();
+    Promise.resolve().then(() => {
+      this.routerAnimation = this.prepareRoute(this.outlet);
+      this.changeDetectorRef.detectChanges();
+    });
+
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.routerAnimation = this.prepareRoute(this.outlet);
+        this.changeDetectorRef.detectChanges();
+      }
+    });
+  }
+
+  prepareRoute(outlet?: RouterOutlet) {
+    return outlet &&
+      outlet.activatedRouteData &&
+      outlet.activatedRouteData['animationState'];
+  }
 }

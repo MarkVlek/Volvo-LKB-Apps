@@ -13,16 +13,8 @@ const leaveAnimation = animation([
 export const routeTransitionAnimations = trigger('routerTrigger', [
     //#region FORWARDS
     transition(
-        `${RouterAnimationEnum.RTCCategoryList} => ${RouterAnimationEnum.RTCItemList}, 
-        ${RouterAnimationEnum.RTCItemList} => ${RouterAnimationEnum.RTCItemView},
-        ${RouterAnimationEnum.LeveransklaraBilarMain} => ${RouterAnimationEnum.LeveransklaraBilarFilterSerach},
-        ${RouterAnimationEnum.LeveransklaraBilarFilterSerach} => ${RouterAnimationEnum.LeveransklaraBilarDetails},
-        ${RouterAnimationEnum.Accessories} => ${RouterAnimationEnum.AccessoriesCategory},
-        ${RouterAnimationEnum.AccessoriesCategory} => ${RouterAnimationEnum.AccessoriesCategoryDetails},
-        ${RouterAnimationEnum.AccessoriesCategoryDetails} => ${RouterAnimationEnum.AccessoriesProduct},
-        ${RouterAnimationEnum.Cart} => ${RouterAnimationEnum.OrderDone},
-        ${RouterAnimationEnum.Electrification} => ${RouterAnimationEnum.ElectrificationCategories},
-        ${RouterAnimationEnum.ElectrificationCategories} => ${RouterAnimationEnum.ElectrificationItem}`,
+        `${RouterAnimationEnum.LeveransklaraBilarMain} => ${RouterAnimationEnum.LeveransklaraBilarFilterSerach},
+        ${RouterAnimationEnum.LeveransklaraBilarFilterSerach} => ${RouterAnimationEnum.LeveransklaraBilarDetails}`,
         [
             style({ position: 'relative' }),
             query(':enter, :leave', [
@@ -47,15 +39,8 @@ export const routeTransitionAnimations = trigger('routerTrigger', [
     //#endregion
     //#region BACKWARDS
     transition(
-        `${RouterAnimationEnum.RTCItemList} => ${RouterAnimationEnum.RTCCategoryList},
-         ${RouterAnimationEnum.RTCItemView} => ${RouterAnimationEnum.RTCItemList},
-         ${RouterAnimationEnum.LeveransklaraBilarFilterSerach} => ${RouterAnimationEnum.LeveransklaraBilarMain},
-         ${RouterAnimationEnum.LeveransklaraBilarDetails} => ${RouterAnimationEnum.LeveransklaraBilarFilterSerach},
-         ${RouterAnimationEnum.AccessoriesCategory} => ${RouterAnimationEnum.Accessories},
-         ${RouterAnimationEnum.AccessoriesCategoryDetails} => ${RouterAnimationEnum.AccessoriesCategory},
-         ${RouterAnimationEnum.AccessoriesProduct} => ${RouterAnimationEnum.AccessoriesCategoryDetails},
-         ${RouterAnimationEnum.ElectrificationItem} => ${RouterAnimationEnum.ElectrificationCategories},
-         ${RouterAnimationEnum.ElectrificationCategories} => ${RouterAnimationEnum.Electrification}`,
+        `${RouterAnimationEnum.LeveransklaraBilarFilterSerach} => ${RouterAnimationEnum.LeveransklaraBilarMain},
+         ${RouterAnimationEnum.LeveransklaraBilarDetails} => ${RouterAnimationEnum.LeveransklaraBilarFilterSerach}`,
         [
             style({ position: 'relative' }),
             query(':enter, :leave', [

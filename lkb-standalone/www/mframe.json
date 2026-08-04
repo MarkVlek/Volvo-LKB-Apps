@@ -52,6 +52,35 @@
           },
           "type": "bool",
           "value": false
+        },
+        {
+          "name": "DealershipNameFilters",
+          "label": {
+            "en-US": {
+              "value": "Dealership Name Filters",
+              "tooltip": "Dealership names to be filtered in the way they are displayed. Format: Keyword|Pattern|Replace With \nSpaces are included in formatting"
+            }
+          },
+          "type": "array",
+          "value": [
+            "AHLBERG BIL|Ahlberg Bil | ",
+            "BILBOLAGET|Bilbolaget | ",
+            "BILDEVE|Bildeve AB - | ",
+            "BILIA|Bilia| ",
+            "BILKOMPANIET|Bilkompaniet i | ",
+            "BILMÅNSSON|Bilmånsson | ",
+            "BOGESUNDS|Bogesunds Bil | ",
+            "BRANDT BIL|Brandt Bil - | ",
+            "FINNVEDENS|Finnvedens Bil | ",
+            "HELMIA|Helmia Bil AB | ",
+            "LILJAS|Liljas Personbilar | ",
+            "NYBERGS|Nybergs Bil | ",
+            "REJMES|Rejmes Halland - | ",
+            "ROLF|Rolf Ericson Bil | ",
+            "SKOBES|Skobes Bil | ",
+            "STENDAHLS|Stendahls Bil | ",
+            "VOLVO CAR|Volvo Car | "
+          ]
         }
       ]
     },
