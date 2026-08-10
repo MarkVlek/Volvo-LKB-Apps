@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { darkenOverTime } from '../../../animations/darken-over-time.animation';
 import { PageCard } from '../../../enums/page-card-enum';
 import { LkbService } from '../../../services/lkb.service';
+import { AnalyticsService } from '../../../services/analytics.service';
 import { LkbCategory } from '../models/LkbCategory';
 
 @Component({
@@ -20,7 +21,8 @@ export class LkbCategoryImageComponent implements OnInit {
   constructor(
     private lkbService
       : LkbService,
-    private router: Router) {
+    private router: Router,
+    private analytics: AnalyticsService) {
     lkbService
       .currentSelected$.subscribe(value => {
         if (value == this.category) {
@@ -40,6 +42,7 @@ export class LkbCategoryImageComponent implements OnInit {
   };
 
   selectCategory() {
+    this.analytics.track(true, 'Category', `User selected ${this.category.name}`);
     this.lkbService.currentSelected$.next(this.category);
     this.lkbService.setStartCategory(this.category);
     this.router.navigate([PageCard.Leveransklara_bilarcategory]);

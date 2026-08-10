@@ -2,6 +2,7 @@
 import { Router, NavigationEnd } from '@angular/router'
 import { Subject } from 'rxjs'
 import { PageCard } from '../enums/page-card-enum';
+import { AnalyticsService } from './analytics.service';
 
 @Injectable({ providedIn: 'root' })
 export class NavigationService {
@@ -16,7 +17,7 @@ export class NavigationService {
     public atOrigin: boolean
     public history: string[] = []
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private analytics: AnalyticsService) {
         this.router.events.subscribe((event) => {
             if (this.history.length > 0) {
                 this.atOrigin = true;
@@ -33,6 +34,8 @@ export class NavigationService {
     }
 
     back(): void {
+        this.analytics.track(true, 'Navigation',
+            `User went back from ${decodeURI(this.currentLocationPath[0] ?? 'unknown')}`);
         this.backClicked.next();
 
         if (decodeURI(this.currentLocationPath[0]) == PageCard.Leveransklara_bilarcategory) {

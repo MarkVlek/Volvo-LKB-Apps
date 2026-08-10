@@ -46,6 +46,7 @@ import { PostalcodePipe } from './pages/leveransklarabilar/pipes/postal-code.pip
 import { LkbService } from './services/lkb.service';
 import { HarmonyConfigService } from './services/harmony-config.service';
 import { NavigationService } from './services/navigation.service';
+import { AnalyticsService } from './services/analytics.service';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { NavigationService } from './services/navigation.service';
     LkbService,
     HarmonyConfigService,
     NavigationService,
+    AnalyticsService,
     { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }
   ],
   bootstrap: [AppComponent],

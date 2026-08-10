@@ -116,6 +116,28 @@
           "value": "7.95"
         }
       ]
+    },
+    {
+      "name": "Analytics Settings",
+      "label": {
+        "en-US": {
+          "value": "Analytics Settings",
+          "tooltip": "Configuration for the kiosk interaction analytics."
+        }
+      },
+      "params": [
+        {
+          "name": "SessionIdleTimeout",
+          "label": {
+            "en-US": {
+              "value": "Session Idle Timeout (s)",
+              "tooltip": "Seconds of inactivity before the current analytics session is closed. The next touch on the screen starts a new session, so each visitor is measured separately. Set to 0 to disable idle sessions (one session per player restart). Example: 180"
+            }
+          },
+          "type": "string",
+          "value": "180"
+        }
+      ]
     }
   ]
 }

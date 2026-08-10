@@ -2,6 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild, HostLis
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { routeTransitionAnimations } from './animations/route-transition-animations';
 import { LkbService } from './services/lkb.service';
+import { AnalyticsService } from './services/analytics.service';
 
 @Component({
   selector: 'app-root',
@@ -59,6 +60,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
     private lkbService: LkbService,
+    private analytics: AnalyticsService,
   ) { }
 
   ngOnInit(): void {
@@ -67,9 +69,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     const loader = (window as any).Loader;
     if (loader) {
       loader.isStarted().then(() => {
+        this.analytics.track(false, 'Session', 'Session started');
         this.lkbService.initializeCars();
       });
     } else {
+      this.analytics.track(false, 'Session', 'Session started');
       this.lkbService.initializeCars();
     }
   };

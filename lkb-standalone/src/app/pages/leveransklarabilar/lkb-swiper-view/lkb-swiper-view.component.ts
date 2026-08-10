@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { VolvoLeveransklarabilar, VolvoLeveransklarabilarMedia } from '../models/LkbCategory';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { describeCar, VolvoLeveransklarabilar, VolvoLeveransklarabilarMedia } from '../models/LkbCategory';
+import { AnalyticsService } from '../../../services/analytics.service';
 import { SwiperComponent } from 'swiper/angular';
 
 import SwiperCore, { Navigation, Pagination, SwiperOptions, Thumbs, Controller, } from 'swiper';
@@ -12,10 +13,18 @@ SwiperCore.use([Navigation, Pagination, Thumbs, Controller]);
   templateUrl: './lkb-swiper-view.component.html',
   styleUrls: ['./lkb-swiper-view.component.scss']
 })
-export class LkbSwiperViewComponent implements OnInit, AfterViewInit {
+export class LkbSwiperViewComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() car: VolvoLeveransklarabilar;
   @ViewChild('main', { static: false }) mainSwiper?: SwiperComponent;
   @ViewChild('list', { static: false }) listSwiper?: SwiperComponent;
+
+  /**
+   * Which slides were actually reached. Seeded with the opening photo, which is shown rather than
+   * chosen — so it neither reports nor counts as browsing.
+   */
+  private viewedSlides = new Set<number>([0]);
+
+  constructor(private analytics: AnalyticsService) { }
 
   mainConfig: SwiperOptions = {
     slidesPerView: 1,
@@ -61,6 +70,14 @@ export class LkbSwiperViewComponent implements OnInit, AfterViewInit {
     this.listSwiper.showPagination = true
   }
 
+  ngOnDestroy(): void {
+    // Only report actual browsing: everyone "sees" the first image just by opening the car.
+    if (this.viewedSlides.size > 1) {
+      this.analytics.track(false, 'Gallery',
+        `Browsed ${this.viewedSlides.size} of ${this.mediaList.length} images of ${describeCar(this.car)}`);
+    }
+  }
+
   next() {
     this.mainSwiper.swiperRef.slideNext(200, true)
   }
@@ -75,6 +92,7 @@ export class LkbSwiperViewComponent implements OnInit, AfterViewInit {
 
   onBeforeTransitionImage(eventParams: Parameters<SwiperEvents['beforeTransitionStart']>) {
     const [swiper] = eventParams;
+    this.trackSlideView(swiper.activeIndex);
 
     if (swiper.previousIndex > swiper.activeIndex && (swiper.previousIndex) % 4 == 0) {
       this.listSwiper.swiperRef.slideTo(swiper.previousIndex - 4, 200)
@@ -85,7 +103,20 @@ export class LkbSwiperViewComponent implements OnInit, AfterViewInit {
 
   }
 
+  /**
+   * Reports a photo the first time it is reached, whether by thumbnail, arrow or swipe. Repeats are
+   * dropped, so paging back and forth over the same few photos cannot flood the event stream.
+   */
+  private trackSlideView(index: number) {
+    if (this.viewedSlides.has(index)) return;
+    this.viewedSlides.add(index);
+
+    this.analytics.track(true, 'Gallery',
+      `User viewed photo ${index + 1} of ${this.mediaList.length} of ${describeCar(this.car)}`);
+  }
+
   handleMissingImage(media: VolvoLeveransklarabilarMedia) {
+    this.analytics.track(false, 'Health', `Image failed to load for ${describeCar(this.car)}`);
 
     let index = this.mediaList.indexOf(media);
     this.mediaList.splice(index, 1)

@@ -1,11 +1,12 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { HarmonyConfigService } from '../../../services/harmony-config.service';
 import { LkbService } from '../../../services/lkb.service';
+import { AnalyticsService } from '../../../services/analytics.service';
 import SwiperCore, { Navigation, Pagination, SwiperOptions, Thumbs, Controller, } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 import { SwiperEvents } from 'swiper/types';
-import { VolvoLeveransklarabilar } from '../models/LkbCategory';
+import { describeCar, VolvoLeveransklarabilar } from '../models/LkbCategory';
 
 SwiperCore.use([Navigation, Pagination, Thumbs, Controller]);
 
@@ -14,15 +15,18 @@ SwiperCore.use([Navigation, Pagination, Thumbs, Controller]);
   templateUrl: './lkb-details.component.html',
   styleUrls: ['./lkb-details.component.scss']
 })
-export class LkbDetailsComponent implements OnInit, AfterViewInit {
+export class LkbDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('drawer', { static: false }) drawer?: MatDrawer;
   @ViewChild('swiperImage', { static: false }) swiperImage?: SwiperComponent;
   @ViewChild('swiperThumbnail', { static: false }) swiperThumbnail?: SwiperComponent;
   show: boolean = false;
 
+  private openedAt: number;
+
   constructor(
     public lkbService: LkbService,
     public harmonyConfig: HarmonyConfigService,
+    private analytics: AnalyticsService,
     // public navigationService: any
   ) { }
   shaded: boolean = false;
@@ -71,25 +75,40 @@ export class LkbDetailsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.shaded = false;
+    this.openedAt = new Date().getTime();
     this.dealerId = this.harmonyConfig.dealerId;
     // this.navigationService.backClicked.subscribe(() => { this.shaded = true; })
 
     // this.lkbService.getCar(this.lkbService.selectedCar.regNr).subscribe(res => {
-    this.lkbService.getCar(this.lkbService.selectedCar.id).subscribe(res => {
-      //Only get options here. Or maybe get options with every car? Put this in resolver instead?
-      this.car = res;
-      this.show = true;
-      this.options = res.optionsCommaSeparated;
-      this.getLocation(res);
-      this.getDrivingWheel(res);
-      this.formatPrice(res);
-      this.getFuelIcon(res);
+    this.lkbService.getCar(this.lkbService.selectedCar.id).subscribe({
+      next: res => {
+        //Only get options here. Or maybe get options with every car? Put this in resolver instead?
+        this.car = res;
+        this.show = true;
+        this.options = res.optionsCommaSeparated;
+        this.getLocation(res);
+        this.getDrivingWheel(res);
+        this.formatPrice(res);
+        this.getFuelIcon(res);
+      },
+      error: () => {
+        this.analytics.track(false, 'Health',
+          `Vehicle detail load failed for ${this.lkbService.selectedCar?.id}`);
+      }
     });
 
     this.lkbService.toggleDrawer$.subscribe(() => {
       this.lkbService.showInsurance = false;
       this.drawer.toggle();
     })
+  }
+
+  ngOnDestroy(): void {
+    // Dwell time is the strongest interest signal the detail page produces; it can only be measured
+    // on the way out. Falls back to the list entry when the detail fetch never returned.
+    const seconds = Math.round((new Date().getTime() - this.openedAt) / 1000);
+    const car = this.car ?? this.lkbService.selectedCar;
+    this.analytics.track(false, 'Vehicle', `Viewed ${describeCar(car)} for ${seconds}s`);
   }
 
   onBeforeTransitionImage(eventParams: Parameters<SwiperEvents['beforeTransitionStart']>) {
@@ -173,6 +192,8 @@ export class LkbDetailsComponent implements OnInit, AfterViewInit {
   }
 
   toggleInsurance() {
+    this.analytics.track(true, 'Insurance',
+      `User opened the insurance calculator for ${describeCar(this.car)}`);
     this.drawer.open();
   }
 

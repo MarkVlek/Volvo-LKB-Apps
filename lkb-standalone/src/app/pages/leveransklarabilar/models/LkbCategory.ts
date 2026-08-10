@@ -113,6 +113,31 @@ export class VolvoLeveransklarabilar {
     }
 }
 
+/**
+ * One-line description of a vehicle for analytics `details` strings, so every event that names a
+ * car names it identically. Missing fields are dropped rather than printed as "undefined".
+ */
+export function describeCar(car: VolvoLeveransklarabilar): string {
+    if (!car) return 'unknown vehicle';
+
+    const price = car.price
+        ? new Intl.NumberFormat('sv-SE', { style: 'currency', currency: 'SEK', minimumFractionDigits: 0 }).format(car.price)
+        : null;
+
+    const facts = [
+        car.modelYear,
+        price,
+        car.milage != null ? `${car.milage} mil` : null,
+        car.fuel,
+        car.waykeBranchName || car.branch,
+    ].filter(Boolean);
+
+    const title = car.title || car.model || 'unknown vehicle';
+    const described = facts.length ? `${title} — ${facts.join(', ')}` : title;
+
+    return car.isSelekt ? `${described} [Selekt]` : described;
+}
+
 export class VolvoLeveransklarabilarOption {
     name: string;
 }

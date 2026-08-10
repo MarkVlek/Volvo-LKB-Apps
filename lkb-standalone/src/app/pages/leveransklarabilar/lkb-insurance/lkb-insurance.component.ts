@@ -1,15 +1,18 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { of, Subject } from 'rxjs';
+import { of, Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { LkbService } from '../../../services/lkb.service';
+import { AnalyticsService } from '../../../services/analytics.service';
 import { Addons, LkbInsurance } from '../models/LkbInsurance';
+import { describeCar } from '../models/LkbCategory';
 
 @Component({
   selector: 'app-lkb-insurance',
   templateUrl: './lkb-insurance.component.html',
   styleUrls: ['./lkb-insurance.component.scss']
 })
-export class LkbInsuranceComponent implements OnInit {
+export class LkbInsuranceComponent implements OnInit, OnDestroy {
   @Input() carBrand: string;
   @Input() regNr: string;
   @Input() dealerId: string;
@@ -26,10 +29,15 @@ export class LkbInsuranceComponent implements OnInit {
 
   @ViewChild('input', { static: false }) input: ElementRef;
   form: FormGroup;
+  // NOTE: searchValue holds a personnummer. It must never reach an analytics event, nor must
+  // anything derived from it (length, prefix, validity). See the analytics design spec.
   searchValue: string = "";
   searchValue$: Subject<string> = new Subject<string>();
 
-  constructor(public lkbService: LkbService) { }
+  private milesChange$: Subject<number> = new Subject<number>();
+  private subscriptions = new Subscription();
+
+  constructor(public lkbService: LkbService, private analytics: AnalyticsService) { }
 
   ngOnInit(): void {
     this.lkbService.toggleDrawer$.subscribe(() => {
@@ -39,6 +47,14 @@ export class LkbInsuranceComponent implements OnInit {
       this.error = false;
     })
     this.onInsurance = false;
+
+    this.subscriptions.add(this.milesChange$.pipe(debounceTime(600)).subscribe(miles => {
+      this.analytics.track(true, 'Insurance', `User set driving distance to ${miles} mil`);
+    }));
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   onClose() {
@@ -50,6 +66,9 @@ export class LkbInsuranceComponent implements OnInit {
 
   onSearch() {
     this.showSpinner = true;
+    // The request itself is the signal. The personnummer in searchValue is deliberately absent.
+    this.analytics.track(true, 'Insurance',
+      `User requested an insurance quote for ${describeCar(this.lkbService.selectedCar)}`);
 
     let drivingDistance = 1;
     const miles = this.miles;
@@ -102,12 +121,15 @@ export class LkbInsuranceComponent implements OnInit {
         var insuranceDTO = JSON.parse(data);
         this.insurances = insuranceDTO['response']['insurances']
         this.insuranceError = false;
+        this.analytics.track(false, 'Insurance',
+          `Insurance quote returned ${this.insurances?.length ?? 0} options`);
       },
       error: () => {
         this.insuranceError = true;
         this.lkbService.showInsurance = false;
         this.showSpinner = false;
         this.error = true;
+        this.analytics.track(false, 'Insurance', 'Insurance quote failed');
         setTimeout(() => {
           this.error = false;
         }, 5000);
@@ -123,6 +145,7 @@ export class LkbInsuranceComponent implements OnInit {
 
   changeMiles(event: number) {
     this.miles = event;
+    this.milesChange$.next(event);
   }
 
   checkMiles(miles: number) {
@@ -134,6 +157,8 @@ export class LkbInsuranceComponent implements OnInit {
 
   chooseAddon(addon: Addons, insurance: LkbInsurance) {
     if (!this.chosenAddons.includes(addon)) {
+      this.analytics.track(true, 'Insurance',
+        `User selected add-on ${addon.name} (+${addon.monthlyPrice}/month)`);
       this.chosenAddons.push(addon)
       insurance.price = insurance.price += addon.monthlyPrice;
     }

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { PageCard } from '../../../enums/page-card-enum';
 import { LkbService } from '../../../services/lkb.service';
-import { VolvoLeveransklarabilar } from '../models/LkbCategory';
+import { AnalyticsService } from '../../../services/analytics.service';
+import { describeCar, VolvoLeveransklarabilar } from '../models/LkbCategory';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -23,7 +24,8 @@ export class LkbResultviewComponent implements OnInit {
 
   constructor(
     private lkbService: LkbService,
-    private router: Router) { }
+    private router: Router,
+    private analytics: AnalyticsService) { }
 
   ngOnInit(): void {
     this.lkbContainer = document.getElementById('lkb-container')
@@ -57,6 +59,7 @@ export class LkbResultviewComponent implements OnInit {
   }
 
   onCarClick(car: VolvoLeveransklarabilar) {
+    this.analytics.track(true, 'Vehicle', `User opened ${describeCar(car)}`);
     this.lkbService.setSelectedCar(car);
     this.router.navigate([PageCard.Leveransklara_bilar_detail]);
   }
@@ -95,6 +98,8 @@ export class LkbResultviewComponent implements OnInit {
 
     this.currentPage++;
     this.loadCars()
+    this.analytics.track(true, 'Vehicle',
+      `User loaded more results (page ${this.currentPage + 1}, ${this.displayedCars.length} shown)`);
   }
 
   scrollToPreviousCar() {

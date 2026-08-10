@@ -124,7 +124,7 @@
                         </div>
 
                         <div class="subscription">
-                            <app-lkb-finace-box [car]="this.car"> </app-lkb-finace-box>
+                            <app-lkb-finace-box *ngIf="show" [car]="this.car"> </app-lkb-finace-box>
                         </div>
 
                     </div>

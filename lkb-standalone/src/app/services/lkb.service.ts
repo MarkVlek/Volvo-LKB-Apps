@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject, combineLatest, forkJoin } from 'r
 import { map } from 'rxjs/operators';
 import { LkbCategory, VolvoLeveransklarabilar } from '../pages/leveransklarabilar/models/LkbCategory';
 import { HarmonyConfigService } from './harmony-config.service';
+import { AnalyticsService } from './analytics.service';
 import * as dealerIds from '../../assets/js/Volvo_Wayke_Dealer_IDs.json';
 
 @Injectable({ providedIn: 'root' })
@@ -28,7 +29,8 @@ export class LkbService {
 
   constructor(
     private http: HttpClient,
-    private harmonyConfig: HarmonyConfigService
+    private harmonyConfig: HarmonyConfigService,
+    private analytics: AnalyticsService
   ) { }
 
   // ── Category definitions (static, no backend needed) ─────────────────────
@@ -243,24 +245,33 @@ export class LkbService {
         this.setBranches(values[0]);
         this.harmonyConfig.searchableBranchNames = values[0];
         this.harmonyConfig.dealerId = values[1];
-        this.getAllCars().subscribe(data => {
-          this.allCars = data;
-          this.unfilteredCars = this.allCars;
-        });
+        this.loadAllCars();
       }).catch(e => {
         this.setBranches(this.harmonyConfig.searchableBranchNames);
-        this.getAllCars().subscribe(data => {
-          this.allCars = data;
-          this.unfilteredCars = this.allCars;
-        });
+        this.loadAllCars();
       })
     } else {
       this.setBranches(this.harmonyConfig.searchableBranchNames);
-      this.getAllCars().subscribe(data => {
+      this.loadAllCars();
+    }
+  }
+
+  /**
+   * Shared tail of initializeCars()'s three branches. An empty or failed inventory is invisible to
+   * the visitor (they just see an empty list) but means a broken install, so both outcomes are
+   * reported as Health events.
+   */
+  private loadAllCars() {
+    this.getAllCars().subscribe({
+      next: data => {
         this.allCars = data;
         this.unfilteredCars = this.allCars;
-      });
-    }
+        this.analytics.track(false, 'Health', `Inventory loaded: ${data.length} cars`);
+      },
+      error: () => {
+        this.analytics.track(false, 'Health', 'Inventory load failed');
+      }
+    });
   }
 
   setFilteredCars(filteredCars: VolvoLeveransklarabilar[]) {

@@ -1,6 +1,9 @@
-import { AfterViewInit, Component, Input, OnInit, Renderer2, signal } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, Renderer2, signal } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { MinMaxOutput } from '../../../components/lkb-slider/lkb-slider.component';
 import { LkbService } from '../../../services/lkb.service';
+import { AnalyticsService } from '../../../services/analytics.service';
 import { LkbCategory, LkbFilter, VolvoLeveransklarabilar } from '../models/LkbCategory';
 import { HarmonyConfigService } from '../../../services/harmony-config.service';
 
@@ -10,7 +13,7 @@ import { HarmonyConfigService } from '../../../services/harmony-config.service';
   styleUrls: ['./lkb-filter.component.scss']
 })
 
-export class LkbFilterComponent implements OnInit, AfterViewInit {
+export class LkbFilterComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() cars: any[] = [];
 
   readonly panelOpenState = signal(false);
@@ -57,19 +60,65 @@ export class LkbFilterComponent implements OnInit, AfterViewInit {
   milageSlider: MinMaxOutput = new MinMaxOutput(0, 400000);
   horsePowerSlider: MinMaxOutput = new MinMaxOutput(60, 790);
 
-  constructor(public lkbService: LkbService, private renderer: Renderer2, private harmonyConfig: HarmonyConfigService) { }
+  // Sliders fire on every step of a drag; debounce so one drag logs one event, not forty.
+  private sliderChange$: Subject<string> = new Subject<string>();
+  private sliderSubscription: any;
+  /** Suppresses filter events while the panel replays the landing-screen choice on init. */
+  private tracking = false;
+  private lastReportedEmpty = false;
+
+  constructor(
+    public lkbService: LkbService,
+    private renderer: Renderer2,
+    private harmonyConfig: HarmonyConfigService,
+    private analytics: AnalyticsService) { }
 
   ngAfterViewInit(): void {
   }
 
 
   ngOnInit(): void {
+    this.sliderSubscription = this.sliderChange$
+      .pipe(debounceTime(600))
+      .subscribe(label => {
+        this.analytics.track(true, 'Filter', `User set ${label} (${this.resultCount()} cars)`);
+        this.reportEmptyResult();
+      });
+
     this.lkbService.setAllBrandsAvailable();
     this.initFilters();
     // Set the style of this filter button as active...
     this.lkbService.setLocationsCount(this.carLocations ? this.carLocations.length : 0);
     this.allBrandsAvailable = this.harmonyConfig.allBrandsAvailable ? "true" : "false";
+    // setStartingCategory replays the tile the visitor already tapped on the landing screen; that
+    // is captured by the Category event, so tracking only opens afterwards to avoid double-counting.
     this.setStartingCategory(this.carCategeries)
+    this.tracking = true;
+  }
+
+  ngOnDestroy(): void {
+    this.sliderSubscription?.unsubscribe();
+  }
+
+  // ── Analytics helpers ─────────────────────────────────────────────────────
+
+  private resultCount(): number {
+    return this.lkbService.filteredCars.value?.length ?? 0;
+  }
+
+  private trackFilter(details: string): void {
+    if (!this.tracking) return;
+    this.analytics.track(true, 'Filter', `${details} (${this.resultCount()} cars)`);
+    this.reportEmptyResult();
+  }
+
+  /** A dead-end search is the signal worth having; log it on the transition, not every keystroke. */
+  private reportEmptyResult(): void {
+    const empty = this.resultCount() === 0;
+    if (empty && !this.lastReportedEmpty) {
+      this.analytics.track(false, 'Filter', 'No cars match the filters');
+    }
+    this.lastReportedEmpty = empty;
   }
 
   initFilters(skipCategories = false) {
@@ -204,11 +253,13 @@ export class LkbFilterComponent implements OnInit, AfterViewInit {
       this.selectedOptions = [];
       this.initFilters();
       this.filter();
+      this.trackFilter('User enabled all brands');
     }
   }
 
   toggleSelected(selected) {
     const index = this.selectedOptions.findIndex(option => option.filterName === selected.filterName);
+    const wasSelected = index !== -1;
     if (selected.filterType == "manufacturer") {
       if (index !== -1) {
         this.selectedOptions.splice(index, 1)
@@ -231,6 +282,8 @@ export class LkbFilterComponent implements OnInit, AfterViewInit {
       this.filterNoSliders();
       this.initSliderFilters(true)
     }
+    this.trackFilter(
+      `User ${wasSelected ? 'removed' : 'applied'} ${selected.filterType}: ${selected.filterName}`);
   }
 
   setCategory(category) {
@@ -246,6 +299,7 @@ export class LkbFilterComponent implements OnInit, AfterViewInit {
       this.selectedOptions = [...this.selectedOptions, category];
       this.filterNoSliders();
       this.initSliderFilters(true)
+      this.trackFilter(`User changed category to ${category.name}`);
     }
   }
 
@@ -318,6 +372,10 @@ export class LkbFilterComponent implements OnInit, AfterViewInit {
 
   toggleSidebar() {
     this.lkbService.sideBar = !this.lkbService.sideBar
+    if (this.tracking) {
+      this.analytics.track(true, 'Filter',
+        `User ${this.lkbService.sideBar ? 'opened' : 'closed'} the filter panel`);
+    }
   }
 
   //#region Slider methods
@@ -325,36 +383,47 @@ export class LkbFilterComponent implements OnInit, AfterViewInit {
     const value = (event.target as HTMLInputElement).valueAsNumber;
     this.yearSlider.max = value;
     this.filter()
+    this.trackSlider('model year', this.yearSlider);
   }
 
   yearChangeNewest(event: Event) {
     const value = (event.target as HTMLInputElement).valueAsNumber;
     this.yearSlider.min = value;
     this.filter()
+    this.trackSlider('model year', this.yearSlider);
   }
 
   priceChangeHighest(event: Event) {
     const value = (event.target as HTMLInputElement).valueAsNumber;
     this.priceSlider.max = value;
     this.filter()
+    this.trackSlider('price', this.priceSlider);
   }
 
   priceChangeLowest(event: Event) {
     const value = (event.target as HTMLInputElement).valueAsNumber;
     this.priceSlider.min = value;
     this.filter()
+    this.trackSlider('price', this.priceSlider);
   }
 
   milageChangeLowest(event: Event) {
     const value = (event.target as HTMLInputElement).valueAsNumber;
     this.milageSlider.min = value;
     this.filter()
+    this.trackSlider('mileage', this.milageSlider);
   }
 
   milageChangeHighest(event: Event) {
     const value = (event.target as HTMLInputElement).valueAsNumber;
     this.milageSlider.max = value;
     this.filter()
+    this.trackSlider('mileage', this.milageSlider);
+  }
+
+  private trackSlider(name: string, slider: MinMaxOutput) {
+    if (!this.tracking) return;
+    this.sliderChange$.next(`${name} to ${slider.min}–${slider.max}`);
   }
 
   // horsePowerChange(output: MinMaxOutput) {

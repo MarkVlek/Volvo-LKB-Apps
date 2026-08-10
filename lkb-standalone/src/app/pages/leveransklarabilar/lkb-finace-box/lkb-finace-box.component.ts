@@ -1,16 +1,20 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { VolvoLeveransklarabilar } from '../models/LkbCategory';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { describeCar, VolvoLeveransklarabilar } from '../models/LkbCategory';
+import { AnalyticsService } from '../../../services/analytics.service';
 
 @Component({
   selector: 'app-lkb-finace-box',
   templateUrl: './lkb-finace-box.component.html',
   styleUrls: ['./lkb-finace-box.component.scss']
 })
-export class LkbFinaceBoxComponent implements OnInit, AfterViewInit {
+export class LkbFinaceBoxComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() car: VolvoLeveransklarabilar;
 
-  constructor() { }
+  private subscriptions = new Subscription();
+
+  constructor(private analytics: AnalyticsService) { }
 
   interestRate: number;
   currentCost: number;
@@ -30,10 +34,29 @@ export class LkbFinaceBoxComponent implements OnInit, AfterViewInit {
       this.startPrice = value;
       this.currentCost = this.calculateMonthlyPayment();
     })
+
+    // Separate debounced subscriptions so a slider drag reports once, on the value it settles on,
+    // while the displayed cost above keeps updating live from the subscriptions in place already.
+    this.subscriptions.add(this.startPrice$.pipe(debounceTime(600)).subscribe(() => {
+      this.analytics.track(true, 'Finance',
+        `User adjusted down payment to ${this.formatNumber(this.startPrice)} — ${this.formatNumber(this.currentCost)}/month for ${describeCar(this.car)}`);
+    }));
+    this.subscriptions.add(this.installment$.pipe(debounceTime(600)).subscribe(() => {
+      this.analytics.track(true, 'Finance',
+        `User adjusted period to ${this.installment} months — ${this.formatNumber(this.currentCost)}/month for ${describeCar(this.car)}`);
+    }));
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
+      // The detail page fetches its vehicle asynchronously, so this can fire before the car input
+      // is populated. The template already guards (*ngIf and car?.), so match that here.
+      if (!this.car) return;
+
       this.interestRate = parseFloat(this.car.interestRate)
       const monInt = this.interestRate / 1200;
       const n = this.installment;

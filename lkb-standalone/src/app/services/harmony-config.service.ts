@@ -52,6 +52,17 @@ export class HarmonyConfigService {
             NameFilters: p('Inventory Settings', 'DealershipNameFilters'),
           };
 
+          // Read separately from p(): that helper throws on a missing component/param, which would
+          // abort this callback and skip loader.ready() entirely. Shipping a new main.js against a
+          // stale mframe.json is an easy mistake given the manual copy step, so an absent analytics
+          // param must degrade to the default rather than break the template.
+          try {
+            this.params['SessionIdleTimeout'] =
+              p('Analytics Settings', 'SessionIdleTimeout').toString();
+          } catch {
+            console.warn('[HarmonyConfigService] SessionIdleTimeout not found in mframe — using the default.');
+          }
+
           loader.ready();
         });
       } else {
@@ -114,6 +125,16 @@ export class HarmonyConfigService {
     return this.params['WaykeApiToken'] ?? '';
   }
 
+  /**
+   * Seconds of inactivity before the analytics session is closed; the next touch starts a new one.
+   * 0 disables idle sessions. Falls back to 180 for any missing or unparsable value, so analytics
+   * configuration can never stop the app from running.
+   */
+  get sessionIdleTimeoutSeconds(): number {
+    const parsed = parseInt(this.params['SessionIdleTimeout'], 10);
+    return Number.isFinite(parsed) && parsed >= 0 ? parsed : 180;
+  }
+
   // ── Dev defaults ──────────────────────────────────────────────────────────
 
   private devDefaults(): Record<string, any> {
@@ -125,6 +146,7 @@ export class HarmonyConfigService {
       InterestRate: '7.95',
       AllBrandsAvailable: 'false',
       WaykeApiToken: '68OaLKCeo4M6ZnHs8NPxZuvFuDdyA9EM',
+      SessionIdleTimeout: '180',
       NameFilters: [
         "AHLBERG BIL|Ahlberg Bil | ",
         "BILBOLAGET|Bilbolaget | ",
