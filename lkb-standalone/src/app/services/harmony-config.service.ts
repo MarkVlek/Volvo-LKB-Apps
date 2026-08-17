@@ -140,7 +140,9 @@ export class HarmonyConfigService {
   private devDefaults(): Record<string, any> {
     return {
       InventoryApiUrl: 'https://api.wayke.se/search',
-      DealerId: 'fab817e9-3c81-4b50-ae67-43003b2e6274',
+      // Empty on purpose: an ID outranks branch names, so a non-empty default would silently
+      // override every dealer's branch configuration with this one dealer's inventory.
+      DealerId: '',
       LkbBranchName: 'Bildeve AB - Bergahuset',
       SearchableBranchNames: 'Bildeve AB - Bergahuset, Bildeve AB - Landskrona, Volvo Car Hisings Backa',
       InterestRate: '7.95',

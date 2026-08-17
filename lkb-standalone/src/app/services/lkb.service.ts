@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject, combineLatest, forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject, combineLatest, forkJoin, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { LkbCategory, VolvoLeveransklarabilar } from '../pages/leveransklarabilar/models/LkbCategory';
 import { HarmonyConfigService } from './harmony-config.service';
 import { AnalyticsService } from './analytics.service';
@@ -26,6 +26,19 @@ export class LkbService {
   paginationAllLoaded: any;
   searchableBranchNames: string;
   displayedCars: VolvoLeveransklarabilar[] = [];
+
+  /** Values supplied by the player (device), which outrank the template's own settings. */
+  deviceBranchNames: string = '';
+  deviceDealerId: string = '';
+
+  /** Which setting the inventory actually came from — reported with the startup Health event. */
+  private resolvedSource: string = 'none';
+
+  /**
+   * Upper bound for a single inventory request. One organisation can hold ~1000 vehicles and the
+   * API truncates silently at whatever `hits` says, so this sits well above the largest dealer.
+   */
+  private static readonly SEARCH_HITS = 2000;
 
   constructor(
     private http: HttpClient,
@@ -75,36 +88,90 @@ export class LkbService {
   //   return keys;
   // };
 
-  getAllCars(): Observable<VolvoLeveransklarabilar[]> {
-    // let keys = this.getAPIKeys();
-    let carList;
-    let streamList = [];
-    let branches = this.searchableBranchNames.split(',');
+  /** Splits a comma-separated setting into trimmed, non-empty values. */
+  private splitList(value: any): string[] {
+    return String(value ?? '').split(',').map(v => v.trim()).filter(v => v.length > 0);
+  }
 
-    for (let id in branches) {
-      let url = `${this.harmonyConfig.inventoryApiUrl}/vehicles?hits=700&branch=${branches[id].trim()}`;
+  /**
+   * One inventory request. The API accepts a parameter repeated per value, so every branch or
+   * dealer is covered by a single call rather than one call each.
+   *
+   * `param` is 'branch' (names), 'branchId' (a single showroom) or 'parentId' (a whole dealer
+   * organisation, i.e. all of its showrooms).
+   */
+  private searchBy(param: string, values: string[]): Observable<VolvoLeveransklarabilar[]> {
+    const query = values.map(v => `${param}=${encodeURIComponent(v)}`).join('&');
+    const url = `${this.harmonyConfig.inventoryApiUrl}/vehicles?hits=${LkbService.SEARCH_HITS}&${query}`;
 
-      streamList.push(
-        this.http.get(url, {
-          headers: { 'x-api-key': this.harmonyConfig.waykeApiToken }
-        }))
+    return this.http.get(url, {
+      headers: { 'x-api-key': this.harmonyConfig.waykeApiToken }
+    }).pipe(map(data => this.formatCars([data])));
+  }
 
+  /**
+   * Inventory sources in priority order. Device (player) settings outrank the template's own, and
+   * an ID outranks a name at each level.
+   */
+  private searchSources(): { kind: 'id' | 'name', values: string[], label: string }[] {
+    const sources: { kind: 'id' | 'name', values: string[], label: string }[] = [];
+    const add = (kind: 'id' | 'name', raw: any, label: string) => {
+      const values = this.splitList(raw);
+      if (values.length) sources.push({ kind, values, label });
     };
-    // for (let id in keys) {
-    //   let url = `${this.harmonyConfig.inventoryApiUrl}/vehicles`;
 
-    //   console.log(keys[id])
-    //   streamList.push(
-    //     this.http.get(url, {
-    //       headers: { 'x-api-key': keys[id].trim() }
-    //     }))
+    add('id', this.deviceDealerId, 'device dealer ID');
+    add('name', this.deviceBranchNames, 'device branch names');
+    add('id', this.harmonyConfig.dealerId, 'template dealer ID');
+    add('name', this.searchableBranchNames, 'template branch names');
 
-    // };
-    carList = forkJoin(streamList).pipe(
-      map(data => this.formatCars(data))
+    return sources;
+  }
+
+  /**
+   * Resolves one source to vehicles, falling back through the remaining sources when a source
+   * yields nothing.
+   *
+   * A Wayke ID can identify either a single showroom (`branchId`) or a whole dealer organisation
+   * (`parentId`), and nothing in the value itself says which — so an ID source tries the showroom
+   * form first and the organisation form second. A wrong ID returns no error, just an empty list,
+   * which is why an empty result has to fall through rather than leave the screen blank.
+   */
+  private resolveSource(sources: { kind: 'id' | 'name', values: string[], label: string }[],
+    index: number): Observable<VolvoLeveransklarabilar[]> {
+
+    if (index >= sources.length) return of([]);
+
+    const source = sources[index];
+    const next = () => this.resolveSource(sources, index + 1);
+
+    const attempt: Observable<VolvoLeveransklarabilar[]> = source.kind === 'name'
+      ? this.searchBy('branch', source.values)
+      : this.searchBy('branchId', source.values).pipe(
+        switchMap(cars => cars.length ? of(cars) : this.searchBy('parentId', source.values)));
+
+    return attempt.pipe(
+      switchMap(cars => {
+        if (cars.length) {
+          this.resolvedSource = source.label;
+          return of(cars);
+        }
+        this.analytics.track(false, 'Health',
+          `Inventory source ${source.label} returned no cars — falling back`);
+        return next();
+      })
     );
+  }
 
-    return carList;
+  getAllCars(): Observable<VolvoLeveransklarabilar[]> {
+    const sources = this.searchSources();
+
+    if (!sources.length) {
+      this.analytics.track(false, 'Health', 'No inventory source configured');
+      return of([]);
+    }
+
+    return this.resolveSource(sources, 0);
   }
 
   formatCars(response): VolvoLeveransklarabilar[] {
@@ -137,12 +204,13 @@ export class LkbService {
     //   retCar.isSelekt = true;
     // }
 
+    // hasManufacturerPackaging is the certified-programme flag, which for Volvo means Selekt.
+    // It used to also require a Selekt marker in resellerPackagingOptions, but that array holds
+    // optional marketing copy the dealer attaches by hand — most never do, so whole sites showed
+    // one Selekt car instead of dozens. shortDescription never contains "SELEKT" at all.
+    // The manufacturer guard is belt-and-braces: no non-Volvo vehicle in the feed carries the flag.
     retCar.isSelekt = carData.hasManufacturerPackaging === true &&
-      (
-        (carData.resellerPackagingOptions || [])
-          .some(p => (p.title || '').toUpperCase().includes('SELEKT')) ||
-        (carData.shortDescription || '').toUpperCase().includes('SELEKT')
-      )
+      (carData.manufacturer || '').toUpperCase() === 'VOLVO'
 
 
     // Thumb File
@@ -242,9 +310,12 @@ export class LkbService {
     const loader = (window as any).Loader;
     if (loader) {
       loader.getPlayerParameters(["BRANCH_NAMES", "DEALER_ID"]).then(values => {
-        this.setBranches(values[0]);
-        this.harmonyConfig.searchableBranchNames = values[0];
-        this.harmonyConfig.dealerId = values[1];
+        // Kept separate from the template settings rather than overwriting them, so the template
+        // values stay available as the lower-priority fallback. An unset player parameter comes
+        // back as an empty string, which splitList drops.
+        this.deviceBranchNames = String(values[0] ?? '');
+        this.deviceDealerId = String(values[1] ?? '');
+        this.setBranches(this.harmonyConfig.searchableBranchNames);
         this.loadAllCars();
       }).catch(e => {
         this.setBranches(this.harmonyConfig.searchableBranchNames);
@@ -266,7 +337,8 @@ export class LkbService {
       next: data => {
         this.allCars = data;
         this.unfilteredCars = this.allCars;
-        this.analytics.track(false, 'Health', `Inventory loaded: ${data.length} cars`);
+        this.analytics.track(false, 'Health',
+          `Inventory loaded: ${data.length} cars via ${this.resolvedSource}`);
       },
       error: () => {
         this.analytics.track(false, 'Health', 'Inventory load failed');

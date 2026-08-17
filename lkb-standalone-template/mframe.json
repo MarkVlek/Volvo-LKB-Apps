@@ -98,11 +98,11 @@
           "label": {
             "en-US": {
               "value": "Dealer ID",
-              "tooltip": "The dealer branch ID to be used as a fallback for insurance API calls (Wayke branch ID)."
+              "tooltip": "Wayke ID(s) used to load the vehicle inventory, comma-separated for several. Accepts either a showroom ID or a whole dealer organisation ID — an organisation ID loads every showroom belonging to that dealer. Takes priority over Branch Name; leave empty to select the inventory by branch name instead. The player's own DEALER_ID setting, when present, overrides this one."
             }
           },
           "type": "string",
-          "value": "fab817e9-3c81-4b50-ae67-43003b2e6274"
+          "value": ""
         },
         {
           "name": "InterestRate",
