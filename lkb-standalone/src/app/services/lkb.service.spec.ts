@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { LkbService } from './lkb.service';
 import { HarmonyConfigService } from './harmony-config.service';
 import { AnalyticsService } from './analytics.service';
+import mframe from '../../mframe.json';
 
 /**
  * Covers inventory source resolution — the priority chain, the single-request form, and the
@@ -74,6 +75,48 @@ describe('LkbService — inventory sources', () => {
     req.flush(response(3));
   });
 
+  /**
+   * Branch names reach the app in two shapes: typed by hand into Harmony with the Swedish letters
+   * intact, or read from the player already percent-encoded. Encoding the encoded form turns its
+   * `%` into `%25`, which cost Bilia 290 of 544 vehicles — measured live, 11 of their 19 branch
+   * names carry an encoded letter.
+   */
+  it('encodes a branch name that was typed with Swedish letters', () => {
+    service.searchableBranchNames = 'Bilia Jägersro Volvo';
+
+    service.getAllCars().subscribe();
+
+    const req = http.expectOne(r => r.url.includes('/vehicles'));
+    expect(req.request.url).toContain('branch=Bilia%20J%C3%A4gersro%20Volvo');
+    req.flush(response(1));
+  });
+
+  it('does not re-encode an already percent-encoded branch name', () => {
+    service.searchableBranchNames = 'Bilia J%C3%A4gersro Volvo';
+
+    service.getAllCars().subscribe();
+
+    const req = http.expectOne(r => r.url.includes('/vehicles'));
+    // The player encodes the letters but leaves the spaces, so the URL is only half-formed until
+    // those are encoded too. Relying on the browser to tidy that up leaves a URL that other HTTP
+    // clients reject outright.
+    expect(req.request.url).toContain('branch=Bilia%20J%C3%A4gersro%20Volvo');
+    expect(req.request.url).not.toContain('%25');
+    req.flush(response(1));
+  });
+
+  it('decides per name, not per setting, when the two shapes are mixed', () => {
+    service.searchableBranchNames = 'Bilia T%C3%A4by Volvo, Bilia Kungälv Volvo';
+
+    service.getAllCars().subscribe();
+
+    const req = http.expectOne(r => r.url.includes('/vehicles'));
+    expect(req.request.url).toContain('T%C3%A4by');
+    expect(req.request.url).toContain('Kung%C3%A4lv');
+    expect(req.request.url).not.toContain('%25');
+    req.flush(response(1));
+  });
+
   it('raises the hit ceiling above the largest dealer', () => {
     service.searchableBranchNames = 'Branch A';
     service.getAllCars().subscribe();
@@ -124,21 +167,34 @@ describe('LkbService — inventory sources', () => {
     expect(result.length).toBe(7);
   });
 
-  it('falls back to branch names when the ID matches nothing at all', () => {
+  it('shows nothing rather than another dealer stock when the ID matches nothing at all', () => {
     service.deviceDealerId = 'bad-id';
     service.searchableBranchNames = 'Template Branch';
 
-    let result = [];
+    let result = null;
     service.getAllCars().subscribe(cars => result = cars);
 
     http.expectOne(r => r.url.includes('branchId=bad-id')).flush(response(0));
     http.expectOne(r => r.url.includes('parentId=bad-id')).flush(response(0));
 
-    // A typo'd ID must not leave the screen empty.
-    const byName = http.expectOne(r => r.url.includes('branch=Template%20Branch'));
-    byName.flush(response(4));
+    // Showing one dealer's inventory on another dealer's screen is not permitted, so a mis-typed
+    // ID must leave the screen empty instead of cascading to the next-best setting.
+    http.expectNone(r => r.url.includes('branch='));
+    expect(result).toEqual([]);
+  });
 
-    expect(result.length).toBe(4);
+  it('does not fall back from the device settings to the template settings', () => {
+    service.deviceBranchNames = 'Device Branch';
+    config.dealerId = 'template-id';
+    service.searchableBranchNames = 'Template Branch';
+
+    let result = null;
+    service.getAllCars().subscribe(cars => result = cars);
+
+    http.expectOne(r => r.url.includes('branch=Device%20Branch')).flush(response(0));
+
+    http.expectNone(() => true);
+    expect(result).toEqual([]);
   });
 
   it('makes no request when nothing is configured', () => {
@@ -147,6 +203,26 @@ describe('LkbService — inventory sources', () => {
 
     http.expectNone(() => true);
     expect(result).toEqual([]);
+  });
+});
+
+/**
+ * The shipped mframe defaults are what an unconfigured player runs on, so a non-empty inventory
+ * setting here would put the sample dealer's cars on every screen that nobody has configured yet.
+ */
+describe('Harmony template defaults', () => {
+
+  const components: any[] = (mframe as any).components;
+
+  function param(name: string) {
+    return components
+      .reduce((all, component) => all.concat(component.params), [])
+      .find(p => p.name === name);
+  }
+
+  it('selects no inventory until a dealer is configured', () => {
+    expect(param('DealerId').value).toBe('');
+    expect(param('LkbBranchName').value).toBe('');
   });
 });
 

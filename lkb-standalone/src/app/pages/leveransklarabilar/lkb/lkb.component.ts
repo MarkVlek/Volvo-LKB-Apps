@@ -17,5 +17,10 @@ export class LkbComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, public lkbService: LkbService) { }
 
   ngOnInit(): void {
+    // An unconfigured screen legitimately has no inventory, so once the load has finished an empty
+    // list means "nothing to show" rather than "still coming".
+    this.lkbService.inventoryLoaded$.subscribe(loaded => {
+      this.onCars = !loaded || this.lkbService.unfilteredCars.length > 0;
+    });
   }
 }

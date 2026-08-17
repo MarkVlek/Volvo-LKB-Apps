@@ -27,6 +27,12 @@ export class LkbService {
   searchableBranchNames: string;
   displayedCars: VolvoLeveransklarabilar[] = [];
 
+  /**
+   * Turns true once the startup inventory load has finished, whether it found anything or not.
+   * Lets a view tell "still loading" apart from "there is nothing to show".
+   */
+  inventoryLoaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   /** Values supplied by the player (device), which outrank the template's own settings. */
   deviceBranchNames: string = '';
   deviceDealerId: string = '';
@@ -94,14 +100,37 @@ export class LkbService {
   }
 
   /**
+   * A branch name reaches us in one of two shapes and both have to work: an operator types
+   * `Bilia Jägersro Volvo` into Harmony by hand, while the player stores that same name already
+   * percent-encoded, as `Bilia J%C3%A4gersro Volvo`.
+   *
+   * Encoding the encoded shape turns its `%` into `%25`, so the API searches for the literal text
+   * "Bilia J%C3%A4gersro Volvo" and matches nothing. A `%` is the tell — no Wayke branch name
+   * contains one — so a value carrying it is left as it is.
+   *
+   * Its spaces are still encoded: the player encodes the letters but not the spaces, and a URL
+   * carrying a raw space is only accepted because browsers quietly repair it.
+   */
+  private encodeName(value: string): string {
+    return value.includes('%')
+      ? value.replace(/ /g, '%20')
+      : encodeURIComponent(value);
+  }
+
+  /**
    * One inventory request. The API accepts a parameter repeated per value, so every branch or
    * dealer is covered by a single call rather than one call each.
    *
    * `param` is 'branch' (names), 'branchId' (a single showroom) or 'parentId' (a whole dealer
-   * organisation, i.e. all of its showrooms).
+   * organisation, i.e. all of its showrooms). Only names need the encoding check above; an ID is a
+   * GUID either way.
    */
   private searchBy(param: string, values: string[]): Observable<VolvoLeveransklarabilar[]> {
-    const query = values.map(v => `${param}=${encodeURIComponent(v)}`).join('&');
+    const encode = param === 'branch'
+      ? (v: string) => this.encodeName(v)
+      : (v: string) => encodeURIComponent(v);
+
+    const query = values.map(v => `${param}=${encode(v)}`).join('&');
     const url = `${this.harmonyConfig.inventoryApiUrl}/vehicles?hits=${LkbService.SEARCH_HITS}&${query}`;
 
     return this.http.get(url, {
@@ -110,68 +139,52 @@ export class LkbService {
   }
 
   /**
-   * Inventory sources in priority order. Device (player) settings outrank the template's own, and
-   * an ID outranks a name at each level.
+   * The one setting the inventory is read from, in priority order: device (player) settings
+   * outrank the template's own, and an ID outranks a name at each level. Only the
+   * highest-priority configured setting is used — see getAllCars() for why.
    */
-  private searchSources(): { kind: 'id' | 'name', values: string[], label: string }[] {
-    const sources: { kind: 'id' | 'name', values: string[], label: string }[] = [];
-    const add = (kind: 'id' | 'name', raw: any, label: string) => {
+  private searchSource(): { kind: 'id' | 'name', values: string[], label: string } | null {
+    const candidates: [('id' | 'name'), any, string][] = [
+      ['id', this.deviceDealerId, 'device dealer ID'],
+      ['name', this.deviceBranchNames, 'device branch names'],
+      ['id', this.harmonyConfig.dealerId, 'template dealer ID'],
+      ['name', this.searchableBranchNames, 'template branch names'],
+    ];
+
+    for (const [kind, raw, label] of candidates) {
       const values = this.splitList(raw);
-      if (values.length) sources.push({ kind, values, label });
-    };
+      if (values.length) return { kind, values, label };
+    }
 
-    add('id', this.deviceDealerId, 'device dealer ID');
-    add('name', this.deviceBranchNames, 'device branch names');
-    add('id', this.harmonyConfig.dealerId, 'template dealer ID');
-    add('name', this.searchableBranchNames, 'template branch names');
-
-    return sources;
+    return null;
   }
 
   /**
-   * Resolves one source to vehicles, falling back through the remaining sources when a source
-   * yields nothing.
+   * Vehicles for the configured dealer, or none at all.
    *
-   * A Wayke ID can identify either a single showroom (`branchId`) or a whole dealer organisation
-   * (`parentId`), and nothing in the value itself says which — so an ID source tries the showroom
-   * form first and the organisation form second. A wrong ID returns no error, just an empty list,
-   * which is why an empty result has to fall through rather than leave the screen blank.
+   * Showing one dealership's stock on another dealership's screen is not permitted, so nothing
+   * here may widen the search: an unconfigured screen shows no cars, and a configured screen that
+   * comes back empty stays empty rather than falling back to a lower-priority setting that could
+   * belong to a different dealer.
+   *
+   * The one retry that is safe stays in place. A Wayke ID can identify either a single showroom
+   * (`branchId`) or a whole dealer organisation (`parentId`) and nothing in the value itself says
+   * which, so an ID is tried both ways — both forms name the same dealer.
    */
-  private resolveSource(sources: { kind: 'id' | 'name', values: string[], label: string }[],
-    index: number): Observable<VolvoLeveransklarabilar[]> {
-
-    if (index >= sources.length) return of([]);
-
-    const source = sources[index];
-    const next = () => this.resolveSource(sources, index + 1);
-
-    const attempt: Observable<VolvoLeveransklarabilar[]> = source.kind === 'name'
-      ? this.searchBy('branch', source.values)
-      : this.searchBy('branchId', source.values).pipe(
-        switchMap(cars => cars.length ? of(cars) : this.searchBy('parentId', source.values)));
-
-    return attempt.pipe(
-      switchMap(cars => {
-        if (cars.length) {
-          this.resolvedSource = source.label;
-          return of(cars);
-        }
-        this.analytics.track(false, 'Health',
-          `Inventory source ${source.label} returned no cars — falling back`);
-        return next();
-      })
-    );
-  }
-
   getAllCars(): Observable<VolvoLeveransklarabilar[]> {
-    const sources = this.searchSources();
+    const source = this.searchSource();
 
-    if (!sources.length) {
-      this.analytics.track(false, 'Health', 'No inventory source configured');
+    if (!source) {
+      this.analytics.track(false, 'Health', 'No inventory source configured — showing no cars');
       return of([]);
     }
 
-    return this.resolveSource(sources, 0);
+    this.resolvedSource = source.label;
+
+    return source.kind === 'name'
+      ? this.searchBy('branch', source.values)
+      : this.searchBy('branchId', source.values).pipe(
+        switchMap(cars => cars.length ? of(cars) : this.searchBy('parentId', source.values)));
   }
 
   formatCars(response): VolvoLeveransklarabilar[] {
@@ -337,10 +350,12 @@ export class LkbService {
       next: data => {
         this.allCars = data;
         this.unfilteredCars = this.allCars;
+        this.inventoryLoaded$.next(true);
         this.analytics.track(false, 'Health',
           `Inventory loaded: ${data.length} cars via ${this.resolvedSource}`);
       },
       error: () => {
+        this.inventoryLoaded$.next(true);
         this.analytics.track(false, 'Health', 'Inventory load failed');
       }
     });

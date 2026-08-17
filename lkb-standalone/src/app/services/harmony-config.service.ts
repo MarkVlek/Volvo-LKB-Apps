@@ -20,57 +20,63 @@ export class HarmonyConfigService {
   }
 
   private loadFromLoader(): void {
-    try {
-      // window.Loader is injected by the Harmony player runtime
-      const loader = (window as any).Loader;
-      if (loader) {
-        loader.getComponents().then((components) => {
-          function p(componentName, paramName) {
-            try {
-              var result = components.filter(function (component) {
-                return component.name === componentName;
-              })[0];
-              if (paramName)
-                result = result.params.filter(function (param) {
-                  return param.name === paramName;
-                })[0].value;
-              return result;
-            } catch (e) {
-              console.error('Could not find component "' + componentName + '" and/or param "' + paramName + '"');
-              throw e;
-            }
-          }
+    // window.Loader is injected by the Harmony player runtime
+    const loader = (window as any).Loader;
 
-          this.params = {
-            InventoryApiUrl: p('Inventory Settings', 'InventoryApiUrl'),
-            DealerId: p('Fallback Settings', 'DealerId'),
-            LkbBranchName: p('Inventory Settings', 'LkbBranchName'),
-            SearchableBranchNames: p('Inventory Settings', 'LkbBranchName'),
-            InterestRate: p('Fallback Settings', 'InterestRate'),
-            AllBrandsAvailable: p('Inventory Settings', 'AllBrandsAvailable').toString(),
-            WaykeApiToken: p('Inventory Settings', 'WaykeApiToken'),
-            NameFilters: p('Inventory Settings', 'DealershipNameFilters'),
-          };
-
-          // Read separately from p(): that helper throws on a missing component/param, which would
-          // abort this callback and skip loader.ready() entirely. Shipping a new main.js against a
-          // stale mframe.json is an easy mistake given the manual copy step, so an absent analytics
-          // param must degrade to the default rather than break the template.
-          try {
-            this.params['SessionIdleTimeout'] =
-              p('Analytics Settings', 'SessionIdleTimeout').toString();
-          } catch {
-            console.warn('[HarmonyConfigService] SessionIdleTimeout not found in mframe — using the default.');
-          }
-
-          loader.ready();
-        });
-      } else {
-        console.warn('[HarmonyConfigService] window.Loader not available — using dev defaults.');
-        this.params = this.devDefaults();
-      }
-    } catch {
+    if (!loader) {
+      console.warn('[HarmonyConfigService] window.Loader not available — using dev defaults.');
       this.params = this.devDefaults();
+      return;
+    }
+
+    try {
+      loader.getComponents().then((components) => {
+        function p(componentName, paramName) {
+          try {
+            var result = components.filter(function (component) {
+              return component.name === componentName;
+            })[0];
+            if (paramName)
+              result = result.params.filter(function (param) {
+                return param.name === paramName;
+              })[0].value;
+            return result;
+          } catch (e) {
+            console.error('Could not find component "' + componentName + '" and/or param "' + paramName + '"');
+            throw e;
+          }
+        }
+
+        this.params = {
+          InventoryApiUrl: p('Inventory Settings', 'InventoryApiUrl'),
+          DealerId: p('Fallback Settings', 'DealerId'),
+          LkbBranchName: p('Inventory Settings', 'LkbBranchName'),
+          SearchableBranchNames: p('Inventory Settings', 'LkbBranchName'),
+          InterestRate: p('Fallback Settings', 'InterestRate'),
+          AllBrandsAvailable: p('Inventory Settings', 'AllBrandsAvailable').toString(),
+          WaykeApiToken: p('Inventory Settings', 'WaykeApiToken'),
+          NameFilters: p('Inventory Settings', 'DealershipNameFilters'),
+        };
+
+        // Read separately from p(): that helper throws on a missing component/param, which would
+        // abort this callback and skip loader.ready() entirely. Shipping a new main.js against a
+        // stale mframe.json is an easy mistake given the manual copy step, so an absent analytics
+        // param must degrade to the default rather than break the template.
+        try {
+          this.params['SessionIdleTimeout'] =
+            p('Analytics Settings', 'SessionIdleTimeout').toString();
+        } catch {
+          console.warn('[HarmonyConfigService] SessionIdleTimeout not found in mframe — using the default.');
+        }
+
+        loader.ready();
+      });
+    } catch (e) {
+      // A player IS present, its Loader just misbehaved. The dev defaults name a real dealership,
+      // so applying them here would put that dealer's cars on someone else's screen — which is
+      // exactly what must never happen. No configuration means no inventory.
+      console.error('[HarmonyConfigService] Loader failed — no inventory will be shown.', e);
+      this.params = {};
     }
   }
 

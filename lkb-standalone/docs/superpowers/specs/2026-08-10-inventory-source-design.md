@@ -64,6 +64,10 @@ showroom ID resolves on the first call (Bergahuset → 77), an organisation ID o
 
 ### Empty results fall through
 
+> **Reversed on 2026-08-17** — see `2026-08-17-no-inventory-without-configuration.md`. Falling
+> through reached the template default, which named a real dealership, so a mis-typed ID showed
+> another dealer's stock. Volvo raised this as a legal constraint. There is no fall-through now.
+
 A source that yields no vehicles moves to the next source rather than leaving the screen blank, and
 logs a `Health` event naming the source that came back empty. A typo'd ID degrades to the branch
 names instead of emptying the kiosk.
@@ -77,6 +81,10 @@ the ID path opt-in. The dev stub in `lkb-standalone-template/index.html` was emp
 reason — it shipped a Bildeve org ID alongside a 19-branch Bilia list, and the ID would have won.
 
 ### Accepted risk
+
+> **No longer accurate as of 2026-08-17** — the fall-through this relied on is gone, so a
+> `DEALER_ID` that is not a Wayke ID now empties the screen instead of degrading to `BRANCH_NAMES`.
+> Accepted knowingly; see `2026-08-17-no-inventory-without-configuration.md`.
 
 The player's `DEALER_ID` sits at the top of the chain, and no production player value has been
 verified as a Wayke GUID — the only known value is the Bildeve org ID in the mframe default and the

@@ -10,39 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="stylesheet" href="./css/styles.css" media="print" onload="this.media='all'">
   <script src="./js/es6-shim.min.js" type="text/javascript"></script>
-  <!-- ===== DEV ONLY — REMOVE BEFORE `mtemplate compile` =====
-       mtemplate watch has no Harmony player, so template-loader falls back to
-       PreviewPlayer whose executeCommand is a no-op. GET_SITE_PARAMETERS then
-       never calls back and LkbService.initializeCars() hangs forever, so no
-       inventory request is ever made. This stub answers it locally.
-       Defined before template-loader.js so it wins the `if (!window.Player)` check. -->
-  <script type="text/javascript">
-    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-      window.Player = {
-        mediaFinished: function () { },
-        mediaError: function () { },
-        mediaReady: function () { },
-        getParameter: function () { return null; },
-        openMediaInZone: function () { },
-        addPlaybackListener: function () { },
-        executeCommand: function (playId, commandName, commandParamsJson) {
-          var params = JSON.parse(commandParamsJson);
-          if (commandName === 'GET_SITE_PARAMETERS') {
-            var values = params.keys.map(function (key) {
-              if (key === 'BRANCH_NAMES') return 'Bilia Eskilstuna Volvo, Bilia Haga Norra Volvo, Bilia Haninge Volvo, Bilia J%C3%A4gersro Volvo, Bilia K%C3%B6ping Volvo, Bilia Kung%C3%A4lv Volvo, Bilia Kungsbacka Volvo, Bilia Lund Volvo, Bilia Nacka Volvo, Bilia S%C3%A4vedalen Volvo, Bilia Segeltorp Volvo, Bilia Sisj%C3%B6n - Verkstad, Bilia Sisj%C3%B6n Begagnade bilar, Bilia Sisj%C3%B6n Volvo, Bilia S%C3%B6dert%C3%A4lje Volvo, Bilia Str%C3%A4ngn%C3%A4s Volvo, Bilia T%C3%A4by Volvo, Bilia Trelleborg Volvo, Bilia V%C3%A4ster%C3%A5s Volvo';
-              // Empty so this stub exercises the BRANCH_NAMES path above. A dealer ID outranks
-              // branch names, so putting one here would ignore that whole list. To test the ID
-              // path locally, drop in a showroom or organisation ID instead.
-              if (key === 'DEALER_ID') return '';
-              return '';
-            });
-            setTimeout(function () { window[params.callbackMethod](values); }, 0);
-          }
-        }
-      };
-    }
-  </script>
-  <!-- ===== END DEV ONLY ===== -->
   <script src="./js/template-loader.js" type="text/javascript"></script>
 </head>
 

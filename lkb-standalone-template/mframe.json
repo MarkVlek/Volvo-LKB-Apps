@@ -36,11 +36,11 @@
           "label": {
             "en-US": {
               "value": "Branch Name",
-              "tooltip": "The dealer branch name. When set, the branch location label is suppressed on car cards (single-location dealers)."
+              "tooltip": "Wayke branch name(s) whose vehicles this screen shows, comma-separated for several. Must match the Wayke branch name exactly. Leave empty and the screen shows no vehicles at all — a screen may only ever show its own dealership's inventory, so nothing is shown until this or the Dealer ID is set. Overridden by Dealer ID and by the player's own BRANCH_NAMES setting."
             }
           },
           "type": "string",
-          "value": "Bildeve AB - Bergahuset"
+          "value": ""
         },
         {
           "name": "AllBrandsAvailable",
