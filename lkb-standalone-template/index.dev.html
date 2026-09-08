@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     LOCAL DEVELOPMENT ONLY - DO NOT COMPILE OR UPLOAD THIS FILE.
+
+     A copy of index.html carrying the fake Harmony player below, so the built
+     template can be opened straight from disk in a browser and load a real
+     Wayke inventory. The shipped index.html has none of this in it.
+
+     Usage:  open this file in Chrome (double-click, or serve the folder).
+     See BUILD.md > "Testing the template locally".
+     ══════════════════════════════════════════════════════════════════════ -->
+
+<html lang="sv" data-critters-container>
+
+<head>
+  <meta charset="utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volvo LKB (LOCAL DEV)</title>
+  <!-- <base href="./"> -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="./css/styles.css" media="print" onload="this.media='all'">
+
+  <!-- ── Local test Loader ─────────────────────────────────────────────────────
+       Stands in for the Harmony player so the template can be opened in a plain
+       browser and load a real inventory.
+
+       Configuration is read from the real mframe.json, exactly like a player would
+       — so whatever you set there (SessionIdleTimeout, InterestRate, filters...) is
+       what you test. The only value substituted is DealerId, which mframe ships
+       empty on purpose; the dealerships listed below stand in for it.
+
+       Inert on a player: Harmony injects window.Player before the template runs
+       (template-loader.js detects it the same way), so the guard below keeps this
+       switched off in production. It has to sit BEFORE template-loader.js, which
+       does `window['Loader'] = window['Loader'] || new Loader()` and therefore
+       keeps whatever Loader already exists.
+  -->
+  <script type="text/javascript">
+    if (!window.Player) {
+      // [ Wayke organization ID, dealership, city ]. The four marked "no stock" are valid IDs but
+      // hold no leveransklara Volvos — they are not new-Volvo showrooms (commercial vehicles,
+      // Nissan, used cars, workshop), so they contribute nothing to the inventory.
+      var LKB_TEST_DEALERS = [
+        ['bc51d4cb-b736-475d-8dbc-6c17b9190817', 'Bilia Eskilstuna Volvo', 'Eskilstuna'],
+        ['e38c23de-bb8a-4000-8612-5085067ec7c9', 'Bilia Hisingen Transportbilscenter', 'Göteborg'],   // no stock
+        ['245c7d18-48ca-414c-baea-8d1c48ac5044', 'Bilia Haninge Volvo', 'Handen'],
+        ['080927f1-50fc-4a27-90d7-522a3e65a1a5', 'Bilia Outlet Bilhall Kista', 'Kista (Akalla)'],
+        ['21b7519b-f56d-405f-9c3a-fb04bae526ae', 'Bilia Kungsbacka Volvo', 'Kungsbacka'],
+        ['47ab6615-a8fa-477d-a919-d2d10faaef6f', 'Bilia Kungälv Volvo', 'Kungälv'],
+        ['aa0910f4-c3c7-4edc-900b-a92c76584149', 'Bilia Köping Volvo', 'Köping'],
+        ['edf487e4-fed6-4c37-8efe-36880aa37705', 'Bilia Lund Volvo', 'Lund'],
+        ['3c96fe88-7eb0-4129-9b8c-57d1e94ff8fb', 'Bilia Jägersro Nissan', 'Malmö'],                  // no stock
+        ['baeddac2-a263-41ac-8b6e-7e888e8777a3', 'Bilia Jägersro Volvo', 'Malmö'],
+        ['b0b41626-3fe9-4b38-b91d-794cf0643afe', 'Bilia Nacka Volvo', 'Nacka'],
+        ['6355dcdd-9dc3-4289-b4c5-ab48e5aaf732', 'Bilia Segeltorp Volvo', 'Segeltorp'],
+        ['b3692e92-f67a-4112-812d-5faa5ba8ea18', 'Bilia Sisjön Begagnade bilar', 'Sisjön'],          // no stock
+        ['437731f6-acbf-4988-8f4d-062522cec045', 'Bilia Haga Norra Volvo', 'Solna'],
+        ['3ee2d538-9543-4a37-acec-02e7eb8483fd', 'Bilia Strängnäs Volvo', 'Strängnäs'],
+        ['75217af8-de02-49a8-8d7b-98f1949f1fb4', 'Bilia Sävedalen Volvo', 'Sävedalen'],
+        ['c09b25a4-b458-49f3-b70d-fe3199b2e094', 'Bilia Södertälje Volvo', 'Södertälje'],
+        ['7b48758c-8f51-4298-9d4c-9586bc235ff6', 'Bilia Trelleborg Volvo', 'Trelleborg'],
+        ['48ed98f2-12e4-428d-9b15-522c1c0547ea', 'Bilia Täby Volvo', 'Täby'],
+        ['5d0ff611-6258-47cb-b766-9cb4ad8d2f82', 'Bilia Västerås Volvo', 'Västerås'],
+        ['c4b31d76-4e4b-4a94-acc6-02c5693a1ab0', 'Bilia Sisjön - Verkstad', 'Västra Frölunda'],      // no stock
+        ['07e5682d-00da-486b-9220-1dcecfe478c3', 'Bilia Sisjön Volvo', 'Västra Frölunda']
+      ];
+
+      var LKB_TEST_DEALER_IDS = LKB_TEST_DEALERS.map(function (d) { return d[0]; }).join(', ');
+
+      // Read the real mframe.json instead of duplicating its parameters here, so editing a value
+      // in mframe.json is all it takes to test it — there is no second list to keep in sync.
+      // DealerId is the one exception: mframe ships it empty on purpose (a screen shows no cars
+      // until a dealership is configured), so the test dealerships above are injected into it.
+      function loadComponentsFromMframe() {
+        return fetch('./mframe.json?t=' + Date.now())
+          .then(function (response) {
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            return response.json();
+          })
+          .then(function (mframe) {
+            var components = mframe.components;
+            components.forEach(function (component) {
+              (component.params || []).forEach(function (param) {
+                if (param.name === 'DealerId' && !param.value) {
+                  param.value = LKB_TEST_DEALER_IDS;
+                }
+              });
+            });
+            console.warn('[LKB dev] Config read from mframe.json'
+              + ' (SessionIdleTimeout = ' + findParam(components, 'SessionIdleTimeout') + 's,'
+              + ' DealerId injected: ' + LKB_TEST_DEALERS.length + ' dealerships).');
+            return components;
+          })
+          .catch(function (e) {
+            console.error('[LKB dev] Could not read mframe.json — no configuration, so no'
+              + ' inventory will load. Serve this folder over HTTP (mtemplate watch), not file://.', e);
+            throw e;
+          });
+      }
+
+      function findParam(components, name) {
+        var found;
+        components.forEach(function (c) {
+          (c.params || []).forEach(function (p) { if (p.name === name) found = p.value; });
+        });
+        return found;
+      }
+
+      // Fetch once and share the result: getComponents can be called more than once, and
+      // isStarted must not claim "ready" before the configuration has actually arrived.
+      var LKB_CONFIG_PROMISE = null;
+      function getTestComponents() {
+        if (!LKB_CONFIG_PROMISE) LKB_CONFIG_PROMISE = loadComponentsFromMframe();
+        return LKB_CONFIG_PROMISE;
+      }
+
+      window.Loader = {
+        getComponents: getTestComponents,
+        // A real player already holds the configuration before the template starts; reading
+        // mframe.json over HTTP does not. So gate "started" on that fetch — otherwise
+        // AppComponent runs initializeCars() with an empty InventoryApiUrl and no cars load.
+        isStarted: function () { return getTestComponents().then(function () { }); },
+        ready: function () { },
+        // No device settings outside a player, so the injected DealerId is what the
+        // inventory search ends up using.
+        getPlayerParameters: function () { return Promise.resolve(['', '']); },
+        getNewAnalyticsSessionIdPromise: function () { return Promise.resolve('local-test-session'); },
+        createAnalyticsEvent: function (userTriggered, sessionId, customParameters) {
+          console.log('[analytics]', userTriggered ? 'user' : 'system', customParameters);
+        }
+      };
+
+      console.warn('[LKB dev] No Harmony player detected — using the local test Loader.');
+    }
+  </script>
+
+  <script src="./js/es6-shim.min.js" type="text/javascript"></script>
+  <script src="./js/template-loader.js" type="text/javascript"></script>
+</head>
+
+<body>
+  <app-root></app-root>
+
+  <!-- runtime.js -->
+  <script src="./js/runtime.js"></script>
+  <!-- polyfills.js> -->
+  <script src="./js/polyfills.js"></script>
+  <!-- scripts.js -->
+  <script src="./js/scripts.js" defer></script>
+  <!-- main.js -->
+  <script src="./js/main.js"></script>
+</body>
+
+</html>

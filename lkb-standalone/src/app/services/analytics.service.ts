@@ -1,4 +1,5 @@
 import { Injectable, NgZone, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
 import { HarmonyConfigService } from './harmony-config.service';
 
 /** Grouping axis for every event. Kept short and colon-free. */
@@ -46,6 +47,13 @@ export class AnalyticsService implements OnDestroy {
   private sessionClosed = false;
   private idleTimer: any = null;
 
+  /**
+   * Fires when the idle timer closes a session — the visitor has walked away. AppComponent uses it
+   * to return the screen to the start view. Kept as a notification rather than a router call here
+   * so analytics stays free of UI concerns.
+   */
+  public readonly sessionEnded$ = new Subject<void>();
+
   private readonly onInteraction = () => this.noteInteraction();
   private readonly interactionEvents = ['pointerdown', 'touchstart', 'keydown'];
 
@@ -60,6 +68,7 @@ export class AnalyticsService implements OnDestroy {
 
   ngOnDestroy(): void {
     this.clearIdleTimer();
+    this.sessionEnded$.complete();
     this.interactionEvents.forEach(name =>
       document.removeEventListener(name, this.onInteraction, true));
   }
@@ -178,6 +187,10 @@ export class AnalyticsService implements OnDestroy {
     if (this.sessionClosed) return;
     this.sessionClosed = true;
     this.track(false, 'Session', 'Session ended (idle)');
+
+    // Back into Angular: the idle timer was armed with runOutsideAngular, and subscribers navigate
+    // and change view state, which would not be picked up by change detection out here.
+    this.zone.run(() => this.sessionEnded$.next());
   }
 
   private clearIdleTimer(): void {

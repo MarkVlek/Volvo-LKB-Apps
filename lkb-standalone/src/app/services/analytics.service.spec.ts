@@ -143,6 +143,45 @@ describe('AnalyticsService', () => {
     flush();
   }));
 
+  it('announces the idle close once so the UI can return to the start screen', fakeAsync(() => {
+    installLoader({ resolvesWith: 'session-one' });
+    const service = makeService();
+    tick();
+
+    let ended = 0;
+    service.sessionEnded$.subscribe(() => ended++);
+
+    tick(IDLE_SECONDS * 1000);
+    expect(ended).toBe(1);
+
+    // A second visitor's session must be able to announce its own close.
+    (window as any).Loader.getNewAnalyticsSessionIdPromise = () => Promise.resolve('session-two');
+    touch();
+    tick(1);
+    tick(IDLE_SECONDS * 1000);
+    expect(ended).toBe(2);
+
+    flush();
+  }));
+
+  it('does not announce an idle close while the visitor keeps touching the screen', fakeAsync(() => {
+    installLoader({ resolvesWith: 'session-one' });
+    const service = makeService();
+    tick();
+
+    let ended = 0;
+    service.sessionEnded$.subscribe(() => ended++);
+
+    // Each touch pushes the deadline out, so the session never goes idle.
+    for (let i = 0; i < 3; i++) {
+      tick((IDLE_SECONDS - 1) * 1000);
+      touch();
+    }
+    expect(ended).toBe(0);
+
+    flush();
+  }));
+
   it('keeps events on one line', fakeAsync(() => {
     installLoader({ resolvesWith: 'session-one' });
     const service = makeService();

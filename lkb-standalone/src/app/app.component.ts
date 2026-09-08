@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { routeTransitionAnimations } from './animations/route-transition-animations';
+import { LKB_ROUTES } from './app-routing.module';
 import { LkbService } from './services/lkb.service';
 import { AnalyticsService } from './services/analytics.service';
 
@@ -76,7 +77,21 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.analytics.track(false, 'Session', 'Session started');
       this.lkbService.initializeCars();
     }
+
+    this.analytics.sessionEnded$.subscribe(() => this.resetToStartScreen());
   };
+
+  /**
+   * A visitor who walks away leaves the screen on their own car; the next one should find the start
+   * screen. The list and its filters are rebuilt from scratch on re-entry (the reuse strategy only
+   * re-attaches the cached list when returning from a car's detail page), so only the state held on
+   * LkbService has to be cleared by hand.
+   */
+  private resetToStartScreen(): void {
+    this.lkbService.selectedCar = null;
+    this.lkbService.sideBar = true;
+    this.router.navigate([LKB_ROUTES.CATEGORIES]);
+  }
 
   ngAfterViewInit(): void {
     // This change will ensure that change detection runs after the view is initialized, preventing the ExpressionChangedAfterItHasBeenCheckedError from occurring.
