@@ -172,7 +172,8 @@ export class HarmonyConfigService {
         "ROLF|Rolf Ericson Bil | ",
         "SKOBES|Skobes Bil | ",
         "STENDAHLS|Stendahls Bil | ",
-        "VOLVO CAR|Volvo Car | "
+        "VOLVO CAR|Volvo Car | ",
+        "TAGE REJMES BIL I|Tage Rejmes Bil i|"
       ]
     };
   }

@@ -66,6 +66,23 @@
         ['07e5682d-00da-486b-9220-1dcecfe478c3', 'Bilia Sisjön Volvo', 'Västra Frölunda']
       ];
 
+
+      // ── TEMPORARY ────────────────────────────────────────────────────────────────
+      // An alternative set of dealer IDs, parked here. To use them instead: uncomment
+      // this block and comment out the LKB_TEST_DEALERS line below it.
+      // var LKB_TEST_DEALER_IDS = [
+      // '497b66c8-f658-4b88-8115-8d3296174811',
+      // '0afb6170-f8a1-4497-8649-b2d303f5cea6',
+      // 'cebe897b-4a06-4dc4-a3b7-50c1a1d9a7bd',
+      // 'baf6d177-4ecd-48fe-9cf6-c65c8014a474',
+      // 'b7839234-0a21-460b-9f8d-b58917d19ae7',
+      // '6d39be6e-be19-4153-ad07-0da47920bea4',
+      // '86cd6c4d-23a0-46e4-ad54-796dfc80fba2',
+      // '4c172fdb-ce5a-47a2-8874-52534e51aaf7',
+      // '8455f97c-12d7-4775-931f-a70fd1b0a19e'
+      // ].join(', ');
+      // ── end TEMPORARY ────────────────────────────────────────────────────────────
+
       var LKB_TEST_DEALER_IDS = LKB_TEST_DEALERS.map(function (d) { return d[0]; }).join(', ');
 
       // Read the real mframe.json instead of duplicating its parameters here, so editing a value
@@ -89,7 +106,7 @@
             });
             console.warn('[LKB dev] Config read from mframe.json'
               + ' (SessionIdleTimeout = ' + findParam(components, 'SessionIdleTimeout') + 's,'
-              + ' DealerId injected: ' + LKB_TEST_DEALERS.length + ' dealerships).');
+              + ' DealerId injected: ' + LKB_TEST_DEALER_IDS.split(',').length + ' dealerships).');
             return components;
           })
           .catch(function (e) {
